@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "782836535478",
+    "project_id": "reaconmove",
+    "storage_bucket": "reaconmove.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782836535478:android:906ae1d721fb963bac5617",
+        "android_client_info": {
+          "package_name": "tz.co.dirmgroup.reacon_customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782836535478-8hv5gjodbgddvvie16uc9pdjlgg698bq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPMSVbUSqza4O4HUKFakB1eM88b7b7mL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782836535478-8hv5gjodbgddvvie16uc9pdjlgg698bq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
