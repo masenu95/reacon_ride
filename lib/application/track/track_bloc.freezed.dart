@@ -1091,7 +1091,13 @@ class _$TrackStateTearOff {
       required bool loading,
       required Address fromPlace,
       required Address toPlace,
-      required Map<String, dynamic> directions}) {
+      required Map<String, dynamic> directions,
+      required double taxPrice,
+      required double xxlPrice,
+      required double bodaPrice,
+      required double bajajPrice,
+      required double kirikuuPrice,
+      required bool priceLoading}) {
     return _TrackState(
       current: current,
       active: active,
@@ -1103,6 +1109,12 @@ class _$TrackStateTearOff {
       fromPlace: fromPlace,
       toPlace: toPlace,
       directions: directions,
+      taxPrice: taxPrice,
+      xxlPrice: xxlPrice,
+      bodaPrice: bodaPrice,
+      bajajPrice: bajajPrice,
+      kirikuuPrice: kirikuuPrice,
+      priceLoading: priceLoading,
     );
   }
 }
@@ -1124,6 +1136,12 @@ mixin _$TrackState {
   Address get fromPlace => throw _privateConstructorUsedError;
   Address get toPlace => throw _privateConstructorUsedError;
   Map<String, dynamic> get directions => throw _privateConstructorUsedError;
+  double get taxPrice => throw _privateConstructorUsedError;
+  double get xxlPrice => throw _privateConstructorUsedError;
+  double get bodaPrice => throw _privateConstructorUsedError;
+  double get bajajPrice => throw _privateConstructorUsedError;
+  double get kirikuuPrice => throw _privateConstructorUsedError;
+  bool get priceLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TrackStateCopyWith<TrackState> get copyWith =>
@@ -1145,7 +1163,13 @@ abstract class $TrackStateCopyWith<$Res> {
       bool loading,
       Address fromPlace,
       Address toPlace,
-      Map<String, dynamic> directions});
+      Map<String, dynamic> directions,
+      double taxPrice,
+      double xxlPrice,
+      double bodaPrice,
+      double bajajPrice,
+      double kirikuuPrice,
+      bool priceLoading});
 }
 
 /// @nodoc
@@ -1168,6 +1192,12 @@ class _$TrackStateCopyWithImpl<$Res> implements $TrackStateCopyWith<$Res> {
     Object? fromPlace = freezed,
     Object? toPlace = freezed,
     Object? directions = freezed,
+    Object? taxPrice = freezed,
+    Object? xxlPrice = freezed,
+    Object? bodaPrice = freezed,
+    Object? bajajPrice = freezed,
+    Object? kirikuuPrice = freezed,
+    Object? priceLoading = freezed,
   }) {
     return _then(_value.copyWith(
       current: current == freezed
@@ -1210,6 +1240,30 @@ class _$TrackStateCopyWithImpl<$Res> implements $TrackStateCopyWith<$Res> {
           ? _value.directions
           : directions // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
+      taxPrice: taxPrice == freezed
+          ? _value.taxPrice
+          : taxPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      xxlPrice: xxlPrice == freezed
+          ? _value.xxlPrice
+          : xxlPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      bodaPrice: bodaPrice == freezed
+          ? _value.bodaPrice
+          : bodaPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      bajajPrice: bajajPrice == freezed
+          ? _value.bajajPrice
+          : bajajPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      kirikuuPrice: kirikuuPrice == freezed
+          ? _value.kirikuuPrice
+          : kirikuuPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      priceLoading: priceLoading == freezed
+          ? _value.priceLoading
+          : priceLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1230,7 +1284,13 @@ abstract class _$TrackStateCopyWith<$Res> implements $TrackStateCopyWith<$Res> {
       bool loading,
       Address fromPlace,
       Address toPlace,
-      Map<String, dynamic> directions});
+      Map<String, dynamic> directions,
+      double taxPrice,
+      double xxlPrice,
+      double bodaPrice,
+      double bajajPrice,
+      double kirikuuPrice,
+      bool priceLoading});
 }
 
 /// @nodoc
@@ -1255,6 +1315,12 @@ class __$TrackStateCopyWithImpl<$Res> extends _$TrackStateCopyWithImpl<$Res>
     Object? fromPlace = freezed,
     Object? toPlace = freezed,
     Object? directions = freezed,
+    Object? taxPrice = freezed,
+    Object? xxlPrice = freezed,
+    Object? bodaPrice = freezed,
+    Object? bajajPrice = freezed,
+    Object? kirikuuPrice = freezed,
+    Object? priceLoading = freezed,
   }) {
     return _then(_TrackState(
       current: current == freezed
@@ -1297,6 +1363,30 @@ class __$TrackStateCopyWithImpl<$Res> extends _$TrackStateCopyWithImpl<$Res>
           ? _value.directions
           : directions // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
+      taxPrice: taxPrice == freezed
+          ? _value.taxPrice
+          : taxPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      xxlPrice: xxlPrice == freezed
+          ? _value.xxlPrice
+          : xxlPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      bodaPrice: bodaPrice == freezed
+          ? _value.bodaPrice
+          : bodaPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      bajajPrice: bajajPrice == freezed
+          ? _value.bajajPrice
+          : bajajPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      kirikuuPrice: kirikuuPrice == freezed
+          ? _value.kirikuuPrice
+          : kirikuuPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      priceLoading: priceLoading == freezed
+          ? _value.priceLoading
+          : priceLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1314,7 +1404,13 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
       required this.loading,
       required this.fromPlace,
       required this.toPlace,
-      required this.directions});
+      required this.directions,
+      required this.taxPrice,
+      required this.xxlPrice,
+      required this.bodaPrice,
+      required this.bajajPrice,
+      required this.kirikuuPrice,
+      required this.priceLoading});
 
   @override
   final Position current;
@@ -1336,10 +1432,22 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
   final Address toPlace;
   @override
   final Map<String, dynamic> directions;
+  @override
+  final double taxPrice;
+  @override
+  final double xxlPrice;
+  @override
+  final double bodaPrice;
+  @override
+  final double bajajPrice;
+  @override
+  final double kirikuuPrice;
+  @override
+  final bool priceLoading;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TrackState(current: $current, active: $active, from: $from, to: $to, fromPrediction: $fromPrediction, toPrediction: $toPrediction, loading: $loading, fromPlace: $fromPlace, toPlace: $toPlace, directions: $directions)';
+    return 'TrackState(current: $current, active: $active, from: $from, to: $to, fromPrediction: $fromPrediction, toPrediction: $toPrediction, loading: $loading, fromPlace: $fromPlace, toPlace: $toPlace, directions: $directions, taxPrice: $taxPrice, xxlPrice: $xxlPrice, bodaPrice: $bodaPrice, bajajPrice: $bajajPrice, kirikuuPrice: $kirikuuPrice, priceLoading: $priceLoading)';
   }
 
   @override
@@ -1356,7 +1464,13 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
       ..add(DiagnosticsProperty('loading', loading))
       ..add(DiagnosticsProperty('fromPlace', fromPlace))
       ..add(DiagnosticsProperty('toPlace', toPlace))
-      ..add(DiagnosticsProperty('directions', directions));
+      ..add(DiagnosticsProperty('directions', directions))
+      ..add(DiagnosticsProperty('taxPrice', taxPrice))
+      ..add(DiagnosticsProperty('xxlPrice', xxlPrice))
+      ..add(DiagnosticsProperty('bodaPrice', bodaPrice))
+      ..add(DiagnosticsProperty('bajajPrice', bajajPrice))
+      ..add(DiagnosticsProperty('kirikuuPrice', kirikuuPrice))
+      ..add(DiagnosticsProperty('priceLoading', priceLoading));
   }
 
   @override
@@ -1389,7 +1503,25 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
                     .equals(other.toPlace, toPlace)) &&
             (identical(other.directions, directions) ||
                 const DeepCollectionEquality()
-                    .equals(other.directions, directions)));
+                    .equals(other.directions, directions)) &&
+            (identical(other.taxPrice, taxPrice) ||
+                const DeepCollectionEquality()
+                    .equals(other.taxPrice, taxPrice)) &&
+            (identical(other.xxlPrice, xxlPrice) ||
+                const DeepCollectionEquality()
+                    .equals(other.xxlPrice, xxlPrice)) &&
+            (identical(other.bodaPrice, bodaPrice) ||
+                const DeepCollectionEquality()
+                    .equals(other.bodaPrice, bodaPrice)) &&
+            (identical(other.bajajPrice, bajajPrice) ||
+                const DeepCollectionEquality()
+                    .equals(other.bajajPrice, bajajPrice)) &&
+            (identical(other.kirikuuPrice, kirikuuPrice) ||
+                const DeepCollectionEquality()
+                    .equals(other.kirikuuPrice, kirikuuPrice)) &&
+            (identical(other.priceLoading, priceLoading) ||
+                const DeepCollectionEquality()
+                    .equals(other.priceLoading, priceLoading)));
   }
 
   @override
@@ -1404,7 +1536,13 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
       const DeepCollectionEquality().hash(loading) ^
       const DeepCollectionEquality().hash(fromPlace) ^
       const DeepCollectionEquality().hash(toPlace) ^
-      const DeepCollectionEquality().hash(directions);
+      const DeepCollectionEquality().hash(directions) ^
+      const DeepCollectionEquality().hash(taxPrice) ^
+      const DeepCollectionEquality().hash(xxlPrice) ^
+      const DeepCollectionEquality().hash(bodaPrice) ^
+      const DeepCollectionEquality().hash(bajajPrice) ^
+      const DeepCollectionEquality().hash(kirikuuPrice) ^
+      const DeepCollectionEquality().hash(priceLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -1423,7 +1561,13 @@ abstract class _TrackState implements TrackState {
       required bool loading,
       required Address fromPlace,
       required Address toPlace,
-      required Map<String, dynamic> directions}) = _$_TrackState;
+      required Map<String, dynamic> directions,
+      required double taxPrice,
+      required double xxlPrice,
+      required double bodaPrice,
+      required double bajajPrice,
+      required double kirikuuPrice,
+      required bool priceLoading}) = _$_TrackState;
 
   @override
   Position get current => throw _privateConstructorUsedError;
@@ -1447,6 +1591,18 @@ abstract class _TrackState implements TrackState {
   Address get toPlace => throw _privateConstructorUsedError;
   @override
   Map<String, dynamic> get directions => throw _privateConstructorUsedError;
+  @override
+  double get taxPrice => throw _privateConstructorUsedError;
+  @override
+  double get xxlPrice => throw _privateConstructorUsedError;
+  @override
+  double get bodaPrice => throw _privateConstructorUsedError;
+  @override
+  double get bajajPrice => throw _privateConstructorUsedError;
+  @override
+  double get kirikuuPrice => throw _privateConstructorUsedError;
+  @override
+  bool get priceLoading => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TrackStateCopyWith<_TrackState> get copyWith =>

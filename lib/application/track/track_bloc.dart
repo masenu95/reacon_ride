@@ -123,6 +123,11 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
           ),
         );
 
+        final double distanceKm = res.distance / 1000;
+        final double minutes = res.time / 60;
+
+        final double price = (distanceKm * 900) + (minutes * 100);
+
         if (kDebugMode) {
           print(res);
         }
