@@ -1,7 +1,6 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
-
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 import 'package:reacon_customer/presentation/core/theme/colors.dart';
 
 Column cartOrderItemListTile(
@@ -234,4 +233,9 @@ class FormFieldWidget extends StatelessWidget {
       validator: validation,
     );
   }
+}
+
+String numberFormat(String number) {
+  final f = NumberFormat();
+  return f.format(int.parse(number));
 }

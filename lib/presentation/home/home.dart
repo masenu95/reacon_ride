@@ -145,12 +145,13 @@ class _HomeState extends State<Home> {
                   child: Container(
                     padding: const EdgeInsets.all(20),
                     child: Column(
-                      children: const [
-                        Icon(
-                          Icons.local_taxi,
-                          size: 100,
+                      children: [
+                        Image.asset(
+                          "images/taxSide.png",
+                          height: 100,
+                          width: 100,
                         ),
-                        Text(
+                        const Text(
                           "Abiria/Passanger",
                           style: TextStyle(fontSize: 12),
                         ),
@@ -172,12 +173,13 @@ class _HomeState extends State<Home> {
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   child: Column(
-                    children: const [
-                      Icon(
-                        Icons.local_taxi,
-                        size: 100,
+                    children: [
+                      Image.asset(
+                        "images/dialogImage.png",
+                        height: 100,
+                        width: 100,
                       ),
-                      Text(
+                      const Text(
                         "Mzigo/Luggage",
                         style: TextStyle(fontSize: 12),
                       ),

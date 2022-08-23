@@ -13,8 +13,7 @@ class SearchRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<TrackBloc, TrackState>(
       listener: (context, state) {
-        if (state.fromPlace.coordinates.latitude != 0 &&
-            state.toPlace.coordinates.latitude != 0) {
+        if (state.search == true) {
           context.read<TrackBloc>().add(const TrackEvent.getDirection());
           Navigator.pushNamed(context, TrackMapDetail.routeName);
         }

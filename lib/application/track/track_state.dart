@@ -13,12 +13,15 @@ class TrackState with _$TrackState {
     required Address fromPlace,
     required Address toPlace,
     required Map<String, dynamic> directions,
+    required double distance,
+    required double time,
     required double taxPrice,
     required double xxlPrice,
     required double bodaPrice,
     required double bajajPrice,
     required double kirikuuPrice,
     required bool priceLoading,
+    required bool search,
   }) = _TrackState;
 
   factory TrackState.initial() => TrackState(
@@ -47,5 +50,8 @@ class TrackState with _$TrackState {
         taxPrice: 0,
         xxlPrice: 0,
         priceLoading: false,
+        distance: 0,
+        time: 0,
+        search: false,
       );
 }

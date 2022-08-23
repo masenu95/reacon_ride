@@ -13,13 +13,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:reacon_customer/application/auth/authentication/auth_bloc.dart';
 import 'package:reacon_customer/application/track/track_bloc.dart';
-import 'package:reacon_customer/domain/vehichle.dart';
+import 'package:reacon_customer/domain/track/vehichle.dart';
 import 'package:reacon_customer/infrastucture/core/constant.dart';
 import 'package:reacon_customer/infrastucture/fireStoreCollections.dart';
 import 'package:reacon_customer/presentation/core/utils/colors.dart';
 import 'package:reacon_customer/presentation/core/utils/custom_style.dart';
 import 'package:reacon_customer/presentation/core/utils/dimensions.dart';
 import 'package:reacon_customer/presentation/core/utils/strings.dart';
+import 'package:reacon_customer/presentation/core/widget.dart';
 import 'package:reacon_customer/presentation/track/mapKitAssistant.dart';
 
 class TrackMapDetail extends StatefulWidget {
@@ -506,7 +507,11 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                           children: [
                             Row(
                               children: [
-                                Image.asset(vehicle.image),
+                                Image.asset(
+                                  vehicle.image,
+                                  width: 120,
+                                  height: 50,
+                                ),
                                 const SizedBox(
                                   width: Dimensions.widthSize,
                                 ),
@@ -517,7 +522,7 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                                       vehicle.name,
                                       style: GoogleFonts.roboto(
                                           color: CustomColor.primaryColor,
-                                          fontSize: Dimensions.defaultTextSize,
+                                          fontSize: 12,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     const SizedBox(
@@ -541,7 +546,7 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                                           color: Colors.grey,
                                         ),
                                         Text(
-                                          '${vehicle.distance} km',
+                                          " ${numberFormat(context.read<TrackBloc>().state.distance.round().toString())} km",
                                           style: CustomStyle.textStyle,
                                         ),
                                       ],
@@ -551,11 +556,12 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                               ],
                             ),
                             Text(
-                              '\$${vehicle.amount}',
+                              'TZS ${numberFormat(context.read<TrackBloc>().state.taxPrice.round().toString())}',
                               style: GoogleFonts.roboto(
-                                  color: CustomColor.primaryColor,
-                                  fontSize: Dimensions.largeTextSize,
-                                  fontWeight: FontWeight.bold),
+                                color: CustomColor.primaryColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ],
                         ),

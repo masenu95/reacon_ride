@@ -1,15 +1,12 @@
 import 'dart:async';
-import 'dart:convert' as convert;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_geocoder/geocoder.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_place/google_place.dart';
-import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:reacon_customer/domain/track/i_track_facade.dart';
 import 'package:reacon_customer/infrastucture/core/constant.dart';
@@ -91,21 +88,36 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
         }
       },
       selectedFromLocation: (e) async* {
+        bool search = false;
         yield state.copyWith(from: e.name);
         final address = await Geocoder.google(EnvConstant.googleAPiKey)
             .findAddressesFromQuery(e.name);
+        if (address[0].coordinates.latitude != 0 &&
+            state.toPlace.coordinates.latitude != 0) {
+          search = true;
+        }
+
         yield state.copyWith(
           fromPlace: address[0],
           fromPrediction: [],
+          search: search,
         );
       },
       selectedToLocation: (e) async* {
+        bool search = false;
+
         yield state.copyWith(to: e.name);
         final address = await Geocoder.google(EnvConstant.googleAPiKey)
             .findAddressesFromQuery(e.name);
+        if (state.fromPlace.coordinates.latitude != 0 &&
+            address[0].coordinates.latitude != 0) {
+          search = true;
+        }
+
         yield state.copyWith(
           toPlace: address[0],
           toPrediction: [],
+          search: search,
         );
       },
       getDirection: (e) async* {
@@ -126,7 +138,15 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
         final double distanceKm = res.distance / 1000;
         final double minutes = res.time / 60;
 
-        final double price = (distanceKm * 900) + (minutes * 100);
+        double price = (distanceKm * 900) + (minutes * 100);
+
+        yield state.copyWith(
+          taxPrice: price,
+          bodaPrice: price,
+          kirikuuPrice: price,
+          bajajPrice: price,
+          distance: distanceKm,
+        );
 
         if (kDebugMode) {
           print(res);
