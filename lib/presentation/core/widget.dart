@@ -4,23 +4,20 @@ import 'package:flutter/material.dart';
 
 import 'package:reacon_customer/presentation/core/theme/colors.dart';
 
-
-
 Column cartOrderItemListTile(
-    String image,
-    BuildContext context,
-    String title,
-    String price,
-    int itemCount,
-    void plus,
-    void minus,
-
-    ) {
+  String image,
+  BuildContext context,
+  String title,
+  String price,
+  int itemCount,
+  void plus,
+  void minus,
+) {
   return Column(
     children: <Widget>[
       ListTile(
         title: Padding(
-          padding: EdgeInsets.only(top: 8.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -28,11 +25,11 @@ Column cartOrderItemListTile(
                   image,
                   scale: 2.5,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20.0,
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width/2-40,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 2 - 40,
                   child: Text(
                     title,
                     style: Theme.of(context).textTheme.subtitle2!.copyWith(
@@ -40,13 +37,13 @@ Column cartOrderItemListTile(
                     overflow: TextOverflow.clip,
                   ),
                 ),
-                Spacer(
+                const Spacer(
                   flex: 2,
                 ),
                 Container(
                   height: 30.0,
                   //width: 76.7,
-                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
                   decoration: BoxDecoration(
                     border: Border.all(color: kMainColor),
                     borderRadius: BorderRadius.circular(30.0),
@@ -54,7 +51,7 @@ Column cartOrderItemListTile(
                   child: Row(
                     children: <Widget>[
                       InkWell(
-                        onTap:()=> minus,
+                        onTap: () => minus,
                         child: Icon(
                           Icons.remove,
                           color: kMainColor,
@@ -62,12 +59,12 @@ Column cartOrderItemListTile(
                           //size: 23.3,
                         ),
                       ),
-                      SizedBox(width: 8.0),
+                      const SizedBox(width: 8.0),
                       Text(itemCount.toString(),
                           style: Theme.of(context).textTheme.caption),
-                      SizedBox(width: 8.0),
+                      const SizedBox(width: 8.0),
                       InkWell(
-                        onTap: ()=> plus,
+                        onTap: () => plus,
                         child: Icon(
                           Icons.add,
                           color: kMainColor,
@@ -77,7 +74,7 @@ Column cartOrderItemListTile(
                     ],
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   ' $price TZS',
                   style: Theme.of(context).textTheme.caption,
@@ -89,17 +86,14 @@ Column cartOrderItemListTile(
   );
 }
 
-
-
-Widget quickGrid({
-  required BuildContext context,
-  required String image,
-  required String name,
-  required String category,
-  required String price,
-  required VoidCallback onTap,
-  required double width
-}) {
+Widget quickGrid(
+    {required BuildContext context,
+    required String image,
+    required String name,
+    required String category,
+    required String price,
+    required VoidCallback onTap,
+    required double width}) {
   return GestureDetector(
     onTap: onTap,
     child: Row(
@@ -108,13 +102,14 @@ Widget quickGrid({
         FadedScaleAnimation(
           Container(
             decoration: BoxDecoration(
-              image: DecorationImage(image:NetworkImage(image),fit: BoxFit.cover),
+              image: DecorationImage(
+                  image: NetworkImage(image), fit: BoxFit.cover),
             ),
-           height: 100,
+            height: 100,
             width: width,
           ),
         ),
-        SizedBox(width: 13.3),
+        const SizedBox(width: 13.3),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -124,17 +119,19 @@ Widget quickGrid({
                   maxLines: 1,
                   softWrap: false,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                      color: Theme.of(context).secondaryHeaderColor)),
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle2!
+                      .copyWith(color: Theme.of(context).secondaryHeaderColor)),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(category,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context)
                     .textTheme
                     .caption!
                     .copyWith(color: kLightTextColor, fontSize: 10.0)),
-            SizedBox(height: 10.3),
+            const SizedBox(height: 10.3),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -143,7 +140,7 @@ Widget quickGrid({
                   color: kIconColor,
                   size: 10,
                 ),
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 Text(price,
                     style: Theme.of(context)
                         .textTheme
@@ -173,18 +170,68 @@ class Loader extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
-          children: [
-            const  Image(
+          children: const [
+            Image(
                 height: 100,
                 width: 100,
                 image: AssetImage('images/loader.gif')),
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
             Text(
-                "Waiting.."
+              "Waiting..",
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class FormFieldWidget extends StatelessWidget {
+  const FormFieldWidget({
+    Key? key,
+    required this.label,
+    required this.hint,
+    required this.onChange,
+    required this.validation,
+    required this.color,
+    required this.text,
+  }) : super(key: key);
+  final String label;
+  final String hint;
+  final void Function(String) onChange;
+  final String? Function(String?)? validation;
+  final Color color;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextEditingController _controller = TextEditingController();
+    _controller.value = TextEditingValue(
+      text: text,
+      selection: TextSelection(
+        baseOffset: text.length,
+        extentOffset: text.length,
+      ),
+    );
+    return TextFormField(
+      controller: _controller,
+      style: const TextStyle(
+        fontSize: 14.0,
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(
+            6,
+          ),
+        ),
+        prefixIcon: const Icon(Icons.search),
+        hintText: hint,
+        hintStyle: const TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+      ),
+      autocorrect: false,
+      onChanged: onChange,
+      validator: validation,
     );
   }
 }

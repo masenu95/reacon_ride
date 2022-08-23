@@ -31,7 +31,6 @@ dependencies:
   dio: ^4.0.4
   flutter_secure_storage: ^4.2.1
   cloud_firestore: ^2.4.0
-  google_geocoding: ^0.2.0
   firebase_core: ^1.4.0
   firebase_storage: ^10.0.1
   firebase_auth: ^3.0.1
@@ -52,7 +51,12 @@ dependencies:
   geolocator: ^8.0.1
   geocoding: ^2.0.1
   google_place: ^0.4.7
+  google_geocoding: ^0.2.0
+  
   flutter_geocoder: ^0.2.2-nullsafety
+  permission_handler: ^10.0.0
+  maps_toolkit: ^2.0.1
+  geoflutterfire: ^3.0.1
 
 
 

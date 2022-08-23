@@ -6,45 +6,38 @@ import '../../application/track/track_bloc.dart';
 import '../home/home.dart';
 import '../home/landing.dart';
 
-
-
 class Welcome extends StatelessWidget {
   static const routeName = '/welcome';
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-     if(state.authStatus =="unknown"){
-
-        }else if(state.authStatus == "unauthenticated"){
-
+        if (state.authStatus == "unknown") {
+        } else if (state.authStatus == "unauthenticated") {
           Navigator.pushReplacementNamed(context, '/login');
-        } else  if(state.authStatus == "authenticated"){
-
+        } else if (state.authStatus == "authenticated") {
           Navigator.pushReplacementNamed(context, Landing.routeName);
         }
-
       },
       child: Container(
-          height: MediaQuery.of(context).size.height,
-         decoration: BoxDecoration(
-           image: DecorationImage(image: AssetImage('images/launch.png'), fit: BoxFit.cover,),
-         ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 150.0),
-                    child: Image(
-                        height: 40,
-                        width: 40,
-                        image:AssetImage('images/loader.gif'),
-                      ),
-                  ),
-                ],
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          color: Colors.red,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: const [
+            Padding(
+              padding: EdgeInsets.only(bottom: 150.0),
+              child: Image(
+                height: 40,
+                width: 40,
+                image: AssetImage('images/loader.gif'),
               ),
-              ),
-
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

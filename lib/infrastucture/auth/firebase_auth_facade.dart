@@ -40,7 +40,7 @@ class FirebaseAuthFacade implements IAuthFacade {
         password: passwordStr,
       );
 
-      User? user = result.user;
+      final User? user = result.user;
       if (user != null) {
         user.updateDisplayName(name.getOrCrash());
         await FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
@@ -49,7 +49,7 @@ class FirebaseAuthFacade implements IAuthFacade {
           'email': user.email,
           'status': 'user',
           'uid': user.uid,
-          'status':'PENDING',
+          'status': 'PENDING',
         });
       }
       return right(unit);
@@ -80,7 +80,6 @@ class FirebaseAuthFacade implements IAuthFacade {
       );
       return right(unit);
     } on FirebaseAuthException catch (e) {
-
       if (e.code == 'wrong-password' || e.code == 'user-not-found') {
         return left(const AuthFailure.invalidUserAndPasswordCombination());
       } else if (e.code == 'too-many-requests') {
@@ -93,9 +92,9 @@ class FirebaseAuthFacade implements IAuthFacade {
 
   @override
   Future<Either<AuthFailure, UserModel>> currentUser() async {
-    User? user = await _firebaseAuth.currentUser;
+    final User? user = await _firebaseAuth.currentUser;
     if (user != null) {
-      var result =
+      final result =
           await _firebaseFirestore.collection('Users').doc(user.uid).get();
       if (result.data() != null) {
         return right(
@@ -104,7 +103,7 @@ class FirebaseAuthFacade implements IAuthFacade {
         );
       }
     }
-    return left(AuthFailure.unauthenticated());
+    return left(const AuthFailure.unauthenticated());
   }
 
   @override

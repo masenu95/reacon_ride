@@ -156,12 +156,20 @@ class __$CurrentLocationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CurrentLocation implements _CurrentLocation {
+class _$_CurrentLocation
+    with DiagnosticableTreeMixin
+    implements _CurrentLocation {
   const _$_CurrentLocation();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TrackEvent.currentLocation()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'TrackEvent.currentLocation'));
   }
 
   @override
@@ -297,15 +305,25 @@ class __$FromLocationChangeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FromLocationChange implements _FromLocationChange {
+class _$_FromLocationChange
+    with DiagnosticableTreeMixin
+    implements _FromLocationChange {
   const _$_FromLocationChange(this.name);
 
   @override
   final String name;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TrackEvent.fromLocationChange(name: $name)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TrackEvent.fromLocationChange'))
+      ..add(DiagnosticsProperty('name', name));
   }
 
   @override
@@ -455,15 +473,25 @@ class __$ToLocationChangeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ToLocationChange implements _ToLocationChange {
+class _$_ToLocationChange
+    with DiagnosticableTreeMixin
+    implements _ToLocationChange {
   const _$_ToLocationChange(this.name);
 
   @override
   final String name;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TrackEvent.toLocationChange(name: $name)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TrackEvent.toLocationChange'))
+      ..add(DiagnosticsProperty('name', name));
   }
 
   @override
@@ -613,15 +641,25 @@ class __$selectedFromLocationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_selectedFromLocation implements _selectedFromLocation {
+class _$_selectedFromLocation
+    with DiagnosticableTreeMixin
+    implements _selectedFromLocation {
   const _$_selectedFromLocation(this.name);
 
   @override
   final String name;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TrackEvent.selectedFromLocation(name: $name)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TrackEvent.selectedFromLocation'))
+      ..add(DiagnosticsProperty('name', name));
   }
 
   @override
@@ -772,15 +810,25 @@ class __$selectedToLocationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_selectedToLocation implements _selectedToLocation {
+class _$_selectedToLocation
+    with DiagnosticableTreeMixin
+    implements _selectedToLocation {
   const _$_selectedToLocation(this.name);
 
   @override
   final String name;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TrackEvent.selectedToLocation(name: $name)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TrackEvent.selectedToLocation'))
+      ..add(DiagnosticsProperty('name', name));
   }
 
   @override
@@ -916,12 +964,18 @@ class __$GetDirectionCopyWithImpl<$Res> extends _$TrackEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetDirection implements _GetDirection {
+class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
   const _$_GetDirection();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TrackEvent.getDirection()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'TrackEvent.getDirection'));
   }
 
   @override
@@ -1249,7 +1303,7 @@ class __$TrackStateCopyWithImpl<$Res> extends _$TrackStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TrackState implements _TrackState {
+class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
   const _$_TrackState(
       {required this.current,
       required this.active,
@@ -1284,8 +1338,25 @@ class _$_TrackState implements _TrackState {
   final Map<String, dynamic> directions;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TrackState(current: $current, active: $active, from: $from, to: $to, fromPrediction: $fromPrediction, toPrediction: $toPrediction, loading: $loading, fromPlace: $fromPlace, toPlace: $toPlace, directions: $directions)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TrackState'))
+      ..add(DiagnosticsProperty('current', current))
+      ..add(DiagnosticsProperty('active', active))
+      ..add(DiagnosticsProperty('from', from))
+      ..add(DiagnosticsProperty('to', to))
+      ..add(DiagnosticsProperty('fromPrediction', fromPrediction))
+      ..add(DiagnosticsProperty('toPrediction', toPrediction))
+      ..add(DiagnosticsProperty('loading', loading))
+      ..add(DiagnosticsProperty('fromPlace', fromPlace))
+      ..add(DiagnosticsProperty('toPlace', toPlace))
+      ..add(DiagnosticsProperty('directions', directions));
   }
 
   @override

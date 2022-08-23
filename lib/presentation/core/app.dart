@@ -36,7 +36,8 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => TrackBloc()..add(TrackEvent.currentLocation()),
+          create: (context) =>
+              getIt<TrackBloc>()..add(TrackEvent.currentLocation()),
         ),
         BlocProvider(
           create: (context) =>

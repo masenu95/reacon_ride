@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:reacon_customer/application/track/track_bloc.dart';
 import 'package:reacon_customer/presentation/track/location_service.dart';
 
 class MapSample extends StatefulWidget {
@@ -64,12 +66,13 @@ class MapSampleState extends State<MapSample> {
   void _setPolyline(List<PointLatLng> points) {
     final String polylineIdVal = 'polyline_$_polylineIdCounter';
     _polylineIdCounter++;
+    _polylines.clear();
 
     _polylines.add(
       Polyline(
         polylineId: PolylineId(polylineIdVal),
-        width: 2,
-        color: Colors.blue,
+        width: 5,
+        color: Colors.red,
         points: points
             .map(
               (point) => LatLng(point.latitude, point.longitude),
@@ -81,74 +84,89 @@ class MapSampleState extends State<MapSample> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Google Maps'),
-      ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Column(
+    return BlocConsumer<TrackBloc, TrackState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return Scaffold(
+          extendBodyBehindAppBar: true,
+          body: state.loading
+              ? Container()
+              : Column(
                   children: [
-                    TextFormField(
-                      controller: _originController,
-                      decoration: InputDecoration(hintText: ' Origin'),
-                      onChanged: (value) {
-                        print(value);
-                      },
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                controller: _originController,
+                                decoration:
+                                    InputDecoration(hintText: ' Origin'),
+                                onChanged: (value) {
+                                  print(value);
+                                },
+                              ),
+                              TextFormField(
+                                controller: _destinationController,
+                                decoration:
+                                    InputDecoration(hintText: ' Destination'),
+                                onChanged: (value) {
+                                  print(value);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () async {
+                            var directions =
+                                await LocationService().getDirections(
+                              _originController.text,
+                              _destinationController.text,
+                            );
+
+                            _goToPlace(
+                              directions['start_location']['lat'] as double,
+                              directions['start_location']['lng'] as double,
+                              directions['bounds_ne'] as Map<String, dynamic>,
+                              directions['bounds_sw'] as Map<String, dynamic>,
+                            );
+
+                            _setPolyline(directions['polyline_decoded']
+                                as List<PointLatLng>);
+                          },
+                          icon: Icon(Icons.search),
+                        ),
+                      ],
                     ),
-                    TextFormField(
-                      controller: _destinationController,
-                      decoration: InputDecoration(hintText: ' Destination'),
-                      onChanged: (value) {
-                        print(value);
-                      },
+                    Expanded(
+                      child: GoogleMap(
+                        mapType: MapType.normal,
+                        markers: _markers,
+                        myLocationEnabled: true,
+                        polygons: _polygons,
+                        polylines: _polylines,
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(
+                            state.current.latitude,
+                            state.current.longitude,
+                          ),
+                          zoom: 14.4746,
+                        ),
+                        onMapCreated: (GoogleMapController controller) {
+                          _controller.complete(controller);
+                        },
+                        onTap: (point) {
+                          setState(() {});
+                        },
+                      ),
                     ),
                   ],
                 ),
-              ),
-              IconButton(
-                onPressed: () async {
-                  var directions = await LocationService().getDirections(
-                    _originController.text,
-                    _destinationController.text,
-                  );
-                  _goToPlace(
-                    directions['start_location']['lat'] as double,
-                    directions['start_location']['lng'] as double,
-                    directions['bounds_ne'] as Map<String, dynamic>,
-                    directions['bounds_sw'] as Map<String, dynamic>,
-                  );
-
-                  _setPolyline(
-                      directions['polyline_decoded'] as List<PointLatLng>);
-                },
-                icon: Icon(Icons.search),
-              ),
-            ],
-          ),
-          Expanded(
-            child: GoogleMap(
-              mapType: MapType.normal,
-              markers: _markers,
-              polygons: _polygons,
-              polylines: _polylines,
-              initialCameraPosition: _kGooglePlex,
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-              },
-              onTap: (point) {
-                setState(() {
-                  polygonLatLngs.add(point);
-                  _setPolygon();
-                });
-              },
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 

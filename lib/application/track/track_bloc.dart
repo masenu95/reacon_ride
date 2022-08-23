@@ -1,26 +1,28 @@
 import 'dart:async';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_geocoder/geocoder.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:google_place/google_place.dart';
-import 'package:reacon_customer/infrastucture/core/constant.dart';
 import 'dart:convert' as convert;
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_geocoder/geocoder.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_place/google_place.dart';
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
+import 'package:reacon_customer/domain/track/i_track_facade.dart';
+import 'package:reacon_customer/infrastucture/core/constant.dart';
 
 part 'track_bloc.freezed.dart';
-
 part 'track_event.dart';
-
 part 'track_state.dart';
 
+@injectable
 class TrackBloc extends Bloc<TrackEvent, TrackState> {
-  TrackBloc() : super(TrackState.initial());
+  TrackBloc(this._facade) : super(TrackState.initial());
   final GooglePlace _googlePlace = GooglePlace(EnvConstant.googleAPiKey);
-
+  final ITrackFacade _facade;
   @override
   Stream<TrackState> mapEventToState(
     TrackEvent event,
@@ -107,26 +109,23 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
         );
       },
       getDirection: (e) async* {
-        yield state.copyWith(loading: true);
-        final String url =
-            'https://maps.googleapis.com/maps/api/directions/json?origin=${state.fromPlace.coordinates}&destination=${state.toPlace.coordinates}&key=${EnvConstant.googleAPiKey}';
-
-        final response = await http.get(Uri.parse(url));
-        final json = convert.jsonDecode(response.body);
-
-        final results = {
-          'bounds_ne': json['routes'][0]['bounds']['northeast'],
-          'bounds_sw': json['routes'][0]['bounds']['southwest'],
-          'start_location': json['routes'][0]['legs'][0]['start_location'],
-          'end_location': json['routes'][0]['legs'][0]['end_location'],
-          'polyline': json['routes'][0]['overview_polyline']['points'],
-          'polyline_decoded': PolylinePoints().decodePolyline(
-              json['routes'][0]['overview_polyline']['points'].toString()),
-        };
         yield state.copyWith(
-          directions: results,
           loading: false,
         );
+        final res = await _facade.getDirectionDistance(
+          origin: LatLng(
+            state.fromPlace.coordinates.latitude!,
+            state.fromPlace.coordinates.longitude!,
+          ),
+          destination: LatLng(
+            state.toPlace.coordinates.latitude!,
+            state.toPlace.coordinates.longitude!,
+          ),
+        );
+
+        if (kDebugMode) {
+          print(res);
+        }
       },
     );
   }
