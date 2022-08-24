@@ -79,7 +79,15 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TrackBloc, TrackState>(
+    return BlocConsumer<TrackBloc, TrackState>(
+      listener: (context, state) {
+        state.request.fold(
+          () {},
+          (a) {
+            print(a);
+          },
+        );
+      },
       builder: (context, state) {
         /// origin marker
         _addMarker(
@@ -152,7 +160,9 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                                       Radius.circular(Dimensions.radius * 3))),
                           child: SingleChildScrollView(
                             controller: scrollController,
-                            child: selectRiderWidget(context),
+                            child: !state.requestLoading
+                                ? selectRiderWidget(context)
+                                : Container(),
                           ),
                         );
                       },
@@ -492,78 +502,87 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   Vehicle vehicle = VehicleList.list()[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(top: Dimensions.heightSize),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: const Color(0xFFF1F1F3),
-                          border: Border(
-                              bottom: BorderSide(
-                                  color: Colors.black.withOpacity(0.2)))),
-                      child: Padding(
-                        padding: const EdgeInsets.all(Dimensions.marginSize),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  vehicle.image,
-                                  width: 120,
-                                  height: 50,
-                                ),
-                                const SizedBox(
-                                  width: Dimensions.widthSize,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      vehicle.name,
-                                      style: GoogleFonts.roboto(
-                                          color: CustomColor.primaryColor,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(
-                                      height: Dimensions.heightSize * 0.5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.person,
-                                          color: Colors.grey,
-                                        ),
-                                        Text(
-                                          vehicle.person,
-                                          style: CustomStyle.textStyle,
-                                        ),
-                                        const SizedBox(
-                                          width: Dimensions.widthSize,
-                                        ),
-                                        const Icon(
-                                          Icons.location_on,
-                                          color: Colors.grey,
-                                        ),
-                                        Text(
-                                          " ${numberFormat(context.read<TrackBloc>().state.distance.round().toString())} km",
-                                          style: CustomStyle.textStyle,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Text(
-                              'TZS ${numberFormat(context.read<TrackBloc>().state.taxPrice.round().toString())}',
-                              style: GoogleFonts.roboto(
-                                color: CustomColor.primaryColor,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
+                  return GestureDetector(
+                    onTap: () {
+                      context.read<TrackBloc>().add(
+                            const TrackEvent.sendRequest(),
+                          );
+                    },
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: Dimensions.heightSize),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFF1F1F3),
+                            border: Border(
+                                bottom: BorderSide(
+                                    color: Colors.black.withOpacity(0.2)))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(Dimensions.marginSize),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    vehicle.image,
+                                    width: 120,
+                                    height: 50,
+                                  ),
+                                  const SizedBox(
+                                    width: Dimensions.widthSize,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        vehicle.name,
+                                        style: GoogleFonts.roboto(
+                                            color: CustomColor.primaryColor,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(
+                                        height: Dimensions.heightSize * 0.5,
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.person,
+                                            color: Colors.grey,
+                                          ),
+                                          Text(
+                                            vehicle.person,
+                                            style: CustomStyle.textStyle,
+                                          ),
+                                          const SizedBox(
+                                            width: Dimensions.widthSize,
+                                          ),
+                                          const Icon(
+                                            Icons.location_on,
+                                            color: Colors.grey,
+                                          ),
+                                          Text(
+                                            " ${numberFormat(context.read<TrackBloc>().state.distance.round().toString())} km",
+                                            style: CustomStyle.textStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
+                              Text(
+                                'TZS ${numberFormat(context.read<TrackBloc>().state.taxPrice.round().toString())}',
+                                style: GoogleFonts.roboto(
+                                  color: CustomColor.primaryColor,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

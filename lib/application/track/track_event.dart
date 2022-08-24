@@ -11,4 +11,7 @@ class TrackEvent with _$TrackEvent {
   const factory TrackEvent.selectedToLocation(String name) =
       _selectedToLocation;
   const factory TrackEvent.getDirection() = _GetDirection;
+  const factory TrackEvent.sendRequest() = _SendRequest;
+  const factory TrackEvent.getTrip(String tripId) = _GetTrip;
+  const factory TrackEvent.serviceChange(String service) = _ServiceChange;
 }

@@ -48,6 +48,22 @@ class _$TrackEventTearOff {
   _GetDirection getDirection() {
     return const _GetDirection();
   }
+
+  _SendRequest sendRequest() {
+    return const _SendRequest();
+  }
+
+  _GetTrip getTrip(String tripId) {
+    return _GetTrip(
+      tripId,
+    );
+  }
+
+  _ServiceChange serviceChange(String service) {
+    return _ServiceChange(
+      service,
+    );
+  }
 }
 
 /// @nodoc
@@ -63,6 +79,9 @@ mixin _$TrackEvent {
     required TResult Function(String name) selectedFromLocation,
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(String service) serviceChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -73,6 +92,9 @@ mixin _$TrackEvent {
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -83,6 +105,9 @@ mixin _$TrackEvent {
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -94,6 +119,9 @@ mixin _$TrackEvent {
     required TResult Function(_selectedFromLocation value) selectedFromLocation,
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_ServiceChange value) serviceChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -104,6 +132,9 @@ mixin _$TrackEvent {
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -114,6 +145,9 @@ mixin _$TrackEvent {
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -189,6 +223,9 @@ class _$_CurrentLocation
     required TResult Function(String name) selectedFromLocation,
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(String service) serviceChange,
   }) {
     return currentLocation();
   }
@@ -202,6 +239,9 @@ class _$_CurrentLocation
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
   }) {
     return currentLocation?.call();
   }
@@ -215,6 +255,9 @@ class _$_CurrentLocation
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
     if (currentLocation != null) {
@@ -232,6 +275,9 @@ class _$_CurrentLocation
     required TResult Function(_selectedFromLocation value) selectedFromLocation,
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return currentLocation(this);
   }
@@ -245,6 +291,9 @@ class _$_CurrentLocation
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return currentLocation?.call(this);
   }
@@ -258,6 +307,9 @@ class _$_CurrentLocation
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
     if (currentLocation != null) {
@@ -352,6 +404,9 @@ class _$_FromLocationChange
     required TResult Function(String name) selectedFromLocation,
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(String service) serviceChange,
   }) {
     return fromLocationChange(name);
   }
@@ -365,6 +420,9 @@ class _$_FromLocationChange
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
   }) {
     return fromLocationChange?.call(name);
   }
@@ -378,6 +436,9 @@ class _$_FromLocationChange
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
     if (fromLocationChange != null) {
@@ -395,6 +456,9 @@ class _$_FromLocationChange
     required TResult Function(_selectedFromLocation value) selectedFromLocation,
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return fromLocationChange(this);
   }
@@ -408,6 +472,9 @@ class _$_FromLocationChange
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return fromLocationChange?.call(this);
   }
@@ -421,6 +488,9 @@ class _$_FromLocationChange
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
     if (fromLocationChange != null) {
@@ -520,6 +590,9 @@ class _$_ToLocationChange
     required TResult Function(String name) selectedFromLocation,
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(String service) serviceChange,
   }) {
     return toLocationChange(name);
   }
@@ -533,6 +606,9 @@ class _$_ToLocationChange
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
   }) {
     return toLocationChange?.call(name);
   }
@@ -546,6 +622,9 @@ class _$_ToLocationChange
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
     if (toLocationChange != null) {
@@ -563,6 +642,9 @@ class _$_ToLocationChange
     required TResult Function(_selectedFromLocation value) selectedFromLocation,
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return toLocationChange(this);
   }
@@ -576,6 +658,9 @@ class _$_ToLocationChange
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return toLocationChange?.call(this);
   }
@@ -589,6 +674,9 @@ class _$_ToLocationChange
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
     if (toLocationChange != null) {
@@ -689,6 +777,9 @@ class _$_selectedFromLocation
     required TResult Function(String name) selectedFromLocation,
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(String service) serviceChange,
   }) {
     return selectedFromLocation(name);
   }
@@ -702,6 +793,9 @@ class _$_selectedFromLocation
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
   }) {
     return selectedFromLocation?.call(name);
   }
@@ -715,6 +809,9 @@ class _$_selectedFromLocation
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
     if (selectedFromLocation != null) {
@@ -732,6 +829,9 @@ class _$_selectedFromLocation
     required TResult Function(_selectedFromLocation value) selectedFromLocation,
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return selectedFromLocation(this);
   }
@@ -745,6 +845,9 @@ class _$_selectedFromLocation
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return selectedFromLocation?.call(this);
   }
@@ -758,6 +861,9 @@ class _$_selectedFromLocation
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
     if (selectedFromLocation != null) {
@@ -857,6 +963,9 @@ class _$_selectedToLocation
     required TResult Function(String name) selectedFromLocation,
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(String service) serviceChange,
   }) {
     return selectedToLocation(name);
   }
@@ -870,6 +979,9 @@ class _$_selectedToLocation
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
   }) {
     return selectedToLocation?.call(name);
   }
@@ -883,6 +995,9 @@ class _$_selectedToLocation
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
     if (selectedToLocation != null) {
@@ -900,6 +1015,9 @@ class _$_selectedToLocation
     required TResult Function(_selectedFromLocation value) selectedFromLocation,
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return selectedToLocation(this);
   }
@@ -913,6 +1031,9 @@ class _$_selectedToLocation
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return selectedToLocation?.call(this);
   }
@@ -926,6 +1047,9 @@ class _$_selectedToLocation
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
     if (selectedToLocation != null) {
@@ -995,6 +1119,9 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     required TResult Function(String name) selectedFromLocation,
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(String service) serviceChange,
   }) {
     return getDirection();
   }
@@ -1008,6 +1135,9 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
   }) {
     return getDirection?.call();
   }
@@ -1021,6 +1151,9 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     TResult Function(String name)? selectedFromLocation,
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
     if (getDirection != null) {
@@ -1038,6 +1171,9 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     required TResult Function(_selectedFromLocation value) selectedFromLocation,
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return getDirection(this);
   }
@@ -1051,6 +1187,9 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return getDirection?.call(this);
   }
@@ -1064,6 +1203,9 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     TResult Function(_selectedFromLocation value)? selectedFromLocation,
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
     if (getDirection != null) {
@@ -1075,6 +1217,521 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
 
 abstract class _GetDirection implements TrackEvent {
   const factory _GetDirection() = _$_GetDirection;
+}
+
+/// @nodoc
+abstract class _$SendRequestCopyWith<$Res> {
+  factory _$SendRequestCopyWith(
+          _SendRequest value, $Res Function(_SendRequest) then) =
+      __$SendRequestCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SendRequestCopyWithImpl<$Res> extends _$TrackEventCopyWithImpl<$Res>
+    implements _$SendRequestCopyWith<$Res> {
+  __$SendRequestCopyWithImpl(
+      _SendRequest _value, $Res Function(_SendRequest) _then)
+      : super(_value, (v) => _then(v as _SendRequest));
+
+  @override
+  _SendRequest get _value => super._value as _SendRequest;
+}
+
+/// @nodoc
+
+class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
+  const _$_SendRequest();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TrackEvent.sendRequest()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'TrackEvent.sendRequest'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _SendRequest);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() currentLocation,
+    required TResult Function(String name) fromLocationChange,
+    required TResult Function(String name) toLocationChange,
+    required TResult Function(String name) selectedFromLocation,
+    required TResult Function(String name) selectedToLocation,
+    required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(String service) serviceChange,
+  }) {
+    return sendRequest();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
+  }) {
+    return sendRequest?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
+    required TResult orElse(),
+  }) {
+    if (sendRequest != null) {
+      return sendRequest();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CurrentLocation value) currentLocation,
+    required TResult Function(_FromLocationChange value) fromLocationChange,
+    required TResult Function(_ToLocationChange value) toLocationChange,
+    required TResult Function(_selectedFromLocation value) selectedFromLocation,
+    required TResult Function(_selectedToLocation value) selectedToLocation,
+    required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_ServiceChange value) serviceChange,
+  }) {
+    return sendRequest(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
+  }) {
+    return sendRequest?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
+    required TResult orElse(),
+  }) {
+    if (sendRequest != null) {
+      return sendRequest(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SendRequest implements TrackEvent {
+  const factory _SendRequest() = _$_SendRequest;
+}
+
+/// @nodoc
+abstract class _$GetTripCopyWith<$Res> {
+  factory _$GetTripCopyWith(_GetTrip value, $Res Function(_GetTrip) then) =
+      __$GetTripCopyWithImpl<$Res>;
+  $Res call({String tripId});
+}
+
+/// @nodoc
+class __$GetTripCopyWithImpl<$Res> extends _$TrackEventCopyWithImpl<$Res>
+    implements _$GetTripCopyWith<$Res> {
+  __$GetTripCopyWithImpl(_GetTrip _value, $Res Function(_GetTrip) _then)
+      : super(_value, (v) => _then(v as _GetTrip));
+
+  @override
+  _GetTrip get _value => super._value as _GetTrip;
+
+  @override
+  $Res call({
+    Object? tripId = freezed,
+  }) {
+    return _then(_GetTrip(
+      tripId == freezed
+          ? _value.tripId
+          : tripId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetTrip with DiagnosticableTreeMixin implements _GetTrip {
+  const _$_GetTrip(this.tripId);
+
+  @override
+  final String tripId;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TrackEvent.getTrip(tripId: $tripId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TrackEvent.getTrip'))
+      ..add(DiagnosticsProperty('tripId', tripId));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _GetTrip &&
+            (identical(other.tripId, tripId) ||
+                const DeepCollectionEquality().equals(other.tripId, tripId)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(tripId);
+
+  @JsonKey(ignore: true)
+  @override
+  _$GetTripCopyWith<_GetTrip> get copyWith =>
+      __$GetTripCopyWithImpl<_GetTrip>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() currentLocation,
+    required TResult Function(String name) fromLocationChange,
+    required TResult Function(String name) toLocationChange,
+    required TResult Function(String name) selectedFromLocation,
+    required TResult Function(String name) selectedToLocation,
+    required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(String service) serviceChange,
+  }) {
+    return getTrip(tripId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
+  }) {
+    return getTrip?.call(tripId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
+    required TResult orElse(),
+  }) {
+    if (getTrip != null) {
+      return getTrip(tripId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CurrentLocation value) currentLocation,
+    required TResult Function(_FromLocationChange value) fromLocationChange,
+    required TResult Function(_ToLocationChange value) toLocationChange,
+    required TResult Function(_selectedFromLocation value) selectedFromLocation,
+    required TResult Function(_selectedToLocation value) selectedToLocation,
+    required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_ServiceChange value) serviceChange,
+  }) {
+    return getTrip(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
+  }) {
+    return getTrip?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
+    required TResult orElse(),
+  }) {
+    if (getTrip != null) {
+      return getTrip(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetTrip implements TrackEvent {
+  const factory _GetTrip(String tripId) = _$_GetTrip;
+
+  String get tripId => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$GetTripCopyWith<_GetTrip> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$ServiceChangeCopyWith<$Res> {
+  factory _$ServiceChangeCopyWith(
+          _ServiceChange value, $Res Function(_ServiceChange) then) =
+      __$ServiceChangeCopyWithImpl<$Res>;
+  $Res call({String service});
+}
+
+/// @nodoc
+class __$ServiceChangeCopyWithImpl<$Res> extends _$TrackEventCopyWithImpl<$Res>
+    implements _$ServiceChangeCopyWith<$Res> {
+  __$ServiceChangeCopyWithImpl(
+      _ServiceChange _value, $Res Function(_ServiceChange) _then)
+      : super(_value, (v) => _then(v as _ServiceChange));
+
+  @override
+  _ServiceChange get _value => super._value as _ServiceChange;
+
+  @override
+  $Res call({
+    Object? service = freezed,
+  }) {
+    return _then(_ServiceChange(
+      service == freezed
+          ? _value.service
+          : service // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ServiceChange with DiagnosticableTreeMixin implements _ServiceChange {
+  const _$_ServiceChange(this.service);
+
+  @override
+  final String service;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TrackEvent.serviceChange(service: $service)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TrackEvent.serviceChange'))
+      ..add(DiagnosticsProperty('service', service));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ServiceChange &&
+            (identical(other.service, service) ||
+                const DeepCollectionEquality().equals(other.service, service)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(service);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ServiceChangeCopyWith<_ServiceChange> get copyWith =>
+      __$ServiceChangeCopyWithImpl<_ServiceChange>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() currentLocation,
+    required TResult Function(String name) fromLocationChange,
+    required TResult Function(String name) toLocationChange,
+    required TResult Function(String name) selectedFromLocation,
+    required TResult Function(String name) selectedToLocation,
+    required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(String service) serviceChange,
+  }) {
+    return serviceChange(service);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
+  }) {
+    return serviceChange?.call(service);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String service)? serviceChange,
+    required TResult orElse(),
+  }) {
+    if (serviceChange != null) {
+      return serviceChange(service);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CurrentLocation value) currentLocation,
+    required TResult Function(_FromLocationChange value) fromLocationChange,
+    required TResult Function(_ToLocationChange value) toLocationChange,
+    required TResult Function(_selectedFromLocation value) selectedFromLocation,
+    required TResult Function(_selectedToLocation value) selectedToLocation,
+    required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_ServiceChange value) serviceChange,
+  }) {
+    return serviceChange(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
+  }) {
+    return serviceChange?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_ServiceChange value)? serviceChange,
+    required TResult orElse(),
+  }) {
+    if (serviceChange != null) {
+      return serviceChange(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ServiceChange implements TrackEvent {
+  const factory _ServiceChange(String service) = _$_ServiceChange;
+
+  String get service => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$ServiceChangeCopyWith<_ServiceChange> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1100,7 +1757,10 @@ class _$TrackStateTearOff {
       required double bajajPrice,
       required double kirikuuPrice,
       required bool priceLoading,
-      required bool search}) {
+      required bool requestLoading,
+      required String service,
+      required bool search,
+      required Option<Either<RequestFailure, RequestModel>> request}) {
     return _TrackState(
       current: current,
       active: active,
@@ -1120,7 +1780,10 @@ class _$TrackStateTearOff {
       bajajPrice: bajajPrice,
       kirikuuPrice: kirikuuPrice,
       priceLoading: priceLoading,
+      requestLoading: requestLoading,
+      service: service,
       search: search,
+      request: request,
     );
   }
 }
@@ -1150,7 +1813,11 @@ mixin _$TrackState {
   double get bajajPrice => throw _privateConstructorUsedError;
   double get kirikuuPrice => throw _privateConstructorUsedError;
   bool get priceLoading => throw _privateConstructorUsedError;
+  bool get requestLoading => throw _privateConstructorUsedError;
+  String get service => throw _privateConstructorUsedError;
   bool get search => throw _privateConstructorUsedError;
+  Option<Either<RequestFailure, RequestModel>> get request =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TrackStateCopyWith<TrackState> get copyWith =>
@@ -1181,7 +1848,10 @@ abstract class $TrackStateCopyWith<$Res> {
       double bajajPrice,
       double kirikuuPrice,
       bool priceLoading,
-      bool search});
+      bool requestLoading,
+      String service,
+      bool search,
+      Option<Either<RequestFailure, RequestModel>> request});
 }
 
 /// @nodoc
@@ -1212,7 +1882,10 @@ class _$TrackStateCopyWithImpl<$Res> implements $TrackStateCopyWith<$Res> {
     Object? bajajPrice = freezed,
     Object? kirikuuPrice = freezed,
     Object? priceLoading = freezed,
+    Object? requestLoading = freezed,
+    Object? service = freezed,
     Object? search = freezed,
+    Object? request = freezed,
   }) {
     return _then(_value.copyWith(
       current: current == freezed
@@ -1287,10 +1960,22 @@ class _$TrackStateCopyWithImpl<$Res> implements $TrackStateCopyWith<$Res> {
           ? _value.priceLoading
           : priceLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      requestLoading: requestLoading == freezed
+          ? _value.requestLoading
+          : requestLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      service: service == freezed
+          ? _value.service
+          : service // ignore: cast_nullable_to_non_nullable
+              as String,
       search: search == freezed
           ? _value.search
           : search // ignore: cast_nullable_to_non_nullable
               as bool,
+      request: request == freezed
+          ? _value.request
+          : request // ignore: cast_nullable_to_non_nullable
+              as Option<Either<RequestFailure, RequestModel>>,
     ));
   }
 }
@@ -1320,7 +2005,10 @@ abstract class _$TrackStateCopyWith<$Res> implements $TrackStateCopyWith<$Res> {
       double bajajPrice,
       double kirikuuPrice,
       bool priceLoading,
-      bool search});
+      bool requestLoading,
+      String service,
+      bool search,
+      Option<Either<RequestFailure, RequestModel>> request});
 }
 
 /// @nodoc
@@ -1353,7 +2041,10 @@ class __$TrackStateCopyWithImpl<$Res> extends _$TrackStateCopyWithImpl<$Res>
     Object? bajajPrice = freezed,
     Object? kirikuuPrice = freezed,
     Object? priceLoading = freezed,
+    Object? requestLoading = freezed,
+    Object? service = freezed,
     Object? search = freezed,
+    Object? request = freezed,
   }) {
     return _then(_TrackState(
       current: current == freezed
@@ -1428,10 +2119,22 @@ class __$TrackStateCopyWithImpl<$Res> extends _$TrackStateCopyWithImpl<$Res>
           ? _value.priceLoading
           : priceLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      requestLoading: requestLoading == freezed
+          ? _value.requestLoading
+          : requestLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      service: service == freezed
+          ? _value.service
+          : service // ignore: cast_nullable_to_non_nullable
+              as String,
       search: search == freezed
           ? _value.search
           : search // ignore: cast_nullable_to_non_nullable
               as bool,
+      request: request == freezed
+          ? _value.request
+          : request // ignore: cast_nullable_to_non_nullable
+              as Option<Either<RequestFailure, RequestModel>>,
     ));
   }
 }
@@ -1458,7 +2161,10 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
       required this.bajajPrice,
       required this.kirikuuPrice,
       required this.priceLoading,
-      required this.search});
+      required this.requestLoading,
+      required this.service,
+      required this.search,
+      required this.request});
 
   @override
   final Position current;
@@ -1497,11 +2203,17 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
   @override
   final bool priceLoading;
   @override
+  final bool requestLoading;
+  @override
+  final String service;
+  @override
   final bool search;
+  @override
+  final Option<Either<RequestFailure, RequestModel>> request;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TrackState(current: $current, active: $active, from: $from, to: $to, fromPrediction: $fromPrediction, toPrediction: $toPrediction, loading: $loading, fromPlace: $fromPlace, toPlace: $toPlace, directions: $directions, distance: $distance, time: $time, taxPrice: $taxPrice, xxlPrice: $xxlPrice, bodaPrice: $bodaPrice, bajajPrice: $bajajPrice, kirikuuPrice: $kirikuuPrice, priceLoading: $priceLoading, search: $search)';
+    return 'TrackState(current: $current, active: $active, from: $from, to: $to, fromPrediction: $fromPrediction, toPrediction: $toPrediction, loading: $loading, fromPlace: $fromPlace, toPlace: $toPlace, directions: $directions, distance: $distance, time: $time, taxPrice: $taxPrice, xxlPrice: $xxlPrice, bodaPrice: $bodaPrice, bajajPrice: $bajajPrice, kirikuuPrice: $kirikuuPrice, priceLoading: $priceLoading, requestLoading: $requestLoading, service: $service, search: $search, request: $request)';
   }
 
   @override
@@ -1527,7 +2239,10 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
       ..add(DiagnosticsProperty('bajajPrice', bajajPrice))
       ..add(DiagnosticsProperty('kirikuuPrice', kirikuuPrice))
       ..add(DiagnosticsProperty('priceLoading', priceLoading))
-      ..add(DiagnosticsProperty('search', search));
+      ..add(DiagnosticsProperty('requestLoading', requestLoading))
+      ..add(DiagnosticsProperty('service', service))
+      ..add(DiagnosticsProperty('search', search))
+      ..add(DiagnosticsProperty('request', request));
   }
 
   @override
@@ -1584,8 +2299,16 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
             (identical(other.priceLoading, priceLoading) ||
                 const DeepCollectionEquality()
                     .equals(other.priceLoading, priceLoading)) &&
+            (identical(other.requestLoading, requestLoading) ||
+                const DeepCollectionEquality()
+                    .equals(other.requestLoading, requestLoading)) &&
+            (identical(other.service, service) ||
+                const DeepCollectionEquality()
+                    .equals(other.service, service)) &&
             (identical(other.search, search) ||
-                const DeepCollectionEquality().equals(other.search, search)));
+                const DeepCollectionEquality().equals(other.search, search)) &&
+            (identical(other.request, request) ||
+                const DeepCollectionEquality().equals(other.request, request)));
   }
 
   @override
@@ -1609,7 +2332,10 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
       const DeepCollectionEquality().hash(bajajPrice) ^
       const DeepCollectionEquality().hash(kirikuuPrice) ^
       const DeepCollectionEquality().hash(priceLoading) ^
-      const DeepCollectionEquality().hash(search);
+      const DeepCollectionEquality().hash(requestLoading) ^
+      const DeepCollectionEquality().hash(service) ^
+      const DeepCollectionEquality().hash(search) ^
+      const DeepCollectionEquality().hash(request);
 
   @JsonKey(ignore: true)
   @override
@@ -1619,25 +2345,29 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
 
 abstract class _TrackState implements TrackState {
   const factory _TrackState(
-      {required Position current,
-      required String active,
-      required String from,
-      required String to,
-      required List<AutocompletePrediction> fromPrediction,
-      required List<AutocompletePrediction> toPrediction,
-      required bool loading,
-      required Address fromPlace,
-      required Address toPlace,
-      required Map<String, dynamic> directions,
-      required double distance,
-      required double time,
-      required double taxPrice,
-      required double xxlPrice,
-      required double bodaPrice,
-      required double bajajPrice,
-      required double kirikuuPrice,
-      required bool priceLoading,
-      required bool search}) = _$_TrackState;
+          {required Position current,
+          required String active,
+          required String from,
+          required String to,
+          required List<AutocompletePrediction> fromPrediction,
+          required List<AutocompletePrediction> toPrediction,
+          required bool loading,
+          required Address fromPlace,
+          required Address toPlace,
+          required Map<String, dynamic> directions,
+          required double distance,
+          required double time,
+          required double taxPrice,
+          required double xxlPrice,
+          required double bodaPrice,
+          required double bajajPrice,
+          required double kirikuuPrice,
+          required bool priceLoading,
+          required bool requestLoading,
+          required String service,
+          required bool search,
+          required Option<Either<RequestFailure, RequestModel>> request}) =
+      _$_TrackState;
 
   @override
   Position get current => throw _privateConstructorUsedError;
@@ -1678,7 +2408,14 @@ abstract class _TrackState implements TrackState {
   @override
   bool get priceLoading => throw _privateConstructorUsedError;
   @override
+  bool get requestLoading => throw _privateConstructorUsedError;
+  @override
+  String get service => throw _privateConstructorUsedError;
+  @override
   bool get search => throw _privateConstructorUsedError;
+  @override
+  Option<Either<RequestFailure, RequestModel>> get request =>
+      throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TrackStateCopyWith<_TrackState> get copyWith =>

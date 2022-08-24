@@ -48,7 +48,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i9.FirebaseCategoryFacade(get<_i4.FirebaseFirestore>()));
   gh.lazySingleton<_i10.IOrderFacade>(() => _i11.FirebaseOrderFacade(
       get<_i4.FirebaseFirestore>(), get<_i5.FirebaseMessaging>()));
-  gh.lazySingleton<_i12.ITrackFacade>(() => _i13.ApiTrackFacade());
+  gh.lazySingleton<_i12.ITrackFacade>(() => _i13.ApiTrackFacade(
+      get<_i4.FirebaseFirestore>(), get<_i5.FirebaseMessaging>()));
   gh.factory<_i14.LoginBloc>(() => _i14.LoginBloc(get<_i6.IAuthFacade>()));
   gh.factory<_i15.OrderBloc>(() => _i15.OrderBloc(get<_i10.IOrderFacade>()));
   gh.factory<_i16.RegisterBloc>(

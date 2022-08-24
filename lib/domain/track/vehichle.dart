@@ -36,8 +36,28 @@ mixin VehicleList {
       Vehicle(
         id: 4,
         name: 'Dirm Bajaji',
-        image: 'images/car3.png',
+        image: 'images/bajajSide.png',
         person: '3',
+      ),
+    ];
+    return list;
+  }
+}
+
+mixin VehiclepacelList {
+  static List<Vehicle> list() {
+    const list = <Vehicle>[
+      Vehicle(
+        id: 1,
+        name: 'Dirm XL',
+        image: 'images/bodaSide.png',
+        person: '0',
+      ),
+      Vehicle(
+        id: 2,
+        name: 'Dirm Kirikuu',
+        image: 'images/kirikuuSide.png',
+        person: '6',
       ),
     ];
     return list;

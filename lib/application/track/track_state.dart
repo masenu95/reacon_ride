@@ -21,7 +21,10 @@ class TrackState with _$TrackState {
     required double bajajPrice,
     required double kirikuuPrice,
     required bool priceLoading,
+    required bool requestLoading,
+    required String service,
     required bool search,
+    required Option<Either<RequestFailure, RequestModel>> request,
   }) = _TrackState;
 
   factory TrackState.initial() => TrackState(
@@ -53,5 +56,8 @@ class TrackState with _$TrackState {
         distance: 0,
         time: 0,
         search: false,
+        requestLoading: false,
+        service: 'Passanger',
+        request: none(),
       );
 }

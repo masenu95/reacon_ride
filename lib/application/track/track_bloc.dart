@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_geocoder/geocoder.dart';
@@ -9,6 +11,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_place/google_place.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reacon_customer/domain/track/i_track_facade.dart';
+import 'package:reacon_customer/domain/track/request.dart';
+import 'package:reacon_customer/domain/track/request_failure.dart';
 import 'package:reacon_customer/infrastucture/core/constant.dart';
 
 part 'track_bloc.freezed.dart';
@@ -20,6 +24,9 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
   TrackBloc(this._facade) : super(TrackState.initial());
   final GooglePlace _googlePlace = GooglePlace(EnvConstant.googleAPiKey);
   final ITrackFacade _facade;
+
+  late StreamSubscription<Either<RequestFailure, RequestModel>>
+      _tripStreamSubscription;
   @override
   Stream<TrackState> mapEventToState(
     TrackEvent event,
@@ -152,6 +159,37 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
           print(res);
         }
       },
+      sendRequest: (e) async* {
+        yield state.copyWith(
+          requestLoading: true,
+        );
+        final result = await _facade.createRequest(
+          fromLocation: GeoPoint(
+            state.fromPlace.coordinates.latitude as double,
+            state.fromPlace.coordinates.longitude as double,
+          ),
+          toLocation: GeoPoint(
+            state.toPlace.coordinates.latitude as double,
+            state.toPlace.coordinates.longitude as double,
+          ),
+          status: 'REQUESTING',
+          fromName: state.fromPlace.featureName!,
+          toName: state.toPlace.featureName!,
+          estimatedCost: state.taxPrice.toString(),
+          actualCost: state.taxPrice.toString(),
+        );
+        print(result);
+        yield state.copyWith(
+          requestLoading: false,
+          request: optionOf(result),
+        );
+      },
+      serviceChange: (e) async* {
+        yield state.copyWith(
+          service: e.service,
+        );
+      },
+      getTrip: (e) async* {},
     );
   }
 }
