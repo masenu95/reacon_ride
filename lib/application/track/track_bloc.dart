@@ -192,8 +192,26 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
           estimatedCost: state.taxPrice.toString(),
           actualCost: state.taxPrice.toString(),
         );
-        print(result);
+        RequestModel request = RequestModel(
+          fromLocation: const GeoPoint(0, 0),
+          toLocation: const GeoPoint(0, 0),
+          userId: "",
+          customerName: '',
+          customerPhone: '',
+          status: '',
+          estimatedCost: '',
+          actualCost: '',
+          driverId: '',
+          from: '',
+          to: '',
+        );
+
+        result.fold(
+          (l) => null,
+          (r) => request = r,
+        );
         yield state.copyWith(
+          tripData: request,
           requestLoading: false,
           request: optionOf(result),
           searchTo: false,

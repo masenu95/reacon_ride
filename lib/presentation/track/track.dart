@@ -170,9 +170,10 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                           ),
                           child: SingleChildScrollView(
                             controller: scrollController,
-                            child: !state.requestLoading
-                                ? selectRiderWidget(context)
-                                : RequestBottomSheet(),
+                            child: state.requestLoading ||
+                                    state.tripData.status == "REQUESTING"
+                                ? RequestBottomSheet()
+                                : selectRiderWidget(context),
                           ),
                         );
                       },
