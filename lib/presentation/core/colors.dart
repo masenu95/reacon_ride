@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-class CustomColor {
+mixin CustomColor {
   static const Color primaryColor = Color(0xFF022026);
   static Color secondaryColor = Color(0xFFF7A282);
   static Color accentColor = Color(0xFFF29849);

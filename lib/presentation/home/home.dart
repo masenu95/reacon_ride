@@ -140,8 +140,12 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: GestureDetector(
-                  onTap: () =>
-                      Navigator.pushNamed(context, TrackMapDetail.routeName),
+                  onTap: () {
+                    context
+                        .read<TrackBloc>()
+                        .add(const TrackEvent.serviceChange('Passanger'));
+                    Navigator.pushNamed(context, SearchRoute.routeName);
+                  },
                   child: Container(
                     padding: const EdgeInsets.all(20),
                     child: Column(
@@ -164,26 +168,34 @@ class _HomeState extends State<Home> {
             const SizedBox(
               width: 20,
             ),
-            SizedBox(
-              width: (MediaQuery.of(context).size.width / 2) - 20,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        "images/dialogImage.png",
-                        height: 100,
-                        width: 100,
-                      ),
-                      const Text(
-                        "Mzigo/Luggage",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ],
+            GestureDetector(
+              onTap: () {
+                context
+                    .read<TrackBloc>()
+                    .add(const TrackEvent.serviceChange('Laguage'));
+                Navigator.pushNamed(context, SearchRoute.routeName);
+              },
+              child: SizedBox(
+                width: (MediaQuery.of(context).size.width / 2) - 20,
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "images/dialogImage.png",
+                          height: 100,
+                          width: 100,
+                        ),
+                        const Text(
+                          "Mzigo/Luggage",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

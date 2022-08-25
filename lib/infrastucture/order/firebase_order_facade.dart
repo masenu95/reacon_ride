@@ -46,8 +46,8 @@ class FirebaseOrderFacade implements IOrderFacade {
           final Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate);
 
           //final address =
-             // await getAddressFromLatLng(geoPoint.latitude, geoPoint.longitude);
-           // print(address);
+          // await getAddressFromLatLng(geoPoint.latitude, geoPoint.longitude);
+          // print(address);
           final String id =
               '${user.uid}${DateTime.now().millisecondsSinceEpoch}';
           final token = await _messaging.getToken();
@@ -61,11 +61,11 @@ class FirebaseOrderFacade implements IOrderFacade {
             'image': image,
             'price': double.parse(price),
             'destination': geoPoint,
-            'destinationName':'address.first.addressLine',
-            'quantity':1,
+            'destinationName': 'address.first.addressLine',
+            'quantity': 1,
             'status': 'REQUESTING',
-            'transportFee':0,
-            'created_at':myTimeStamp.toDate(),
+            'transportFee': 0,
+            'created_at': myTimeStamp.toDate(),
           });
 
           final order = await _firestore.collection('Orders').doc(id).get();
@@ -98,7 +98,7 @@ class FirebaseOrderFacade implements IOrderFacade {
               }
             }
           } else {
-            return left(OrderFailure.serverError());
+            return left(const OrderFailure.serverError());
           }
         } else {
           return left(const OrderFailure.serverError());
@@ -180,18 +180,18 @@ class FirebaseOrderFacade implements IOrderFacade {
             'food': food,
             'image': image,
             'price': price,
-            'quantity':1,
+            'quantity': 1,
             'status': 'REQUESTING',
           });
 
-          final order = await _firestore.collection('TravelOrders').doc(id).get();
+          final order =
+              await _firestore.collection('TravelOrders').doc(id).get();
 
           if (order.data() != null) {
-
             return right(TravelOrderModel.fromJson(
                 order.data() as Map<String, dynamic>));
           } else {
-            return left(OrderFailure.serverError());
+            return left(const OrderFailure.serverError());
           }
         } else {
           return left(const OrderFailure.serverError());
@@ -211,16 +211,20 @@ class FirebaseOrderFacade implements IOrderFacade {
   }
 }
 
-getAddressFromLatLng( double lat, double lng) async {
+getAddressFromLatLng(double lat, double lng) async {
   final String _host = 'https://maps.google.com/maps/api/geocode/json';
-  final url = '$_host?key=AIzaSyCLVBTXGiIsdiyWUzZOYtbaGw_h-2mn0iI&language=en&latlng=$lat,$lng';
-  if(lat != null && lng != null){
+  final url =
+      '$_host?key=AIzaSyCLVBTXGiIsdiyWUzZOYtbaGw_h-2mn0iI&language=en&latlng=$lat,$lng';
+  if (lat != null && lng != null) {
     final response = await http.get(Uri.parse(url));
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       final Map data = jsonDecode(response.body) as Map;
-      final String _formattedAddress = data["results"][0]["formatted_address"].toString();
+      final String _formattedAddress =
+          data["results"][0]["formatted_address"].toString();
       print("response ==== $_formattedAddress");
       return _formattedAddress;
-    } else return null;
-  } else return null;
+    } else
+      return null;
+  } else
+    return null;
 }

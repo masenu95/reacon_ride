@@ -59,6 +59,12 @@ class _$TrackEventTearOff {
     );
   }
 
+  _TripReceived tripReceived(DocumentSnapshot<Object?> data) {
+    return _TripReceived(
+      data,
+    );
+  }
+
   _ServiceChange serviceChange(String service) {
     return _ServiceChange(
       service,
@@ -81,6 +87,7 @@ mixin _$TrackEvent {
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
     required TResult Function(String tripId) getTrip,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
   }) =>
       throw _privateConstructorUsedError;
@@ -94,6 +101,7 @@ mixin _$TrackEvent {
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +115,7 @@ mixin _$TrackEvent {
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) =>
@@ -121,6 +130,7 @@ mixin _$TrackEvent {
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
     required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +144,7 @@ mixin _$TrackEvent {
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
   }) =>
       throw _privateConstructorUsedError;
@@ -147,6 +158,7 @@ mixin _$TrackEvent {
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) =>
@@ -225,6 +237,7 @@ class _$_CurrentLocation
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
     required TResult Function(String tripId) getTrip,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
   }) {
     return currentLocation();
@@ -241,6 +254,7 @@ class _$_CurrentLocation
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
   }) {
     return currentLocation?.call();
@@ -257,6 +271,7 @@ class _$_CurrentLocation
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
@@ -277,6 +292,7 @@ class _$_CurrentLocation
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
     required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return currentLocation(this);
@@ -293,6 +309,7 @@ class _$_CurrentLocation
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return currentLocation?.call(this);
@@ -309,6 +326,7 @@ class _$_CurrentLocation
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
@@ -406,6 +424,7 @@ class _$_FromLocationChange
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
     required TResult Function(String tripId) getTrip,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
   }) {
     return fromLocationChange(name);
@@ -422,6 +441,7 @@ class _$_FromLocationChange
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
   }) {
     return fromLocationChange?.call(name);
@@ -438,6 +458,7 @@ class _$_FromLocationChange
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
@@ -458,6 +479,7 @@ class _$_FromLocationChange
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
     required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return fromLocationChange(this);
@@ -474,6 +496,7 @@ class _$_FromLocationChange
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return fromLocationChange?.call(this);
@@ -490,6 +513,7 @@ class _$_FromLocationChange
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
@@ -592,6 +616,7 @@ class _$_ToLocationChange
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
     required TResult Function(String tripId) getTrip,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
   }) {
     return toLocationChange(name);
@@ -608,6 +633,7 @@ class _$_ToLocationChange
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
   }) {
     return toLocationChange?.call(name);
@@ -624,6 +650,7 @@ class _$_ToLocationChange
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
@@ -644,6 +671,7 @@ class _$_ToLocationChange
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
     required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return toLocationChange(this);
@@ -660,6 +688,7 @@ class _$_ToLocationChange
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return toLocationChange?.call(this);
@@ -676,6 +705,7 @@ class _$_ToLocationChange
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
@@ -779,6 +809,7 @@ class _$_selectedFromLocation
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
     required TResult Function(String tripId) getTrip,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
   }) {
     return selectedFromLocation(name);
@@ -795,6 +826,7 @@ class _$_selectedFromLocation
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
   }) {
     return selectedFromLocation?.call(name);
@@ -811,6 +843,7 @@ class _$_selectedFromLocation
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
@@ -831,6 +864,7 @@ class _$_selectedFromLocation
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
     required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return selectedFromLocation(this);
@@ -847,6 +881,7 @@ class _$_selectedFromLocation
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return selectedFromLocation?.call(this);
@@ -863,6 +898,7 @@ class _$_selectedFromLocation
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
@@ -965,6 +1001,7 @@ class _$_selectedToLocation
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
     required TResult Function(String tripId) getTrip,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
   }) {
     return selectedToLocation(name);
@@ -981,6 +1018,7 @@ class _$_selectedToLocation
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
   }) {
     return selectedToLocation?.call(name);
@@ -997,6 +1035,7 @@ class _$_selectedToLocation
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
@@ -1017,6 +1056,7 @@ class _$_selectedToLocation
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
     required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return selectedToLocation(this);
@@ -1033,6 +1073,7 @@ class _$_selectedToLocation
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return selectedToLocation?.call(this);
@@ -1049,6 +1090,7 @@ class _$_selectedToLocation
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
@@ -1121,6 +1163,7 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
     required TResult Function(String tripId) getTrip,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
   }) {
     return getDirection();
@@ -1137,6 +1180,7 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
   }) {
     return getDirection?.call();
@@ -1153,6 +1197,7 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
@@ -1173,6 +1218,7 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
     required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return getDirection(this);
@@ -1189,6 +1235,7 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return getDirection?.call(this);
@@ -1205,6 +1252,7 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
@@ -1272,6 +1320,7 @@ class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
     required TResult Function(String tripId) getTrip,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
   }) {
     return sendRequest();
@@ -1288,6 +1337,7 @@ class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
   }) {
     return sendRequest?.call();
@@ -1304,6 +1354,7 @@ class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
@@ -1324,6 +1375,7 @@ class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
     required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return sendRequest(this);
@@ -1340,6 +1392,7 @@ class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return sendRequest?.call(this);
@@ -1356,6 +1409,7 @@ class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
@@ -1448,6 +1502,7 @@ class _$_GetTrip with DiagnosticableTreeMixin implements _GetTrip {
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
     required TResult Function(String tripId) getTrip,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
   }) {
     return getTrip(tripId);
@@ -1464,6 +1519,7 @@ class _$_GetTrip with DiagnosticableTreeMixin implements _GetTrip {
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
   }) {
     return getTrip?.call(tripId);
@@ -1480,6 +1536,7 @@ class _$_GetTrip with DiagnosticableTreeMixin implements _GetTrip {
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
@@ -1500,6 +1557,7 @@ class _$_GetTrip with DiagnosticableTreeMixin implements _GetTrip {
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
     required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return getTrip(this);
@@ -1516,6 +1574,7 @@ class _$_GetTrip with DiagnosticableTreeMixin implements _GetTrip {
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return getTrip?.call(this);
@@ -1532,6 +1591,7 @@ class _$_GetTrip with DiagnosticableTreeMixin implements _GetTrip {
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
@@ -1548,6 +1608,195 @@ abstract class _GetTrip implements TrackEvent {
   String get tripId => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$GetTripCopyWith<_GetTrip> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$TripReceivedCopyWith<$Res> {
+  factory _$TripReceivedCopyWith(
+          _TripReceived value, $Res Function(_TripReceived) then) =
+      __$TripReceivedCopyWithImpl<$Res>;
+  $Res call({DocumentSnapshot<Object?> data});
+}
+
+/// @nodoc
+class __$TripReceivedCopyWithImpl<$Res> extends _$TrackEventCopyWithImpl<$Res>
+    implements _$TripReceivedCopyWith<$Res> {
+  __$TripReceivedCopyWithImpl(
+      _TripReceived _value, $Res Function(_TripReceived) _then)
+      : super(_value, (v) => _then(v as _TripReceived));
+
+  @override
+  _TripReceived get _value => super._value as _TripReceived;
+
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_TripReceived(
+      data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as DocumentSnapshot<Object?>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_TripReceived with DiagnosticableTreeMixin implements _TripReceived {
+  const _$_TripReceived(this.data);
+
+  @override
+  final DocumentSnapshot<Object?> data;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TrackEvent.tripReceived(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TrackEvent.tripReceived'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _TripReceived &&
+            (identical(other.data, data) ||
+                const DeepCollectionEquality().equals(other.data, data)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(data);
+
+  @JsonKey(ignore: true)
+  @override
+  _$TripReceivedCopyWith<_TripReceived> get copyWith =>
+      __$TripReceivedCopyWithImpl<_TripReceived>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() currentLocation,
+    required TResult Function(String name) fromLocationChange,
+    required TResult Function(String name) toLocationChange,
+    required TResult Function(String name) selectedFromLocation,
+    required TResult Function(String name) selectedToLocation,
+    required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
+    required TResult Function(String service) serviceChange,
+  }) {
+    return tripReceived(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
+    TResult Function(String service)? serviceChange,
+  }) {
+    return tripReceived?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
+    TResult Function(String service)? serviceChange,
+    required TResult orElse(),
+  }) {
+    if (tripReceived != null) {
+      return tripReceived(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CurrentLocation value) currentLocation,
+    required TResult Function(_FromLocationChange value) fromLocationChange,
+    required TResult Function(_ToLocationChange value) toLocationChange,
+    required TResult Function(_selectedFromLocation value) selectedFromLocation,
+    required TResult Function(_selectedToLocation value) selectedToLocation,
+    required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_TripReceived value) tripReceived,
+    required TResult Function(_ServiceChange value) serviceChange,
+  }) {
+    return tripReceived(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
+    TResult Function(_ServiceChange value)? serviceChange,
+  }) {
+    return tripReceived?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
+    TResult Function(_ServiceChange value)? serviceChange,
+    required TResult orElse(),
+  }) {
+    if (tripReceived != null) {
+      return tripReceived(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TripReceived implements TrackEvent {
+  const factory _TripReceived(DocumentSnapshot<Object?> data) = _$_TripReceived;
+
+  DocumentSnapshot<Object?> get data => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$TripReceivedCopyWith<_TripReceived> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1631,6 +1880,7 @@ class _$_ServiceChange with DiagnosticableTreeMixin implements _ServiceChange {
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
     required TResult Function(String tripId) getTrip,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
   }) {
     return serviceChange(service);
@@ -1647,6 +1897,7 @@ class _$_ServiceChange with DiagnosticableTreeMixin implements _ServiceChange {
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
   }) {
     return serviceChange?.call(service);
@@ -1663,6 +1914,7 @@ class _$_ServiceChange with DiagnosticableTreeMixin implements _ServiceChange {
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
     TResult Function(String tripId)? getTrip,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     required TResult orElse(),
   }) {
@@ -1683,6 +1935,7 @@ class _$_ServiceChange with DiagnosticableTreeMixin implements _ServiceChange {
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
     required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
   }) {
     return serviceChange(this);
@@ -1699,6 +1952,7 @@ class _$_ServiceChange with DiagnosticableTreeMixin implements _ServiceChange {
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
   }) {
     return serviceChange?.call(this);
@@ -1715,6 +1969,7 @@ class _$_ServiceChange with DiagnosticableTreeMixin implements _ServiceChange {
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
     TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     required TResult orElse(),
   }) {
@@ -1760,6 +2015,9 @@ class _$TrackStateTearOff {
       required bool requestLoading,
       required String service,
       required bool search,
+      required bool searchTo,
+      required bool searchFrom,
+      required RequestModel tripData,
       required Option<Either<RequestFailure, RequestModel>> request}) {
     return _TrackState(
       current: current,
@@ -1783,6 +2041,9 @@ class _$TrackStateTearOff {
       requestLoading: requestLoading,
       service: service,
       search: search,
+      searchTo: searchTo,
+      searchFrom: searchFrom,
+      tripData: tripData,
       request: request,
     );
   }
@@ -1816,6 +2077,9 @@ mixin _$TrackState {
   bool get requestLoading => throw _privateConstructorUsedError;
   String get service => throw _privateConstructorUsedError;
   bool get search => throw _privateConstructorUsedError;
+  bool get searchTo => throw _privateConstructorUsedError;
+  bool get searchFrom => throw _privateConstructorUsedError;
+  RequestModel get tripData => throw _privateConstructorUsedError;
   Option<Either<RequestFailure, RequestModel>> get request =>
       throw _privateConstructorUsedError;
 
@@ -1851,6 +2115,9 @@ abstract class $TrackStateCopyWith<$Res> {
       bool requestLoading,
       String service,
       bool search,
+      bool searchTo,
+      bool searchFrom,
+      RequestModel tripData,
       Option<Either<RequestFailure, RequestModel>> request});
 }
 
@@ -1885,6 +2152,9 @@ class _$TrackStateCopyWithImpl<$Res> implements $TrackStateCopyWith<$Res> {
     Object? requestLoading = freezed,
     Object? service = freezed,
     Object? search = freezed,
+    Object? searchTo = freezed,
+    Object? searchFrom = freezed,
+    Object? tripData = freezed,
     Object? request = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1972,6 +2242,18 @@ class _$TrackStateCopyWithImpl<$Res> implements $TrackStateCopyWith<$Res> {
           ? _value.search
           : search // ignore: cast_nullable_to_non_nullable
               as bool,
+      searchTo: searchTo == freezed
+          ? _value.searchTo
+          : searchTo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchFrom: searchFrom == freezed
+          ? _value.searchFrom
+          : searchFrom // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tripData: tripData == freezed
+          ? _value.tripData
+          : tripData // ignore: cast_nullable_to_non_nullable
+              as RequestModel,
       request: request == freezed
           ? _value.request
           : request // ignore: cast_nullable_to_non_nullable
@@ -2008,6 +2290,9 @@ abstract class _$TrackStateCopyWith<$Res> implements $TrackStateCopyWith<$Res> {
       bool requestLoading,
       String service,
       bool search,
+      bool searchTo,
+      bool searchFrom,
+      RequestModel tripData,
       Option<Either<RequestFailure, RequestModel>> request});
 }
 
@@ -2044,6 +2329,9 @@ class __$TrackStateCopyWithImpl<$Res> extends _$TrackStateCopyWithImpl<$Res>
     Object? requestLoading = freezed,
     Object? service = freezed,
     Object? search = freezed,
+    Object? searchTo = freezed,
+    Object? searchFrom = freezed,
+    Object? tripData = freezed,
     Object? request = freezed,
   }) {
     return _then(_TrackState(
@@ -2131,6 +2419,18 @@ class __$TrackStateCopyWithImpl<$Res> extends _$TrackStateCopyWithImpl<$Res>
           ? _value.search
           : search // ignore: cast_nullable_to_non_nullable
               as bool,
+      searchTo: searchTo == freezed
+          ? _value.searchTo
+          : searchTo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchFrom: searchFrom == freezed
+          ? _value.searchFrom
+          : searchFrom // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tripData: tripData == freezed
+          ? _value.tripData
+          : tripData // ignore: cast_nullable_to_non_nullable
+              as RequestModel,
       request: request == freezed
           ? _value.request
           : request // ignore: cast_nullable_to_non_nullable
@@ -2164,6 +2464,9 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
       required this.requestLoading,
       required this.service,
       required this.search,
+      required this.searchTo,
+      required this.searchFrom,
+      required this.tripData,
       required this.request});
 
   @override
@@ -2209,11 +2512,17 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
   @override
   final bool search;
   @override
+  final bool searchTo;
+  @override
+  final bool searchFrom;
+  @override
+  final RequestModel tripData;
+  @override
   final Option<Either<RequestFailure, RequestModel>> request;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TrackState(current: $current, active: $active, from: $from, to: $to, fromPrediction: $fromPrediction, toPrediction: $toPrediction, loading: $loading, fromPlace: $fromPlace, toPlace: $toPlace, directions: $directions, distance: $distance, time: $time, taxPrice: $taxPrice, xxlPrice: $xxlPrice, bodaPrice: $bodaPrice, bajajPrice: $bajajPrice, kirikuuPrice: $kirikuuPrice, priceLoading: $priceLoading, requestLoading: $requestLoading, service: $service, search: $search, request: $request)';
+    return 'TrackState(current: $current, active: $active, from: $from, to: $to, fromPrediction: $fromPrediction, toPrediction: $toPrediction, loading: $loading, fromPlace: $fromPlace, toPlace: $toPlace, directions: $directions, distance: $distance, time: $time, taxPrice: $taxPrice, xxlPrice: $xxlPrice, bodaPrice: $bodaPrice, bajajPrice: $bajajPrice, kirikuuPrice: $kirikuuPrice, priceLoading: $priceLoading, requestLoading: $requestLoading, service: $service, search: $search, searchTo: $searchTo, searchFrom: $searchFrom, tripData: $tripData, request: $request)';
   }
 
   @override
@@ -2242,6 +2551,9 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
       ..add(DiagnosticsProperty('requestLoading', requestLoading))
       ..add(DiagnosticsProperty('service', service))
       ..add(DiagnosticsProperty('search', search))
+      ..add(DiagnosticsProperty('searchTo', searchTo))
+      ..add(DiagnosticsProperty('searchFrom', searchFrom))
+      ..add(DiagnosticsProperty('tripData', tripData))
       ..add(DiagnosticsProperty('request', request));
   }
 
@@ -2307,8 +2619,16 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
                     .equals(other.service, service)) &&
             (identical(other.search, search) ||
                 const DeepCollectionEquality().equals(other.search, search)) &&
-            (identical(other.request, request) ||
-                const DeepCollectionEquality().equals(other.request, request)));
+            (identical(other.searchTo, searchTo) ||
+                const DeepCollectionEquality()
+                    .equals(other.searchTo, searchTo)) &&
+            (identical(other.searchFrom, searchFrom) ||
+                const DeepCollectionEquality()
+                    .equals(other.searchFrom, searchFrom)) &&
+            (identical(other.tripData, tripData) ||
+                const DeepCollectionEquality()
+                    .equals(other.tripData, tripData)) &&
+            (identical(other.request, request) || const DeepCollectionEquality().equals(other.request, request)));
   }
 
   @override
@@ -2335,6 +2655,9 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
       const DeepCollectionEquality().hash(requestLoading) ^
       const DeepCollectionEquality().hash(service) ^
       const DeepCollectionEquality().hash(search) ^
+      const DeepCollectionEquality().hash(searchTo) ^
+      const DeepCollectionEquality().hash(searchFrom) ^
+      const DeepCollectionEquality().hash(tripData) ^
       const DeepCollectionEquality().hash(request);
 
   @JsonKey(ignore: true)
@@ -2366,6 +2689,9 @@ abstract class _TrackState implements TrackState {
           required bool requestLoading,
           required String service,
           required bool search,
+          required bool searchTo,
+          required bool searchFrom,
+          required RequestModel tripData,
           required Option<Either<RequestFailure, RequestModel>> request}) =
       _$_TrackState;
 
@@ -2413,6 +2739,12 @@ abstract class _TrackState implements TrackState {
   String get service => throw _privateConstructorUsedError;
   @override
   bool get search => throw _privateConstructorUsedError;
+  @override
+  bool get searchTo => throw _privateConstructorUsedError;
+  @override
+  bool get searchFrom => throw _privateConstructorUsedError;
+  @override
+  RequestModel get tripData => throw _privateConstructorUsedError;
   @override
   Option<Either<RequestFailure, RequestModel>> get request =>
       throw _privateConstructorUsedError;

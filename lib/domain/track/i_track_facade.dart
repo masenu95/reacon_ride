@@ -19,7 +19,7 @@ abstract class ITrackFacade {
     required String estimatedCost,
     required String actualCost,
   });
-  Stream<Either<RequestFailure, RequestModel>> getTrip({
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getTrip({
     required String id,
   });
 }

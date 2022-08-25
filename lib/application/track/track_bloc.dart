@@ -25,7 +25,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
   final GooglePlace _googlePlace = GooglePlace(EnvConstant.googleAPiKey);
   final ITrackFacade _facade;
 
-  late StreamSubscription<Either<RequestFailure, RequestModel>>
+  late StreamSubscription<DocumentSnapshot<Map<String, dynamic>>>
       _tripStreamSubscription;
   @override
   Stream<TrackState> mapEventToState(
@@ -59,6 +59,8 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
         yield state.copyWith(
           current: position,
           loading: false,
+          searchTo: false,
+          searchFrom: false,
         );
       },
       fromLocationChange: (e) async* {
@@ -68,11 +70,15 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
 
           if (result != null && result.predictions != null) {
             yield state.copyWith(
-                fromPrediction: result.predictions!, active: "from");
+              fromPrediction: result.predictions!,
+              active: "from",
+              searchFrom: false,
+            );
           } else {
             yield state.copyWith(
               fromPrediction: [],
               active: "",
+              searchFrom: false,
             );
           }
         }
@@ -85,11 +91,13 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
             yield state.copyWith(
               toPrediction: result.predictions!,
               active: "to",
+              searchTo: false,
             );
           } else {
             yield state.copyWith(
               toPrediction: [],
               active: "",
+              searchTo: false,
             );
           }
         }
@@ -108,6 +116,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
           fromPlace: address[0],
           fromPrediction: [],
           search: search,
+          searchFrom: true,
         );
       },
       selectedToLocation: (e) async* {
@@ -125,6 +134,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
           toPlace: address[0],
           toPrediction: [],
           search: search,
+          searchTo: true,
         );
       },
       getDirection: (e) async* {
@@ -153,6 +163,8 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
           kirikuuPrice: price,
           bajajPrice: price,
           distance: distanceKm,
+          searchTo: false,
+          searchFrom: false,
         );
 
         if (kDebugMode) {
@@ -162,6 +174,8 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
       sendRequest: (e) async* {
         yield state.copyWith(
           requestLoading: true,
+          searchTo: false,
+          searchFrom: false,
         );
         final result = await _facade.createRequest(
           fromLocation: GeoPoint(
@@ -182,14 +196,31 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
         yield state.copyWith(
           requestLoading: false,
           request: optionOf(result),
+          searchTo: false,
+          searchFrom: false,
         );
       },
       serviceChange: (e) async* {
         yield state.copyWith(
           service: e.service,
+          searchTo: false,
+          searchFrom: false,
         );
       },
-      getTrip: (e) async* {},
+      getTrip: (e) async* {
+        _tripStreamSubscription = _facade.getTrip(id: e.tripId).listen(
+              (event) => add(
+                TrackEvent.tripReceived(event),
+              ),
+            );
+      },
+      tripReceived: (e) async* {
+        final data = e.data as Map<String, dynamic>;
+        final RequestModel request = RequestModel.fromJson(data);
+        yield state.copyWith(
+          tripData: request,
+        );
+      },
     );
   }
 }

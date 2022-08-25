@@ -31,7 +31,7 @@ class TrackMapDetail extends StatefulWidget {
 }
 
 class _TrackMapDetailState extends State<TrackMapDetail> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final Completer<GoogleMapController> _googleMapController = Completer();
   late GoogleMapController newRideGoogleMapController;
@@ -47,6 +47,7 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
   bool isAction = true;
   Set<Marker> markerSet = Set<Marker>();
   Set<Circle> circleSet = Set<Circle>();
+
   var rotation = 0.0;
 
   final Completer<GoogleMapController> _controller = Completer();
@@ -70,9 +71,10 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
   @override
   void initState() {
     super.initState();
-    BitmapDescriptor.fromAssetImage(const ImageConfiguration(size: Size(4, 4)),
-            'images/motorcycle_delivery.png')
-        .then((onValue) {
+    BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(size: Size(4, 4)),
+      'images/motorcycle_delivery.png',
+    ).then((onValue) {
       myIcon = onValue;
     });
   }
@@ -91,17 +93,23 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
       builder: (context, state) {
         /// origin marker
         _addMarker(
-            LatLng(state.fromPlace.coordinates.latitude!,
-                state.fromPlace.coordinates.longitude!),
-            "origin",
-            BitmapDescriptor.defaultMarker);
+          LatLng(
+            state.fromPlace.coordinates.latitude!,
+            state.fromPlace.coordinates.longitude!,
+          ),
+          "origin",
+          BitmapDescriptor.defaultMarker,
+        );
 
         /// destination marker
         _addMarker(
-            LatLng(state.toPlace.coordinates.latitude!,
-                state.toPlace.coordinates.longitude!),
-            "destination",
-            BitmapDescriptor.defaultMarkerWithHue(90));
+          LatLng(
+            state.toPlace.coordinates.latitude!,
+            state.toPlace.coordinates.longitude!,
+          ),
+          "destination",
+          BitmapDescriptor.defaultMarkerWithHue(90),
+        );
 
         _getPolyline(
           fromLatitude: state.fromPlace.coordinates.latitude!,
@@ -126,8 +134,10 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                           child: GoogleMap(
                             mapType: MapType.normal,
                             initialCameraPosition: CameraPosition(
-                              target: LatLng(state.current.latitude,
-                                  state.current.longitude),
+                              target: LatLng(
+                                state.current.latitude,
+                                state.current.longitude,
+                              ),
                               zoom: 12.4746,
                             ),
                             myLocationEnabled: true,
@@ -152,17 +162,17 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                       builder: (context, scrollController) {
                         return Container(
                           decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft:
-                                      Radius.circular(Dimensions.radius * 3),
-                                  topRight:
-                                      Radius.circular(Dimensions.radius * 3))),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(Dimensions.radius * 3),
+                              topRight: Radius.circular(Dimensions.radius * 3),
+                            ),
+                          ),
                           child: SingleChildScrollView(
                             controller: scrollController,
                             child: !state.requestLoading
                                 ? selectRiderWidget(context)
-                                : Container(),
+                                : RequestBottomSheet(),
                           ),
                         );
                       },
@@ -181,17 +191,22 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
     final Position position = await _determinePosition();
     final GoogleMapController controller = await _controller.future;
     final double distanceInMeters = Geolocator.distanceBetween(
-        52.2165157, 6.9437819, 52.3546274, 4.8285838);
+      52.2165157,
+      6.9437819,
+      52.3546274,
+      4.8285838,
+    );
     if (kDebugMode) {
       print(distanceInMeters / 1000);
     }
     controller.animateCamera(
       CameraUpdate.newCameraPosition(
         CameraPosition(
-            bearing: 192.8334901395799,
-            target: LatLng(position.latitude, position.longitude),
-            tilt: 59.440717697143555,
-            zoom: 12.151926040649414),
+          bearing: 192.8334901395799,
+          target: LatLng(position.latitude, position.longitude),
+          tilt: 59.440717697143555,
+          zoom: 12.151926040649414,
+        ),
       ),
     );
   }
@@ -225,7 +240,8 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
     if (permission == LocationPermission.deniedForever) {
       // Permissions are denied forever, handle appropriately.
       return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+        'Location permissions are permanently denied, we cannot request permissions.',
+      );
     }
 
     // When we reach here, permissions are granted and we can
@@ -358,15 +374,16 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
 
     /// add origin Circle
     Circle pickUpCircle = Circle(
-        circleId: const CircleId("pickUpId"),
-        center: LatLng(
-          fromLatitude,
-          fromLong,
-        ),
-        radius: 12,
-        strokeWidth: 4,
-        strokeColor: Colors.yellowAccent,
-        fillColor: Colors.yellow);
+      circleId: const CircleId("pickUpId"),
+      center: LatLng(
+        fromLatitude,
+        fromLong,
+      ),
+      radius: 12,
+      strokeWidth: 4,
+      strokeColor: Colors.yellowAccent,
+      fillColor: Colors.yellow,
+    );
 
     /// add destination Circle
     Circle dropOffCircle = Circle(
@@ -405,31 +422,36 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
       LatLng mPosition = LatLng(position.latitude, position.longitude);
 
       // this will be used on rotating the icon based on where it moves.
-      var rotation = MapKitAssistant.getMarkerRotation(oldPos.latitude,
-          oldPos.longitude, myPosition.latitude, myPosition.longitude);
+      var rotation = MapKitAssistant.getMarkerRotation(
+        oldPos.latitude,
+        oldPos.longitude,
+        myPosition.latitude,
+        myPosition.longitude,
+      );
 
       //set live location to firestore if the driver is online
-      driverCollectionReference
+      /*  driverCollectionReference
           .doc(context.read<AuthBloc>().state.user.uid)
           .set(
-              (geo.point(
-                      latitude: myPosition.latitude,
-                      longitude: myPosition.longitude))
-                  .data,
-              SetOptions(merge: true));
-
+            (geo.point(
+              latitude: myPosition.latitude,
+              longitude: myPosition.longitude,
+            )).data,
+            SetOptions(merge: true),
+          );
+*/
       /// add origin marker origin marker
-      Marker driverMarker = Marker(
+      /*  Marker driverMarker = Marker(
         position: mPosition,
         markerId: const MarkerId("driverPosition"),
         icon: myIcon!,
         rotation: rotation as double,
-      );
+      );*/
 
       setState(() {
         if (!mounted) return;
 
-        markerSet.add(driverMarker);
+        /* markerSet.add(driverMarker);*/
         // CameraPosition cameraPosition =
         //     CameraPosition(target: mPosition, zoom: 15);
         // newRideGoogleMapController
@@ -466,17 +488,19 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                 Text(
                   Strings.selectRide,
                   style: GoogleFonts.roboto(
-                      color: CustomColor.primaryColor,
-                      fontSize: Dimensions.largeTextSize,
-                      fontWeight: FontWeight.bold),
+                    color: CustomColor.primaryColor,
+                    fontSize: Dimensions.largeTextSize,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 GestureDetector(
                   child: Container(
                     height: 40,
                     width: 40,
                     decoration: const BoxDecoration(
-                        color: CustomColor.primaryColor,
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                      color: CustomColor.primaryColor,
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    ),
                     child: const Center(
                       child: Icon(
                         Icons.backspace_outlined,
@@ -498,98 +522,262 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
             height: MediaQuery.of(context).size.height * 0.4,
             width: MediaQuery.of(context).size.width,
             child: ListView.builder(
-                itemCount: VehicleList.list().length,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  Vehicle vehicle = VehicleList.list()[index];
-                  return GestureDetector(
-                    onTap: () {
-                      context.read<TrackBloc>().add(
-                            const TrackEvent.sendRequest(),
-                          );
-                    },
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: Dimensions.heightSize),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: const Color(0xFFF1F1F3),
-                            border: Border(
-                                bottom: BorderSide(
-                                    color: Colors.black.withOpacity(0.2)))),
-                        child: Padding(
-                          padding: const EdgeInsets.all(Dimensions.marginSize),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    vehicle.image,
-                                    width: 120,
-                                    height: 50,
-                                  ),
-                                  const SizedBox(
-                                    width: Dimensions.widthSize,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        vehicle.name,
-                                        style: GoogleFonts.roboto(
-                                            color: CustomColor.primaryColor,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      const SizedBox(
-                                        height: Dimensions.heightSize * 0.5,
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.person,
-                                            color: Colors.grey,
-                                          ),
-                                          Text(
-                                            vehicle.person,
-                                            style: CustomStyle.textStyle,
-                                          ),
-                                          const SizedBox(
-                                            width: Dimensions.widthSize,
-                                          ),
-                                          const Icon(
-                                            Icons.location_on,
-                                            color: Colors.grey,
-                                          ),
-                                          Text(
-                                            " ${numberFormat(context.read<TrackBloc>().state.distance.round().toString())} km",
-                                            style: CustomStyle.textStyle,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                'TZS ${numberFormat(context.read<TrackBloc>().state.taxPrice.round().toString())}',
-                                style: GoogleFonts.roboto(
-                                  color: CustomColor.primaryColor,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+              itemCount: 4,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                print(VehicleList.list().length);
+                final Vehicle vehicle = VehicleList.list()[index];
+                return GestureDetector(
+                  onTap: () {
+                    context.read<TrackBloc>().add(
+                          const TrackEvent.sendRequest(),
+                        );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: Dimensions.heightSize),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF1F1F3),
+                        border: Border(
+                          bottom: BorderSide(
+                            color: Colors.black.withOpacity(0.2),
                           ),
                         ),
                       ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(Dimensions.marginSize),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(
+                                  vehicle.image,
+                                  width: 120,
+                                  height: 50,
+                                ),
+                                const SizedBox(
+                                  width: Dimensions.widthSize,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      vehicle.name,
+                                      style: GoogleFonts.roboto(
+                                        color: CustomColor.primaryColor,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: Dimensions.heightSize * 0.5,
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.person,
+                                          color: Colors.grey,
+                                        ),
+                                        Text(
+                                          vehicle.person,
+                                          style: CustomStyle.textStyle,
+                                        ),
+                                        const SizedBox(
+                                          width: Dimensions.widthSize,
+                                        ),
+                                        const Icon(
+                                          Icons.location_on,
+                                          color: Colors.grey,
+                                        ),
+                                        Text(
+                                          " ${numberFormat(context.read<TrackBloc>().state.distance.round().toString())} km",
+                                          style: CustomStyle.textStyle,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Text(
+                              'TZS ${numberFormat(context.read<TrackBloc>().state.taxPrice.round().toString())}',
+                              style: GoogleFonts.roboto(
+                                color: CustomColor.primaryColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  );
-                }),
+                  ),
+                );
+              },
+            ),
           ),
         ],
+      ),
+    );
+  }
+
+  void showRequestRideBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (builder) {
+        return RequestBottomSheet();
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    positionStream.cancel();
+    newRideGoogleMapController.dispose();
+    polyLineSet.clear();
+    super.dispose();
+  }
+}
+
+class RequestBottomSheet extends StatefulWidget {
+  @override
+  _RequestBottomSheetState createState() => _RequestBottomSheetState();
+}
+
+class _RequestBottomSheetState extends State<RequestBottomSheet> {
+  double progress = 0;
+  late Timer _timer;
+  int _start = 0;
+
+  currentProgressColor() {
+    if (progress >= 0.6 && progress < 0.8) {
+      return Colors.orange;
+    }
+    if (progress >= 0.8) {
+      return Colors.red;
+    } else {
+      return Colors.green;
+    }
+  }
+
+  double percentage = 0.0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.6,
+      color: const Color(0xFF737373),
+      child: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 30,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.3),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0),
+                ),
+              ),
+              child: Center(
+                child: Container(
+                  height: 5.0,
+                  width: 100.0,
+                  decoration: const BoxDecoration(
+                    color: CustomColor.primaryColor,
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(Dimensions.radius),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            requestRideWidget(context)
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget requestRideWidget(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.5,
+      width: MediaQuery.of(context).size.width,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: Dimensions.marginSize,
+          right: Dimensions.marginSize,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              Strings.requestingRide,
+              style: GoogleFonts.roboto(
+                color: CustomColor.primaryColor,
+                fontSize: Dimensions.extraLargeTextSize * 1.5,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(
+              height: Dimensions.heightSize * 3,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(15.0),
+              child: LinearProgressIndicator(),
+            ),
+            const SizedBox(
+              height: Dimensions.heightSize * 3,
+            ),
+            GestureDetector(
+              child: Container(
+                height: 50.0,
+                decoration: const BoxDecoration(
+                  color: CustomColor.primaryColor,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(Dimensions.radius * 0.5),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    Strings.cancelRequest.toUpperCase(),
+                    style: GoogleFonts.roboto(
+                      color: Colors.white,
+                      fontSize: Dimensions.largeTextSize,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        ),
       ),
     );
   }

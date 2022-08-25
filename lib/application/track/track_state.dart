@@ -24,6 +24,9 @@ class TrackState with _$TrackState {
     required bool requestLoading,
     required String service,
     required bool search,
+    required bool searchTo,
+    required bool searchFrom,
+    required RequestModel tripData,
     required Option<Either<RequestFailure, RequestModel>> request,
   }) = _TrackState;
 
@@ -59,5 +62,20 @@ class TrackState with _$TrackState {
         requestLoading: false,
         service: 'Passanger',
         request: none(),
+        searchFrom: false,
+        searchTo: false,
+        tripData: RequestModel(
+          fromLocation: const GeoPoint(0, 0),
+          toLocation: const GeoPoint(0, 0),
+          userId: "",
+          customerName: '',
+          customerPhone: '',
+          status: '',
+          estimatedCost: '',
+          actualCost: '',
+          driverId: '',
+          from: '',
+          to: '',
+        ),
       );
 }

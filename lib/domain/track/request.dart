@@ -10,6 +10,9 @@ class RequestModel {
   final String estimatedCost;
 
   final String actualCost;
+  final String from;
+  final String to;
+  final String driverId;
 
   RequestModel({
     required this.fromLocation,
@@ -20,6 +23,9 @@ class RequestModel {
     required this.status,
     required this.estimatedCost,
     required this.actualCost,
+    required this.driverId,
+    required this.from,
+    required this.to,
   });
 
   factory RequestModel.fromJson(Map<String, dynamic> data) {
@@ -32,6 +38,9 @@ class RequestModel {
       status: data['status'].toString(),
       estimatedCost: data['estimatedCost'].toString(),
       actualCost: data['actualCost'].toString(),
+      driverId: (data['driverId'] ?? '').toString(),
+      from: (data['fromName'] ?? '').toString(),
+      to: (data['toName'] ?? '').toString(),
     );
   }
 }

@@ -59,8 +59,9 @@ class ApiTrackFacade implements ITrackFacade {
 
         if (userSnapshot.data() != null) {
           final UserModel user = UserModel.fromJson(
-              json: userSnapshot.data() as Map<String, dynamic>,
-              id: userSnapshot.id);
+            json: userSnapshot.data() as Map<String, dynamic>,
+            id: userSnapshot.id,
+          );
 
           //timestamp
           final DateTime currentPhoneDate = DateTime.now();
@@ -104,13 +105,37 @@ class ApiTrackFacade implements ITrackFacade {
                 fromLocation.longitude,
               );
               print(distanceInMeters);
-              if (distanceInMeters < 50000) {
-                return right(requestModel);
+              if (distanceInMeters < 5000) {
+                print(collection.docs[i].data());
+                var result = await http.post(
+                  Uri.parse('https://fcm.googleapis.com/fcm/send'),
+                  headers: <String, String>{
+                    'Content-Type': 'application/json',
+                    'Authorization':
+                        'key=AAAAtkSxkLY:APA91bHOlrex0qaaw97CsSVnpq843r6KN9QslYoPVdRkc8Xl0SLdtkkmXjULa1ucIo-iKOkC7IiqmiTv-6UPE9Vwi6M7-HJ_AvWVMK10bMyEynPCWb_P6e1Gg3BXipabXto3_lyHXkF8',
+                  },
+                  body: jsonEncode(
+                    <String, dynamic>{
+                      'notification': <String, dynamic>{
+                        'body': "Hello New Request Arrive on dirm ",
+                        'title': 'New Request Arrive'
+                      },
+                      'priority': 'high',
+                      'data': <String, dynamic>{
+                        'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+                        'id': id,
+                        'status': 'done'
+                      },
+                      "to": collection.docs[i].data()['token'],
+                    },
+                  ),
+                );
+                print(result.body);
               } else {
-                await _firestore.collection('Trips').doc(trip.id).delete();
-                return left(const RequestFailure.unavailable());
+                continue;
               }
             }
+            return right(requestModel);
           } else {
             return left(const RequestFailure.serverError());
           }
@@ -119,6 +144,7 @@ class ApiTrackFacade implements ITrackFacade {
         }
       }
     } on FirebaseAuthException catch (e) {
+      print(e);
       return left(const RequestFailure.serverError());
     }
 
@@ -126,8 +152,11 @@ class ApiTrackFacade implements ITrackFacade {
   }
 
   @override
-  Stream<Either<RequestFailure, RequestModel>> getTrip(
-      {required String id}) async* {
-    UnimplementedError();
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getTrip({
+    required String id,
+  }) async* {
+    final collection = await _firestore.collection('Trips').doc(id).snapshots();
+
+    yield* collection;
   }
 }
