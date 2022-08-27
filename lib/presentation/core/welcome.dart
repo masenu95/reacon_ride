@@ -22,7 +22,10 @@ class Welcome extends StatelessWidget {
       child: Container(
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
-          color: Colors.red,
+          image: DecorationImage(
+            image: AssetImage('images/launch.png'),
+            fit: BoxFit.cover,
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,

@@ -155,7 +155,16 @@ class ApiTrackFacade implements ITrackFacade {
   Stream<DocumentSnapshot<Map<String, dynamic>>> getTrip({
     required String id,
   }) async* {
-    final collection = await _firestore.collection('Trips').doc(id).snapshots();
+    final collection = _firestore.collection('Trips').doc(id).snapshots();
+
+    yield* collection;
+  }
+
+  @override
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getDriver({
+    required String id,
+  }) async* {
+    final collection = _firestore.collection('Drivers').doc(id).snapshots();
 
     yield* collection;
   }

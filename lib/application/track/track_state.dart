@@ -27,6 +27,7 @@ class TrackState with _$TrackState {
     required bool searchTo,
     required bool searchFrom,
     required RequestModel tripData,
+    required Driver driverData,
     required Option<Either<RequestFailure, RequestModel>> request,
   }) = _TrackState;
 
@@ -76,6 +77,17 @@ class TrackState with _$TrackState {
           driverId: '',
           from: '',
           to: '',
+          id: "",
+        ),
+        driverData: Driver(
+          email: '',
+          phone: '',
+          name: '',
+          vehicleColor: '',
+          vehicleManufacture: '',
+          vehicleNo: '',
+          location: const GeoPoint(0, 0),
+          token: '',
         ),
       );
 }

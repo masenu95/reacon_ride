@@ -22,4 +22,7 @@ abstract class ITrackFacade {
   Stream<DocumentSnapshot<Map<String, dynamic>>> getTrip({
     required String id,
   });
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getDriver({
+    required String id,
+  });
 }

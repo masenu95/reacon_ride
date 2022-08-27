@@ -10,6 +10,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_place/google_place.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reacon_customer/domain/track/driver.dart';
 import 'package:reacon_customer/domain/track/i_track_facade.dart';
 import 'package:reacon_customer/domain/track/request.dart';
 import 'package:reacon_customer/domain/track/request_failure.dart';
@@ -27,6 +28,8 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
 
   late StreamSubscription<DocumentSnapshot<Map<String, dynamic>>>
       _tripStreamSubscription;
+  late StreamSubscription<DocumentSnapshot<Map<String, dynamic>>>
+      _driverStreamSubscription;
   @override
   Stream<TrackState> mapEventToState(
     TrackEvent event,
@@ -204,12 +207,14 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
           driverId: '',
           from: '',
           to: '',
+          id: "",
         );
 
         result.fold(
           (l) => null,
           (r) => request = r,
         );
+        add(TrackEvent.getTrip(request.id));
         yield state.copyWith(
           tripData: request,
           requestLoading: false,
@@ -233,11 +238,26 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
             );
       },
       tripReceived: (e) async* {
-        final data = e.data as Map<String, dynamic>;
+        print(e.data);
+        final data = e.data.data()! as Map<String, dynamic>;
         final RequestModel request = RequestModel.fromJson(data);
         yield state.copyWith(
           tripData: request,
         );
+      },
+      driverReceived: (e) async* {
+        final data = e.data.data()! as Map<String, dynamic>;
+        final Driver request = Driver.fromJson(data);
+        yield state.copyWith(
+          driverData: request,
+        );
+      },
+      getDriver: (e) async* {
+        _driverStreamSubscription = _facade.getTrip(id: e.driverId).listen(
+              (event) => add(
+                TrackEvent.driverReceived(event),
+              ),
+            );
       },
     );
   }

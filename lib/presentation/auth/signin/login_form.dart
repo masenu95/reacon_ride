@@ -34,7 +34,6 @@ class LoginForm extends StatelessWidget {
               ).show(context);
             },
             (_) {
-
               Navigator.pushReplacementNamed(context, Landing.routeName);
             },
           ),
@@ -44,12 +43,13 @@ class LoginForm extends StatelessWidget {
         return SingleChildScrollView(
           child: Form(
             child: Container(
-              height: height,
+              //sheight: height,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: Column(children: [
                 Container(
-                  margin: EdgeInsets.only(top: 100),
-                  child:Text('DIRM MOVE') ,/*Image(
+                  margin: const EdgeInsets.only(top: 100),
+                  child: const Text(
+                      'DIRM MOVE'), /*Image(
                     image: AssetImage('images/logo.png'),
                     height: 150,
                   ),*/
@@ -70,7 +70,7 @@ class LoginForm extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 20,
                             child: Divider(thickness: 3),
                           )
@@ -120,7 +120,6 @@ class LoginForm extends StatelessWidget {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(6),
                           ),
-                          
                           prefixIcon: const Icon(Icons.lock_outline),
                           hintText: 'Password',
                         ),
@@ -130,17 +129,17 @@ class LoginForm extends StatelessWidget {
                             ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     GestureDetector(
                       onTap: () =>
                           Navigator.pushNamed(context, PasswordReset.routeName),
                       child: Container(
-                        child: Text('Forgot password'),
+                        child: const Text('Forgot password'),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     GestureDetector(
@@ -171,7 +170,7 @@ class LoginForm extends StatelessWidget {
                                     size: 20,
                                     color: kWhiteColor,
                                   ),
-                            SizedBox(
+                            const SizedBox(
                               width: 6,
                             ),
                             Text(
@@ -184,14 +183,14 @@ class LoginForm extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Container(
                   child: GestureDetector(
                     onTap: () =>
                         Navigator.pushNamed(context, RegisterPage.routeName),
-                    child: Text(
+                    child: const Text(
                       "Don't have account ? Register",
                     ),
                   ),

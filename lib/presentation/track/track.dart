@@ -22,6 +22,8 @@ import 'package:reacon_customer/presentation/core/utils/dimensions.dart';
 import 'package:reacon_customer/presentation/core/utils/strings.dart';
 import 'package:reacon_customer/presentation/core/widget.dart';
 import 'package:reacon_customer/presentation/track/mapKitAssistant.dart';
+import 'package:reacon_customer/presentation/track/ride.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TrackMapDetail extends StatefulWidget {
   const TrackMapDetail({Key? key}) : super(key: key);
@@ -73,7 +75,7 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
     super.initState();
     BitmapDescriptor.fromAssetImage(
       const ImageConfiguration(size: Size(4, 4)),
-      'images/motorcycle_delivery.png',
+      'images/tax.png',
     ).then((onValue) {
       myIcon = onValue;
     });
@@ -89,6 +91,23 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
             print(a);
           },
         );
+        if (state.driverData.location.longitude != 0.0) {
+          LatLng mPosition = LatLng(
+            state.driverData.location.latitude,
+            state.driverData.location.longitude,
+          );
+          Marker driverMarker = Marker(
+            position: mPosition,
+            markerId: const MarkerId("driverPosition"),
+            icon: myIcon!,
+            rotation: rotation,
+          );
+          markerSet.add(driverMarker);
+        }
+
+        if (state.tripData.status == "ON WAY") {
+          Navigator.pushReplacementNamed(context, Ride.routeName);
+        }
       },
       builder: (context, state) {
         /// origin marker
@@ -173,7 +192,9 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                             child: state.requestLoading ||
                                     state.tripData.status == "REQUESTING"
                                 ? RequestBottomSheet()
-                                : selectRiderWidget(context),
+                                : state.tripData.status == "ACCEPTED"
+                                    ? acceptedRiderWidget(context)
+                                    : selectRiderWidget(context),
                           ),
                         );
                       },
@@ -188,26 +209,143 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
     );
   }
 
-  Future<void> _goToTheLake() async {
-    final Position position = await _determinePosition();
-    final GoogleMapController controller = await _controller.future;
-    final double distanceInMeters = Geolocator.distanceBetween(
-      52.2165157,
-      6.9437819,
-      52.3546274,
-      4.8285838,
-    );
-    if (kDebugMode) {
-      print(distanceInMeters / 1000);
-    }
-    controller.animateCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(
-          bearing: 192.8334901395799,
-          target: LatLng(position.latitude, position.longitude),
-          tilt: 59.440717697143555,
-          zoom: 12.151926040649414,
-        ),
+  Padding acceptedRiderWidget(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: Dimensions.marginSize,
+        right: Dimensions.marginSize,
+        top: Dimensions.heightSize * 3,
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Image.asset('assets/driver.png'),
+              const SizedBox(
+                width: Dimensions.widthSize,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    context.read<TrackBloc>().state.driverData.name,
+                    style: GoogleFonts.roboto(
+                      color: CustomColor.primaryColor,
+                      fontSize: Dimensions.largeTextSize,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: Dimensions.heightSize * 0.5,
+                  ),
+
+                  // MyRating(rating: '5')
+                ],
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 40.0,
+                width: 120.0,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFCEADA),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(Dimensions.radius * 2),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    context.read<TrackBloc>().state.tripData.status,
+                    style: GoogleFonts.roboto(color: CustomColor.accentColor),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: Dimensions.widthSize,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: Dimensions.heightSize * 3,
+          ),
+          const Divider(
+            color: Colors.grey,
+          ),
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  child: Container(
+                    child: Text(
+                      Strings.cancelRide,
+                      style: GoogleFonts.roboto(
+                        color: Colors.red,
+                        fontSize: Dimensions.defaultTextSize,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+              ),
+              Expanded(
+                child: GestureDetector(
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.messenger,
+                          color: CustomColor.accentColor,
+                        ),
+                        const SizedBox(
+                          width: Dimensions.widthSize * 0.5,
+                        ),
+                        Text(
+                          Strings.message,
+                          style: CustomStyle.textStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+              ),
+              Expanded(
+                child: GestureDetector(
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.call,
+                          color: CustomColor.accentColor,
+                        ),
+                        const SizedBox(
+                          width: Dimensions.widthSize * 0.5,
+                        ),
+                        Text(
+                          Strings.callDriver,
+                          style: CustomStyle.textStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    launchUrl(Uri(
+                      scheme: 'tel',
+                      path: context.read<TrackBloc>().state.driverData.phone,
+                    ));
+                  },
+                ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
@@ -708,8 +846,8 @@ class _RequestBottomSheetState extends State<RequestBottomSheet> {
                   width: 100.0,
                   decoration: const BoxDecoration(
                     color: CustomColor.primaryColor,
-                    borderRadius: const BorderRadius.all(
-                      const Radius.circular(Dimensions.radius),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(Dimensions.radius),
                     ),
                   ),
                 ),

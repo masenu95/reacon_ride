@@ -24,6 +24,8 @@ import 'package:reacon_customer/presentation/order/order_placed.dart';
 import 'package:reacon_customer/presentation/order/order_track.dart';
 import 'package:reacon_customer/presentation/order/payment.dart';
 import 'package:reacon_customer/presentation/order/travel_order_detail.dart';
+import 'package:reacon_customer/presentation/track/invoice_screen.dart';
+import 'package:reacon_customer/presentation/track/ride.dart';
 import 'package:reacon_customer/presentation/track/search.dart';
 import 'package:reacon_customer/presentation/track/test.dart';
 import 'package:reacon_customer/presentation/track/track.dart';
@@ -82,6 +84,8 @@ class App extends StatelessWidget {
               TravelOrderDetail.routeName: (context) => TravelOrderDetail(),
               SearchRoute.routeName: (context) => SearchRoute(),
               MapSample.routeName: (context) => MapSample(),
+              InvoiceScreen.routeName: (context) => InvoiceScreen(),
+              Ride.routeName: (context) => const Ride(),
             },
           );
         },
