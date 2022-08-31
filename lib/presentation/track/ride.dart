@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:reacon_customer/application/track/track_bloc.dart';
 import 'package:reacon_customer/presentation/track/invoice_screen.dart';
+import 'package:reacon_customer/presentation/track/location_service.dart';
 
 class Ride extends StatefulWidget {
   const Ride({Key? key}) : super(key: key);
@@ -22,6 +24,11 @@ class _RideState extends State<Ride> {
   Set<Marker> markerSet = Set<Marker>();
   Set<Circle> circleSet = Set<Circle>();
   Map<MarkerId, Marker> markers = {};
+  PolylinePoints polylinePoints = PolylinePoints();
+  Set<Polyline> polyLineSet = Set<Polyline>();
+  Set<Polyline> _polylines = Set<Polyline>();
+
+  int _polylineIdCounter = 1;
 
   @override
   void initState() {
@@ -43,8 +50,12 @@ class _RideState extends State<Ride> {
         icon: descriptor,
         position: position,
       );
-      markers[markerId] = marker;
+      markerSet.add(marker);
     }
+
+    int _polylineIdCounter = 1;
+
+    var rotation = 0.0;
 
     return BlocConsumer<TrackBloc, TrackState>(
       listener: (context, state) {
@@ -92,6 +103,13 @@ class _RideState extends State<Ride> {
           BitmapDescriptor.defaultMarkerWithHue(90),
         );
 
+        polylineGenerate(
+          destination:
+              "${state.toPlace.coordinates.latitude},${state.toPlace.coordinates.longitude}",
+          origin:
+              "${state.fromPlace.coordinates.latitude},${state.fromPlace.coordinates.longitude}",
+        );
+
         return Scaffold(
           extendBodyBehindAppBar: true,
           body: state.loading
@@ -116,6 +134,7 @@ class _RideState extends State<Ride> {
                           scrollGesturesEnabled: true,
                           zoomGesturesEnabled: true,
                           circles: circleSet,
+                          polylines: _polylines,
                           onMapCreated: (GoogleMapController controller) {
                             _googleMapController.complete(controller);
                             newRideGoogleMapController = controller;
@@ -128,6 +147,36 @@ class _RideState extends State<Ride> {
                 ]),
         );
       },
+    );
+  }
+
+  Future<void> polylineGenerate({
+    required String origin,
+    required String destination,
+  }) async {
+    var directions = await LocationService().getDirections(
+      origin,
+      destination,
+    );
+    _setPolyline(directions['polyline_decoded'] as List<PointLatLng>);
+  }
+
+  void _setPolyline(List<PointLatLng> points) {
+    final String polylineIdVal = 'polyline_$_polylineIdCounter';
+    _polylineIdCounter++;
+    _polylines.clear();
+
+    _polylines.add(
+      Polyline(
+        polylineId: PolylineId(polylineIdVal),
+        width: 5,
+        color: Colors.red,
+        points: points
+            .map(
+              (point) => LatLng(point.latitude, point.longitude),
+            )
+            .toList(),
+      ),
     );
   }
 }

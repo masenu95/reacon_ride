@@ -11,19 +11,10 @@ import 'package:reacon_customer/presentation/auth/password/password.dart';
 import 'package:reacon_customer/presentation/auth/register/register.dart';
 import 'package:reacon_customer/presentation/auth/signin/sigin.dart';
 import 'package:reacon_customer/presentation/core/welcome.dart';
-import 'package:reacon_customer/presentation/food/food.dart';
-import 'package:reacon_customer/presentation/food/foods.dart';
-import 'package:reacon_customer/presentation/food/travel_bus.dart';
-import 'package:reacon_customer/presentation/food/travel_food.dart';
-import 'package:reacon_customer/presentation/food/travel_package.dart';
-import 'package:reacon_customer/presentation/food/travel_route.dart';
+
 import 'package:reacon_customer/presentation/home/home.dart';
 import 'package:reacon_customer/presentation/home/landing.dart';
-import 'package:reacon_customer/presentation/order/order_detail.dart';
-import 'package:reacon_customer/presentation/order/order_placed.dart';
-import 'package:reacon_customer/presentation/order/order_track.dart';
-import 'package:reacon_customer/presentation/order/payment.dart';
-import 'package:reacon_customer/presentation/order/travel_order_detail.dart';
+
 import 'package:reacon_customer/presentation/track/invoice_screen.dart';
 import 'package:reacon_customer/presentation/track/ride.dart';
 import 'package:reacon_customer/presentation/track/search.dart';
@@ -67,21 +58,10 @@ class App extends StatelessWidget {
               Login.routeName: (context) => Login(),
               Home.routeName: (context) => Home(),
               TrackMapDetail.routeName: (context) => TrackMapDetail(),
-              TravelInfo.routeName: (context) => TravelInfo(),
               Landing.routeName: (context) => Landing(),
               PasswordReset.routeName: (context) => PasswordReset(),
               RegisterPage.routeName: (context) => RegisterPage(),
-              Foods.routeName: (context) => Foods(),
-              TravelRoute.routeName: (context) => TravelRoute(),
-              FoodPage.routeName: (context) => FoodPage(),
-              OrderDetail.routeName: (context) => OrderDetail(),
-              OrderTrack.routeName: (context) => OrderTrack(),
-              TravelBus.routeName: (context) => TravelBus(),
-              OrderPlaced.routeName: (context) => OrderPlaced(),
-              PaymentPage.routeName: (context) => PaymentPage(),
               Settings.routeName: (context) => Settings(),
-              TravelFoods.routeName: (context) => TravelFoods(),
-              TravelOrderDetail.routeName: (context) => TravelOrderDetail(),
               SearchRoute.routeName: (context) => SearchRoute(),
               MapSample.routeName: (context) => MapSample(),
               InvoiceScreen.routeName: (context) => InvoiceScreen(),

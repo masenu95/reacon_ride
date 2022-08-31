@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:reacon_customer/application/auth/authentication/auth_bloc.dart';
-import 'package:reacon_customer/application/food/food_bloc.dart';
+
 import 'package:reacon_customer/presentation/account/setting_page.dart';
 import 'package:reacon_customer/presentation/auth/signin/sigin.dart';
 import 'package:reacon_customer/presentation/core/shared/list_tile.dart';
@@ -13,8 +13,7 @@ class AccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My account',
-            style: Theme.of(context).textTheme.bodyText1),
+        title: Text('My account', style: Theme.of(context).textTheme.bodyText1),
         centerTitle: true,
       ),
       body: Account(),
@@ -38,45 +37,48 @@ class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        return ListView(
+          children: <Widget>[
+            UserDetails(
+              name: state.user.name,
+              email: state.user.email,
+              phone: state.user.phone,
+            ),
+            Divider(
+              color: Theme.of(context).cardColor,
+              thickness: 8.0,
+            ),
+            BuildListTileIcons(
+              icons: Icons.account_balance_wallet,
+              text: 'Wallet',
+              onTap: () {},
+            ),
 
-  builder: (context, state) {
-    return ListView(
-      children: <Widget>[
-        UserDetails(name: state.user.name,email: state.user.email,phone: state.user.phone,),
-        Divider(
-          color: Theme.of(context).cardColor,
-          thickness: 8.0,
-        ),
-        BuildListTileIcons(
-          icons: Icons.account_balance_wallet,
-          text: 'Wallet',
-          onTap: () => context.read<FoodBloc>().add(FoodEvent.getFoods()),
-        ),
-
-       /* BuildListTileIcons(
+            /* BuildListTileIcons(
           icons: Icons.favorite,
           text: 'Favourites',
           onTap: () =>
               Navigator.pushNamed(context,'/'), // favourite
         ),*/
-        BuildListTileIcons(
-            icons: Icons.map,
-            text: 'Terms & Conditions',
-            onTap: () => Navigator.pushNamed(context, '/')),
-        BuildListTileIcons(
-            icons:Icons.support_agent,
-            text: 'Support',
-            onTap: () => Navigator.pushNamed(context, '/')),
-        BuildListTileIcons(
-          icons:Icons.settings,
-          text: 'Settings',
-          onTap: () => Navigator.pushNamed(context, Settings.routeName),
-        ),
-        LogoutTile(),
-      ],
+            BuildListTileIcons(
+                icons: Icons.map,
+                text: 'Terms & Conditions',
+                onTap: () => Navigator.pushNamed(context, '/')),
+            BuildListTileIcons(
+                icons: Icons.support_agent,
+                text: 'Support',
+                onTap: () => Navigator.pushNamed(context, '/')),
+            BuildListTileIcons(
+              icons: Icons.settings,
+              text: 'Settings',
+              onTap: () => Navigator.pushNamed(context, Settings.routeName),
+            ),
+            LogoutTile(),
+          ],
+        );
+      },
     );
-  },
-);
   }
 }
 
@@ -85,7 +87,7 @@ class AddressTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return BuildListTileIcons(
         icons: Icons.location_pin,
-        text:'Saved Addresses',
+        text: 'Saved Addresses',
         onTap: () {
           Navigator.pushNamed(context, '/');
         });
@@ -120,8 +122,9 @@ class LogoutTile extends StatelessWidget {
                           side: BorderSide(color: kTransparentColor)),
                       textColor: kMainColor,
                       onPressed: () {
-                   context.read<AuthBloc>().add(const AuthEvent.signOut());
-                   Navigator.pushReplacementNamed(context, Login.routeName);
+                        context.read<AuthBloc>().add(const AuthEvent.signOut());
+                        Navigator.pushReplacementNamed(
+                            context, Login.routeName);
                       })
                 ],
               );
@@ -136,7 +139,9 @@ class UserDetails extends StatelessWidget {
   final String email;
   final String phone;
 
-  const UserDetails({Key? key, required this.name,required this.email,required this.phone}) : super(key: key);
+  const UserDetails(
+      {Key? key, required this.name, required this.email, required this.phone})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -144,8 +149,7 @@ class UserDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('\n' + name,
-              style: Theme.of(context).textTheme.bodyText1),
+          Text('\n' + name, style: Theme.of(context).textTheme.bodyText1),
           Text('\n' + phone,
               style: Theme.of(context)
                   .textTheme
