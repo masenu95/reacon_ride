@@ -53,6 +53,10 @@ class _$TrackEventTearOff {
     return const _SendRequest();
   }
 
+  _MyLocation myLocation() {
+    return const _MyLocation();
+  }
+
   _GetTrip getTrip(String tripId) {
     return _GetTrip(
       tripId,
@@ -82,6 +86,17 @@ class _$TrackEventTearOff {
       data,
     );
   }
+
+  _GetNearDrivers getNearDrivers() {
+    return const _GetNearDrivers();
+  }
+
+  _NearDriversReceived nearDriversReceived(
+      List<DocumentSnapshot<Object?>> data) {
+    return _NearDriversReceived(
+      data,
+    );
+  }
 }
 
 /// @nodoc
@@ -98,11 +113,15 @@ mixin _$TrackEvent {
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
+    required TResult Function() myLocation,
     required TResult Function(String tripId) getTrip,
     required TResult Function(String driverId) getDriver,
     required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
     required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -114,11 +133,14 @@ mixin _$TrackEvent {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -130,11 +152,14 @@ mixin _$TrackEvent {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -147,11 +172,14 @@ mixin _$TrackEvent {
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
     required TResult Function(_GetTrip value) getTrip,
     required TResult Function(_GetDriver value) getDriver,
     required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
     required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -163,11 +191,14 @@ mixin _$TrackEvent {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -179,11 +210,14 @@ mixin _$TrackEvent {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -260,11 +294,15 @@ class _$_CurrentLocation
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
+    required TResult Function() myLocation,
     required TResult Function(String tripId) getTrip,
     required TResult Function(String driverId) getDriver,
     required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
     required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
   }) {
     return currentLocation();
   }
@@ -279,11 +317,14 @@ class _$_CurrentLocation
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
   }) {
     return currentLocation?.call();
   }
@@ -298,11 +339,14 @@ class _$_CurrentLocation
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (currentLocation != null) {
@@ -321,11 +365,14 @@ class _$_CurrentLocation
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
     required TResult Function(_GetTrip value) getTrip,
     required TResult Function(_GetDriver value) getDriver,
     required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
     required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
   }) {
     return currentLocation(this);
   }
@@ -340,11 +387,14 @@ class _$_CurrentLocation
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
   }) {
     return currentLocation?.call(this);
   }
@@ -359,11 +409,14 @@ class _$_CurrentLocation
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (currentLocation != null) {
@@ -459,11 +512,15 @@ class _$_FromLocationChange
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
+    required TResult Function() myLocation,
     required TResult Function(String tripId) getTrip,
     required TResult Function(String driverId) getDriver,
     required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
     required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
   }) {
     return fromLocationChange(name);
   }
@@ -478,11 +535,14 @@ class _$_FromLocationChange
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
   }) {
     return fromLocationChange?.call(name);
   }
@@ -497,11 +557,14 @@ class _$_FromLocationChange
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (fromLocationChange != null) {
@@ -520,11 +583,14 @@ class _$_FromLocationChange
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
     required TResult Function(_GetTrip value) getTrip,
     required TResult Function(_GetDriver value) getDriver,
     required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
     required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
   }) {
     return fromLocationChange(this);
   }
@@ -539,11 +605,14 @@ class _$_FromLocationChange
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
   }) {
     return fromLocationChange?.call(this);
   }
@@ -558,11 +627,14 @@ class _$_FromLocationChange
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (fromLocationChange != null) {
@@ -663,11 +735,15 @@ class _$_ToLocationChange
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
+    required TResult Function() myLocation,
     required TResult Function(String tripId) getTrip,
     required TResult Function(String driverId) getDriver,
     required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
     required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
   }) {
     return toLocationChange(name);
   }
@@ -682,11 +758,14 @@ class _$_ToLocationChange
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
   }) {
     return toLocationChange?.call(name);
   }
@@ -701,11 +780,14 @@ class _$_ToLocationChange
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (toLocationChange != null) {
@@ -724,11 +806,14 @@ class _$_ToLocationChange
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
     required TResult Function(_GetTrip value) getTrip,
     required TResult Function(_GetDriver value) getDriver,
     required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
     required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
   }) {
     return toLocationChange(this);
   }
@@ -743,11 +828,14 @@ class _$_ToLocationChange
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
   }) {
     return toLocationChange?.call(this);
   }
@@ -762,11 +850,14 @@ class _$_ToLocationChange
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (toLocationChange != null) {
@@ -868,11 +959,15 @@ class _$_selectedFromLocation
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
+    required TResult Function() myLocation,
     required TResult Function(String tripId) getTrip,
     required TResult Function(String driverId) getDriver,
     required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
     required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
   }) {
     return selectedFromLocation(name);
   }
@@ -887,11 +982,14 @@ class _$_selectedFromLocation
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
   }) {
     return selectedFromLocation?.call(name);
   }
@@ -906,11 +1004,14 @@ class _$_selectedFromLocation
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (selectedFromLocation != null) {
@@ -929,11 +1030,14 @@ class _$_selectedFromLocation
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
     required TResult Function(_GetTrip value) getTrip,
     required TResult Function(_GetDriver value) getDriver,
     required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
     required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
   }) {
     return selectedFromLocation(this);
   }
@@ -948,11 +1052,14 @@ class _$_selectedFromLocation
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
   }) {
     return selectedFromLocation?.call(this);
   }
@@ -967,11 +1074,14 @@ class _$_selectedFromLocation
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (selectedFromLocation != null) {
@@ -1072,11 +1182,15 @@ class _$_selectedToLocation
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
+    required TResult Function() myLocation,
     required TResult Function(String tripId) getTrip,
     required TResult Function(String driverId) getDriver,
     required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
     required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
   }) {
     return selectedToLocation(name);
   }
@@ -1091,11 +1205,14 @@ class _$_selectedToLocation
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
   }) {
     return selectedToLocation?.call(name);
   }
@@ -1110,11 +1227,14 @@ class _$_selectedToLocation
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (selectedToLocation != null) {
@@ -1133,11 +1253,14 @@ class _$_selectedToLocation
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
     required TResult Function(_GetTrip value) getTrip,
     required TResult Function(_GetDriver value) getDriver,
     required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
     required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
   }) {
     return selectedToLocation(this);
   }
@@ -1152,11 +1275,14 @@ class _$_selectedToLocation
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
   }) {
     return selectedToLocation?.call(this);
   }
@@ -1171,11 +1297,14 @@ class _$_selectedToLocation
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (selectedToLocation != null) {
@@ -1246,11 +1375,15 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
+    required TResult Function() myLocation,
     required TResult Function(String tripId) getTrip,
     required TResult Function(String driverId) getDriver,
     required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
     required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
   }) {
     return getDirection();
   }
@@ -1265,11 +1398,14 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
   }) {
     return getDirection?.call();
   }
@@ -1284,11 +1420,14 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (getDirection != null) {
@@ -1307,11 +1446,14 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
     required TResult Function(_GetTrip value) getTrip,
     required TResult Function(_GetDriver value) getDriver,
     required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
     required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
   }) {
     return getDirection(this);
   }
@@ -1326,11 +1468,14 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
   }) {
     return getDirection?.call(this);
   }
@@ -1345,11 +1490,14 @@ class _$_GetDirection with DiagnosticableTreeMixin implements _GetDirection {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (getDirection != null) {
@@ -1415,11 +1563,15 @@ class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
+    required TResult Function() myLocation,
     required TResult Function(String tripId) getTrip,
     required TResult Function(String driverId) getDriver,
     required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
     required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
   }) {
     return sendRequest();
   }
@@ -1434,11 +1586,14 @@ class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
   }) {
     return sendRequest?.call();
   }
@@ -1453,11 +1608,14 @@ class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (sendRequest != null) {
@@ -1476,11 +1634,14 @@ class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
     required TResult Function(_GetTrip value) getTrip,
     required TResult Function(_GetDriver value) getDriver,
     required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
     required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
   }) {
     return sendRequest(this);
   }
@@ -1495,11 +1656,14 @@ class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
   }) {
     return sendRequest?.call(this);
   }
@@ -1514,11 +1678,14 @@ class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (sendRequest != null) {
@@ -1530,6 +1697,194 @@ class _$_SendRequest with DiagnosticableTreeMixin implements _SendRequest {
 
 abstract class _SendRequest implements TrackEvent {
   const factory _SendRequest() = _$_SendRequest;
+}
+
+/// @nodoc
+abstract class _$MyLocationCopyWith<$Res> {
+  factory _$MyLocationCopyWith(
+          _MyLocation value, $Res Function(_MyLocation) then) =
+      __$MyLocationCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$MyLocationCopyWithImpl<$Res> extends _$TrackEventCopyWithImpl<$Res>
+    implements _$MyLocationCopyWith<$Res> {
+  __$MyLocationCopyWithImpl(
+      _MyLocation _value, $Res Function(_MyLocation) _then)
+      : super(_value, (v) => _then(v as _MyLocation));
+
+  @override
+  _MyLocation get _value => super._value as _MyLocation;
+}
+
+/// @nodoc
+
+class _$_MyLocation with DiagnosticableTreeMixin implements _MyLocation {
+  const _$_MyLocation();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TrackEvent.myLocation()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'TrackEvent.myLocation'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _MyLocation);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() currentLocation,
+    required TResult Function(String name) fromLocationChange,
+    required TResult Function(String name) toLocationChange,
+    required TResult Function(String name) selectedFromLocation,
+    required TResult Function(String name) selectedToLocation,
+    required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function() myLocation,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(String driverId) getDriver,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
+    required TResult Function(String service) serviceChange,
+    required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
+  }) {
+    return myLocation();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function()? myLocation,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String driverId)? getDriver,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
+    TResult Function(String service)? serviceChange,
+    TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
+  }) {
+    return myLocation?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function()? myLocation,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String driverId)? getDriver,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
+    TResult Function(String service)? serviceChange,
+    TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
+    required TResult orElse(),
+  }) {
+    if (myLocation != null) {
+      return myLocation();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CurrentLocation value) currentLocation,
+    required TResult Function(_FromLocationChange value) fromLocationChange,
+    required TResult Function(_ToLocationChange value) toLocationChange,
+    required TResult Function(_selectedFromLocation value) selectedFromLocation,
+    required TResult Function(_selectedToLocation value) selectedToLocation,
+    required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_GetDriver value) getDriver,
+    required TResult Function(_TripReceived value) tripReceived,
+    required TResult Function(_ServiceChange value) serviceChange,
+    required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
+  }) {
+    return myLocation(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_GetDriver value)? getDriver,
+    TResult Function(_TripReceived value)? tripReceived,
+    TResult Function(_ServiceChange value)? serviceChange,
+    TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
+  }) {
+    return myLocation?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_GetDriver value)? getDriver,
+    TResult Function(_TripReceived value)? tripReceived,
+    TResult Function(_ServiceChange value)? serviceChange,
+    TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
+    required TResult orElse(),
+  }) {
+    if (myLocation != null) {
+      return myLocation(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MyLocation implements TrackEvent {
+  const factory _MyLocation() = _$_MyLocation;
 }
 
 /// @nodoc
@@ -1609,11 +1964,15 @@ class _$_GetTrip with DiagnosticableTreeMixin implements _GetTrip {
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
+    required TResult Function() myLocation,
     required TResult Function(String tripId) getTrip,
     required TResult Function(String driverId) getDriver,
     required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
     required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
   }) {
     return getTrip(tripId);
   }
@@ -1628,11 +1987,14 @@ class _$_GetTrip with DiagnosticableTreeMixin implements _GetTrip {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
   }) {
     return getTrip?.call(tripId);
   }
@@ -1647,11 +2009,14 @@ class _$_GetTrip with DiagnosticableTreeMixin implements _GetTrip {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (getTrip != null) {
@@ -1670,11 +2035,14 @@ class _$_GetTrip with DiagnosticableTreeMixin implements _GetTrip {
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
     required TResult Function(_GetTrip value) getTrip,
     required TResult Function(_GetDriver value) getDriver,
     required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
     required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
   }) {
     return getTrip(this);
   }
@@ -1689,11 +2057,14 @@ class _$_GetTrip with DiagnosticableTreeMixin implements _GetTrip {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
   }) {
     return getTrip?.call(this);
   }
@@ -1708,11 +2079,14 @@ class _$_GetTrip with DiagnosticableTreeMixin implements _GetTrip {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (getTrip != null) {
@@ -1810,11 +2184,15 @@ class _$_GetDriver with DiagnosticableTreeMixin implements _GetDriver {
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
+    required TResult Function() myLocation,
     required TResult Function(String tripId) getTrip,
     required TResult Function(String driverId) getDriver,
     required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
     required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
   }) {
     return getDriver(driverId);
   }
@@ -1829,11 +2207,14 @@ class _$_GetDriver with DiagnosticableTreeMixin implements _GetDriver {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
   }) {
     return getDriver?.call(driverId);
   }
@@ -1848,11 +2229,14 @@ class _$_GetDriver with DiagnosticableTreeMixin implements _GetDriver {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (getDriver != null) {
@@ -1871,11 +2255,14 @@ class _$_GetDriver with DiagnosticableTreeMixin implements _GetDriver {
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
     required TResult Function(_GetTrip value) getTrip,
     required TResult Function(_GetDriver value) getDriver,
     required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
     required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
   }) {
     return getDriver(this);
   }
@@ -1890,11 +2277,14 @@ class _$_GetDriver with DiagnosticableTreeMixin implements _GetDriver {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
   }) {
     return getDriver?.call(this);
   }
@@ -1909,11 +2299,14 @@ class _$_GetDriver with DiagnosticableTreeMixin implements _GetDriver {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (getDriver != null) {
@@ -2011,11 +2404,15 @@ class _$_TripReceived with DiagnosticableTreeMixin implements _TripReceived {
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
+    required TResult Function() myLocation,
     required TResult Function(String tripId) getTrip,
     required TResult Function(String driverId) getDriver,
     required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
     required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
   }) {
     return tripReceived(data);
   }
@@ -2030,11 +2427,14 @@ class _$_TripReceived with DiagnosticableTreeMixin implements _TripReceived {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
   }) {
     return tripReceived?.call(data);
   }
@@ -2049,11 +2449,14 @@ class _$_TripReceived with DiagnosticableTreeMixin implements _TripReceived {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (tripReceived != null) {
@@ -2072,11 +2475,14 @@ class _$_TripReceived with DiagnosticableTreeMixin implements _TripReceived {
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
     required TResult Function(_GetTrip value) getTrip,
     required TResult Function(_GetDriver value) getDriver,
     required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
     required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
   }) {
     return tripReceived(this);
   }
@@ -2091,11 +2497,14 @@ class _$_TripReceived with DiagnosticableTreeMixin implements _TripReceived {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
   }) {
     return tripReceived?.call(this);
   }
@@ -2110,11 +2519,14 @@ class _$_TripReceived with DiagnosticableTreeMixin implements _TripReceived {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (tripReceived != null) {
@@ -2212,11 +2624,15 @@ class _$_ServiceChange with DiagnosticableTreeMixin implements _ServiceChange {
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
+    required TResult Function() myLocation,
     required TResult Function(String tripId) getTrip,
     required TResult Function(String driverId) getDriver,
     required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
     required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
   }) {
     return serviceChange(service);
   }
@@ -2231,11 +2647,14 @@ class _$_ServiceChange with DiagnosticableTreeMixin implements _ServiceChange {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
   }) {
     return serviceChange?.call(service);
   }
@@ -2250,11 +2669,14 @@ class _$_ServiceChange with DiagnosticableTreeMixin implements _ServiceChange {
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (serviceChange != null) {
@@ -2273,11 +2695,14 @@ class _$_ServiceChange with DiagnosticableTreeMixin implements _ServiceChange {
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
     required TResult Function(_GetTrip value) getTrip,
     required TResult Function(_GetDriver value) getDriver,
     required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
     required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
   }) {
     return serviceChange(this);
   }
@@ -2292,11 +2717,14 @@ class _$_ServiceChange with DiagnosticableTreeMixin implements _ServiceChange {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
   }) {
     return serviceChange?.call(this);
   }
@@ -2311,11 +2739,14 @@ class _$_ServiceChange with DiagnosticableTreeMixin implements _ServiceChange {
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (serviceChange != null) {
@@ -2415,11 +2846,15 @@ class _$_DriverReceived
     required TResult Function(String name) selectedToLocation,
     required TResult Function() getDirection,
     required TResult Function() sendRequest,
+    required TResult Function() myLocation,
     required TResult Function(String tripId) getTrip,
     required TResult Function(String driverId) getDriver,
     required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
     required TResult Function(String service) serviceChange,
     required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
   }) {
     return driverReceived(data);
   }
@@ -2434,11 +2869,14 @@ class _$_DriverReceived
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
   }) {
     return driverReceived?.call(data);
   }
@@ -2453,11 +2891,14 @@ class _$_DriverReceived
     TResult Function(String name)? selectedToLocation,
     TResult Function()? getDirection,
     TResult Function()? sendRequest,
+    TResult Function()? myLocation,
     TResult Function(String tripId)? getTrip,
     TResult Function(String driverId)? getDriver,
     TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
     TResult Function(String service)? serviceChange,
     TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (driverReceived != null) {
@@ -2476,11 +2917,14 @@ class _$_DriverReceived
     required TResult Function(_selectedToLocation value) selectedToLocation,
     required TResult Function(_GetDirection value) getDirection,
     required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
     required TResult Function(_GetTrip value) getTrip,
     required TResult Function(_GetDriver value) getDriver,
     required TResult Function(_TripReceived value) tripReceived,
     required TResult Function(_ServiceChange value) serviceChange,
     required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
   }) {
     return driverReceived(this);
   }
@@ -2495,11 +2939,14 @@ class _$_DriverReceived
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
   }) {
     return driverReceived?.call(this);
   }
@@ -2514,11 +2961,14 @@ class _$_DriverReceived
     TResult Function(_selectedToLocation value)? selectedToLocation,
     TResult Function(_GetDirection value)? getDirection,
     TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
     TResult Function(_GetTrip value)? getTrip,
     TResult Function(_GetDriver value)? getDriver,
     TResult Function(_TripReceived value)? tripReceived,
     TResult Function(_ServiceChange value)? serviceChange,
     TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
     required TResult orElse(),
   }) {
     if (driverReceived != null) {
@@ -2539,6 +2989,422 @@ abstract class _DriverReceived implements TrackEvent {
 }
 
 /// @nodoc
+abstract class _$GetNearDriversCopyWith<$Res> {
+  factory _$GetNearDriversCopyWith(
+          _GetNearDrivers value, $Res Function(_GetNearDrivers) then) =
+      __$GetNearDriversCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$GetNearDriversCopyWithImpl<$Res> extends _$TrackEventCopyWithImpl<$Res>
+    implements _$GetNearDriversCopyWith<$Res> {
+  __$GetNearDriversCopyWithImpl(
+      _GetNearDrivers _value, $Res Function(_GetNearDrivers) _then)
+      : super(_value, (v) => _then(v as _GetNearDrivers));
+
+  @override
+  _GetNearDrivers get _value => super._value as _GetNearDrivers;
+}
+
+/// @nodoc
+
+class _$_GetNearDrivers
+    with DiagnosticableTreeMixin
+    implements _GetNearDrivers {
+  const _$_GetNearDrivers();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TrackEvent.getNearDrivers()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'TrackEvent.getNearDrivers'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _GetNearDrivers);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() currentLocation,
+    required TResult Function(String name) fromLocationChange,
+    required TResult Function(String name) toLocationChange,
+    required TResult Function(String name) selectedFromLocation,
+    required TResult Function(String name) selectedToLocation,
+    required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function() myLocation,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(String driverId) getDriver,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
+    required TResult Function(String service) serviceChange,
+    required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
+  }) {
+    return getNearDrivers();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function()? myLocation,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String driverId)? getDriver,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
+    TResult Function(String service)? serviceChange,
+    TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
+  }) {
+    return getNearDrivers?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function()? myLocation,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String driverId)? getDriver,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
+    TResult Function(String service)? serviceChange,
+    TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
+    required TResult orElse(),
+  }) {
+    if (getNearDrivers != null) {
+      return getNearDrivers();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CurrentLocation value) currentLocation,
+    required TResult Function(_FromLocationChange value) fromLocationChange,
+    required TResult Function(_ToLocationChange value) toLocationChange,
+    required TResult Function(_selectedFromLocation value) selectedFromLocation,
+    required TResult Function(_selectedToLocation value) selectedToLocation,
+    required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_GetDriver value) getDriver,
+    required TResult Function(_TripReceived value) tripReceived,
+    required TResult Function(_ServiceChange value) serviceChange,
+    required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
+  }) {
+    return getNearDrivers(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_GetDriver value)? getDriver,
+    TResult Function(_TripReceived value)? tripReceived,
+    TResult Function(_ServiceChange value)? serviceChange,
+    TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
+  }) {
+    return getNearDrivers?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_GetDriver value)? getDriver,
+    TResult Function(_TripReceived value)? tripReceived,
+    TResult Function(_ServiceChange value)? serviceChange,
+    TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
+    required TResult orElse(),
+  }) {
+    if (getNearDrivers != null) {
+      return getNearDrivers(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetNearDrivers implements TrackEvent {
+  const factory _GetNearDrivers() = _$_GetNearDrivers;
+}
+
+/// @nodoc
+abstract class _$NearDriversReceivedCopyWith<$Res> {
+  factory _$NearDriversReceivedCopyWith(_NearDriversReceived value,
+          $Res Function(_NearDriversReceived) then) =
+      __$NearDriversReceivedCopyWithImpl<$Res>;
+  $Res call({List<DocumentSnapshot<Object?>> data});
+}
+
+/// @nodoc
+class __$NearDriversReceivedCopyWithImpl<$Res>
+    extends _$TrackEventCopyWithImpl<$Res>
+    implements _$NearDriversReceivedCopyWith<$Res> {
+  __$NearDriversReceivedCopyWithImpl(
+      _NearDriversReceived _value, $Res Function(_NearDriversReceived) _then)
+      : super(_value, (v) => _then(v as _NearDriversReceived));
+
+  @override
+  _NearDriversReceived get _value => super._value as _NearDriversReceived;
+
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_NearDriversReceived(
+      data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<DocumentSnapshot<Object?>>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_NearDriversReceived
+    with DiagnosticableTreeMixin
+    implements _NearDriversReceived {
+  const _$_NearDriversReceived(this.data);
+
+  @override
+  final List<DocumentSnapshot<Object?>> data;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TrackEvent.nearDriversReceived(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TrackEvent.nearDriversReceived'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _NearDriversReceived &&
+            (identical(other.data, data) ||
+                const DeepCollectionEquality().equals(other.data, data)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(data);
+
+  @JsonKey(ignore: true)
+  @override
+  _$NearDriversReceivedCopyWith<_NearDriversReceived> get copyWith =>
+      __$NearDriversReceivedCopyWithImpl<_NearDriversReceived>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() currentLocation,
+    required TResult Function(String name) fromLocationChange,
+    required TResult Function(String name) toLocationChange,
+    required TResult Function(String name) selectedFromLocation,
+    required TResult Function(String name) selectedToLocation,
+    required TResult Function() getDirection,
+    required TResult Function() sendRequest,
+    required TResult Function() myLocation,
+    required TResult Function(String tripId) getTrip,
+    required TResult Function(String driverId) getDriver,
+    required TResult Function(DocumentSnapshot<Object?> data) tripReceived,
+    required TResult Function(String service) serviceChange,
+    required TResult Function(DocumentSnapshot<Object?> data) driverReceived,
+    required TResult Function() getNearDrivers,
+    required TResult Function(List<DocumentSnapshot<Object?>> data)
+        nearDriversReceived,
+  }) {
+    return nearDriversReceived(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function()? myLocation,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String driverId)? getDriver,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
+    TResult Function(String service)? serviceChange,
+    TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
+  }) {
+    return nearDriversReceived?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? currentLocation,
+    TResult Function(String name)? fromLocationChange,
+    TResult Function(String name)? toLocationChange,
+    TResult Function(String name)? selectedFromLocation,
+    TResult Function(String name)? selectedToLocation,
+    TResult Function()? getDirection,
+    TResult Function()? sendRequest,
+    TResult Function()? myLocation,
+    TResult Function(String tripId)? getTrip,
+    TResult Function(String driverId)? getDriver,
+    TResult Function(DocumentSnapshot<Object?> data)? tripReceived,
+    TResult Function(String service)? serviceChange,
+    TResult Function(DocumentSnapshot<Object?> data)? driverReceived,
+    TResult Function()? getNearDrivers,
+    TResult Function(List<DocumentSnapshot<Object?>> data)? nearDriversReceived,
+    required TResult orElse(),
+  }) {
+    if (nearDriversReceived != null) {
+      return nearDriversReceived(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CurrentLocation value) currentLocation,
+    required TResult Function(_FromLocationChange value) fromLocationChange,
+    required TResult Function(_ToLocationChange value) toLocationChange,
+    required TResult Function(_selectedFromLocation value) selectedFromLocation,
+    required TResult Function(_selectedToLocation value) selectedToLocation,
+    required TResult Function(_GetDirection value) getDirection,
+    required TResult Function(_SendRequest value) sendRequest,
+    required TResult Function(_MyLocation value) myLocation,
+    required TResult Function(_GetTrip value) getTrip,
+    required TResult Function(_GetDriver value) getDriver,
+    required TResult Function(_TripReceived value) tripReceived,
+    required TResult Function(_ServiceChange value) serviceChange,
+    required TResult Function(_DriverReceived value) driverReceived,
+    required TResult Function(_GetNearDrivers value) getNearDrivers,
+    required TResult Function(_NearDriversReceived value) nearDriversReceived,
+  }) {
+    return nearDriversReceived(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_GetDriver value)? getDriver,
+    TResult Function(_TripReceived value)? tripReceived,
+    TResult Function(_ServiceChange value)? serviceChange,
+    TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
+  }) {
+    return nearDriversReceived?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CurrentLocation value)? currentLocation,
+    TResult Function(_FromLocationChange value)? fromLocationChange,
+    TResult Function(_ToLocationChange value)? toLocationChange,
+    TResult Function(_selectedFromLocation value)? selectedFromLocation,
+    TResult Function(_selectedToLocation value)? selectedToLocation,
+    TResult Function(_GetDirection value)? getDirection,
+    TResult Function(_SendRequest value)? sendRequest,
+    TResult Function(_MyLocation value)? myLocation,
+    TResult Function(_GetTrip value)? getTrip,
+    TResult Function(_GetDriver value)? getDriver,
+    TResult Function(_TripReceived value)? tripReceived,
+    TResult Function(_ServiceChange value)? serviceChange,
+    TResult Function(_DriverReceived value)? driverReceived,
+    TResult Function(_GetNearDrivers value)? getNearDrivers,
+    TResult Function(_NearDriversReceived value)? nearDriversReceived,
+    required TResult orElse(),
+  }) {
+    if (nearDriversReceived != null) {
+      return nearDriversReceived(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NearDriversReceived implements TrackEvent {
+  const factory _NearDriversReceived(List<DocumentSnapshot<Object?>> data) =
+      _$_NearDriversReceived;
+
+  List<DocumentSnapshot<Object?>> get data =>
+      throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$NearDriversReceivedCopyWith<_NearDriversReceived> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 class _$TrackStateTearOff {
   const _$TrackStateTearOff();
 
@@ -2549,6 +3415,7 @@ class _$TrackStateTearOff {
       required String to,
       required List<AutocompletePrediction> fromPrediction,
       required List<AutocompletePrediction> toPrediction,
+      required List<Driver> drivers,
       required bool loading,
       required Address fromPlace,
       required Address toPlace,
@@ -2576,6 +3443,7 @@ class _$TrackStateTearOff {
       to: to,
       fromPrediction: fromPrediction,
       toPrediction: toPrediction,
+      drivers: drivers,
       loading: loading,
       fromPlace: fromPlace,
       toPlace: toPlace,
@@ -2613,6 +3481,7 @@ mixin _$TrackState {
       throw _privateConstructorUsedError;
   List<AutocompletePrediction> get toPrediction =>
       throw _privateConstructorUsedError;
+  List<Driver> get drivers => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
   Address get fromPlace => throw _privateConstructorUsedError;
   Address get toPlace => throw _privateConstructorUsedError;
@@ -2652,6 +3521,7 @@ abstract class $TrackStateCopyWith<$Res> {
       String to,
       List<AutocompletePrediction> fromPrediction,
       List<AutocompletePrediction> toPrediction,
+      List<Driver> drivers,
       bool loading,
       Address fromPlace,
       Address toPlace,
@@ -2690,6 +3560,7 @@ class _$TrackStateCopyWithImpl<$Res> implements $TrackStateCopyWith<$Res> {
     Object? to = freezed,
     Object? fromPrediction = freezed,
     Object? toPrediction = freezed,
+    Object? drivers = freezed,
     Object? loading = freezed,
     Object? fromPlace = freezed,
     Object? toPlace = freezed,
@@ -2736,6 +3607,10 @@ class _$TrackStateCopyWithImpl<$Res> implements $TrackStateCopyWith<$Res> {
           ? _value.toPrediction
           : toPrediction // ignore: cast_nullable_to_non_nullable
               as List<AutocompletePrediction>,
+      drivers: drivers == freezed
+          ? _value.drivers
+          : drivers // ignore: cast_nullable_to_non_nullable
+              as List<Driver>,
       loading: loading == freezed
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
@@ -2833,6 +3708,7 @@ abstract class _$TrackStateCopyWith<$Res> implements $TrackStateCopyWith<$Res> {
       String to,
       List<AutocompletePrediction> fromPrediction,
       List<AutocompletePrediction> toPrediction,
+      List<Driver> drivers,
       bool loading,
       Address fromPlace,
       Address toPlace,
@@ -2873,6 +3749,7 @@ class __$TrackStateCopyWithImpl<$Res> extends _$TrackStateCopyWithImpl<$Res>
     Object? to = freezed,
     Object? fromPrediction = freezed,
     Object? toPrediction = freezed,
+    Object? drivers = freezed,
     Object? loading = freezed,
     Object? fromPlace = freezed,
     Object? toPlace = freezed,
@@ -2919,6 +3796,10 @@ class __$TrackStateCopyWithImpl<$Res> extends _$TrackStateCopyWithImpl<$Res>
           ? _value.toPrediction
           : toPrediction // ignore: cast_nullable_to_non_nullable
               as List<AutocompletePrediction>,
+      drivers: drivers == freezed
+          ? _value.drivers
+          : drivers // ignore: cast_nullable_to_non_nullable
+              as List<Driver>,
       loading: loading == freezed
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
@@ -3013,6 +3894,7 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
       required this.to,
       required this.fromPrediction,
       required this.toPrediction,
+      required this.drivers,
       required this.loading,
       required this.fromPlace,
       required this.toPlace,
@@ -3046,6 +3928,8 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
   final List<AutocompletePrediction> fromPrediction;
   @override
   final List<AutocompletePrediction> toPrediction;
+  @override
+  final List<Driver> drivers;
   @override
   final bool loading;
   @override
@@ -3089,7 +3973,7 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TrackState(current: $current, active: $active, from: $from, to: $to, fromPrediction: $fromPrediction, toPrediction: $toPrediction, loading: $loading, fromPlace: $fromPlace, toPlace: $toPlace, directions: $directions, distance: $distance, time: $time, taxPrice: $taxPrice, xxlPrice: $xxlPrice, bodaPrice: $bodaPrice, bajajPrice: $bajajPrice, kirikuuPrice: $kirikuuPrice, priceLoading: $priceLoading, requestLoading: $requestLoading, service: $service, search: $search, searchTo: $searchTo, searchFrom: $searchFrom, tripData: $tripData, driverData: $driverData, request: $request)';
+    return 'TrackState(current: $current, active: $active, from: $from, to: $to, fromPrediction: $fromPrediction, toPrediction: $toPrediction, drivers: $drivers, loading: $loading, fromPlace: $fromPlace, toPlace: $toPlace, directions: $directions, distance: $distance, time: $time, taxPrice: $taxPrice, xxlPrice: $xxlPrice, bodaPrice: $bodaPrice, bajajPrice: $bajajPrice, kirikuuPrice: $kirikuuPrice, priceLoading: $priceLoading, requestLoading: $requestLoading, service: $service, search: $search, searchTo: $searchTo, searchFrom: $searchFrom, tripData: $tripData, driverData: $driverData, request: $request)';
   }
 
   @override
@@ -3103,6 +3987,7 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
       ..add(DiagnosticsProperty('to', to))
       ..add(DiagnosticsProperty('fromPrediction', fromPrediction))
       ..add(DiagnosticsProperty('toPrediction', toPrediction))
+      ..add(DiagnosticsProperty('drivers', drivers))
       ..add(DiagnosticsProperty('loading', loading))
       ..add(DiagnosticsProperty('fromPlace', fromPlace))
       ..add(DiagnosticsProperty('toPlace', toPlace))
@@ -3144,6 +4029,9 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
             (identical(other.toPrediction, toPrediction) ||
                 const DeepCollectionEquality()
                     .equals(other.toPrediction, toPrediction)) &&
+            (identical(other.drivers, drivers) ||
+                const DeepCollectionEquality()
+                    .equals(other.drivers, drivers)) &&
             (identical(other.loading, loading) ||
                 const DeepCollectionEquality()
                     .equals(other.loading, loading)) &&
@@ -3193,9 +4081,7 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
             (identical(other.searchFrom, searchFrom) ||
                 const DeepCollectionEquality()
                     .equals(other.searchFrom, searchFrom)) &&
-            (identical(other.tripData, tripData) ||
-                const DeepCollectionEquality()
-                    .equals(other.tripData, tripData)) &&
+            (identical(other.tripData, tripData) || const DeepCollectionEquality().equals(other.tripData, tripData)) &&
             (identical(other.driverData, driverData) || const DeepCollectionEquality().equals(other.driverData, driverData)) &&
             (identical(other.request, request) || const DeepCollectionEquality().equals(other.request, request)));
   }
@@ -3209,6 +4095,7 @@ class _$_TrackState with DiagnosticableTreeMixin implements _TrackState {
       const DeepCollectionEquality().hash(to) ^
       const DeepCollectionEquality().hash(fromPrediction) ^
       const DeepCollectionEquality().hash(toPrediction) ^
+      const DeepCollectionEquality().hash(drivers) ^
       const DeepCollectionEquality().hash(loading) ^
       const DeepCollectionEquality().hash(fromPlace) ^
       const DeepCollectionEquality().hash(toPlace) ^
@@ -3244,6 +4131,7 @@ abstract class _TrackState implements TrackState {
           required String to,
           required List<AutocompletePrediction> fromPrediction,
           required List<AutocompletePrediction> toPrediction,
+          required List<Driver> drivers,
           required bool loading,
           required Address fromPlace,
           required Address toPlace,
@@ -3280,6 +4168,8 @@ abstract class _TrackState implements TrackState {
   @override
   List<AutocompletePrediction> get toPrediction =>
       throw _privateConstructorUsedError;
+  @override
+  List<Driver> get drivers => throw _privateConstructorUsedError;
   @override
   bool get loading => throw _privateConstructorUsedError;
   @override

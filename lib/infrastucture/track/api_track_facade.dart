@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -17,11 +19,13 @@ import 'package:reacon_customer/domain/track/i_track_facade.dart';
 import 'package:reacon_customer/domain/track/request.dart';
 import 'package:reacon_customer/domain/track/request_failure.dart';
 import 'package:reacon_customer/infrastucture/core/constant.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 
 @LazySingleton(as: ITrackFacade)
 class ApiTrackFacade implements ITrackFacade {
   final FirebaseFirestore _firestore;
   final FirebaseMessaging _messaging;
+  final geo = Geoflutterfire();
 
   ApiTrackFacade(this._firestore, this._messaging);
   @override
@@ -50,7 +54,9 @@ class ApiTrackFacade implements ITrackFacade {
     required String toName,
     required String estimatedCost,
     required String actualCost,
+    required List<Driver> drivers,
   }) async {
+    print(drivers[0].token);
     try {
       final User? firebaseUser = FirebaseAuth.instance.currentUser;
       if (firebaseUser != null) {
@@ -94,9 +100,9 @@ class ApiTrackFacade implements ITrackFacade {
           if (trip.data() != null) {
             final requestModel =
                 RequestModel.fromJson(trip.data() as Map<String, dynamic>);
-            final collection = await _firestore.collection('Drivers').get();
-            final List<Driver> drivers = [];
-            for (int i = 0; i < collection.docs.length; i++) {
+            //final collection = await _firestore.collection('Drivers').get();
+            //final List<Driver> drivers = [];
+            /*for (int i = 0; i < collection.docs.length; i++) {
               final driver = Driver.fromJson(collection.docs[i].data());
               final double distanceInMeters = Geolocator.distanceBetween(
                 driver.location.latitude,
@@ -106,35 +112,39 @@ class ApiTrackFacade implements ITrackFacade {
               );
               print(distanceInMeters);
               if (distanceInMeters < 5000) {
-                print(collection.docs[i].data());
-                var result = await http.post(
-                  Uri.parse('https://fcm.googleapis.com/fcm/send'),
-                  headers: <String, String>{
-                    'Content-Type': 'application/json',
-                    'Authorization':
-                        'key=AAAAtkSxkLY:APA91bHOlrex0qaaw97CsSVnpq843r6KN9QslYoPVdRkc8Xl0SLdtkkmXjULa1ucIo-iKOkC7IiqmiTv-6UPE9Vwi6M7-HJ_AvWVMK10bMyEynPCWb_P6e1Gg3BXipabXto3_lyHXkF8',
+                print(collection.docs[i].data());*/
+            final _random = Random();
+            //print(drivers[0].token);
+            var driver = (drivers..shuffle()).first;
+            var result = await http.post(
+              Uri.parse('https://fcm.googleapis.com/fcm/send'),
+              headers: <String, String>{
+                'Content-Type': 'application/json',
+                'Authorization':
+                    'key=AAAAtkSxkLY:APA91bHOlrex0qaaw97CsSVnpq843r6KN9QslYoPVdRkc8Xl0SLdtkkmXjULa1ucIo-iKOkC7IiqmiTv-6UPE9Vwi6M7-HJ_AvWVMK10bMyEynPCWb_P6e1Gg3BXipabXto3_lyHXkF8',
+              },
+              body: jsonEncode(
+                <String, dynamic>{
+                  'notification': <String, dynamic>{
+                    'body': "Hello New Request Arrive on dirm ",
+                    'title': 'New Request Arrive'
                   },
-                  body: jsonEncode(
-                    <String, dynamic>{
-                      'notification': <String, dynamic>{
-                        'body': "Hello New Request Arrive on dirm ",
-                        'title': 'New Request Arrive'
-                      },
-                      'priority': 'high',
-                      'data': <String, dynamic>{
-                        'click_action': 'FLUTTER_NOTIFICATION_CLICK',
-                        'id': id,
-                        'status': 'done'
-                      },
-                      "to": collection.docs[i].data()['token'],
-                    },
-                  ),
-                );
-                print(result.body);
+                  'priority': 'high',
+                  'data': <String, dynamic>{
+                    'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+                    'id': id,
+                    'status': 'done'
+                  },
+                  "to": driver.token,
+                  // "eq2Lg1xdSEuW6DwIuBmeG1:APA91bGOujp20RedyVoRZoVte83MqADjKhU7L5eFIRyWverGQ3i_J33odJN_p9D8kUWy9mVk44-frSAc3M0HWrn5v-mgPx0t8iwp1jsIyxQx3tbOPguMEuBsBHOfDu6AkDbN7L_O-PFj",
+                },
+              ),
+            );
+            /*   print(result.body);
               } else {
                 continue;
               }
-            }
+            }*/
             return right(requestModel);
           } else {
             return left(const RequestFailure.serverError());
@@ -155,6 +165,7 @@ class ApiTrackFacade implements ITrackFacade {
   Stream<DocumentSnapshot<Map<String, dynamic>>> getTrip({
     required String id,
   }) async* {
+    print(id);
     final collection = _firestore.collection('Trips').doc(id).snapshots();
 
     yield* collection;
@@ -167,5 +178,34 @@ class ApiTrackFacade implements ITrackFacade {
     final collection = _firestore.collection('Drivers').doc(id).snapshots();
 
     yield* collection;
+  }
+
+  @override
+  Stream<List<DocumentSnapshot<Map<String, dynamic>>>> getDrivers({
+    required LatLng location,
+  }) async* {
+// Create a geoFirePoint
+    GeoFirePoint center = geo.point(
+      latitude: location.latitude,
+      longitude: location.longitude,
+    );
+
+    print({
+      location.latitude,
+      location.longitude,
+    });
+
+// get the collection reference or query
+    final collectionReference = _firestore.collection('Drivers');
+
+    double radius = 5000;
+    String field = 'position';
+
+    final Stream<List<DocumentSnapshot<Map<String, dynamic>>>> stream = geo
+        .collection(collectionRef: collectionReference)
+        .within(center: center, radius: radius, field: field);
+    print(stream);
+
+    yield* stream;
   }
 }

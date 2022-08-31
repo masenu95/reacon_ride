@@ -12,10 +12,15 @@ class TrackEvent with _$TrackEvent {
       _selectedToLocation;
   const factory TrackEvent.getDirection() = _GetDirection;
   const factory TrackEvent.sendRequest() = _SendRequest;
+  const factory TrackEvent.myLocation() = _MyLocation;
   const factory TrackEvent.getTrip(String tripId) = _GetTrip;
   const factory TrackEvent.getDriver(String driverId) = _GetDriver;
   const factory TrackEvent.tripReceived(DocumentSnapshot data) = _TripReceived;
   const factory TrackEvent.serviceChange(String service) = _ServiceChange;
   const factory TrackEvent.driverReceived(DocumentSnapshot data) =
       _DriverReceived;
+
+  const factory TrackEvent.getNearDrivers() = _GetNearDrivers;
+  const factory TrackEvent.nearDriversReceived(List<DocumentSnapshot> data) =
+      _NearDriversReceived;
 }

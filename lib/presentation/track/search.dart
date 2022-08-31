@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reacon_customer/application/track/track_bloc.dart';
 import 'package:reacon_customer/presentation/core/widget.dart';
-import 'package:reacon_customer/presentation/track/test.dart';
 import 'package:reacon_customer/presentation/track/track.dart';
 
 class SearchRoute extends StatelessWidget {
@@ -50,26 +49,58 @@ class SearchRoute extends StatelessWidget {
                 ),
                 Expanded(
                   child: state.active == "from"
-                      ? ListView.builder(
-                          itemCount: state.fromPrediction.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return GestureDetector(
-                              onTap: () => context.read<TrackBloc>().add(
-                                    TrackEvent.selectedFromLocation(
-                                      state.fromPrediction[index].description!,
-                                    ),
-                                  ),
-                              child: ListTile(
-                                leading: CircleAvatar(
-                                  backgroundColor:
-                                      Theme.of(context).primaryColor,
-                                  child: const Icon(Icons.location_on_outlined),
+                      ? Column(
+                          children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            GestureDetector(
+                              onTap: () => context
+                                  .read<TrackBloc>()
+                                  .add(const TrackEvent.myLocation()),
+                              child: const ListTile(
+                                leading: Icon(
+                                  Icons.my_location_sharp,
                                 ),
                                 title: Text(
-                                    state.fromPrediction[index].description!),
+                                  "My Location",
+                                ),
                               ),
-                            );
-                          },
+                            ),
+                            Divider(),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 3,
+                              child: ListView.builder(
+                                itemCount: state.fromPrediction.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return GestureDetector(
+                                    onTap: () => context.read<TrackBloc>().add(
+                                          TrackEvent.selectedFromLocation(
+                                            state.fromPrediction[index]
+                                                .description!,
+                                          ),
+                                        ),
+                                    child: Column(
+                                      children: [
+                                        ListTile(
+                                          leading: CircleAvatar(
+                                            backgroundColor:
+                                                Theme.of(context).primaryColor,
+                                            child: const Icon(
+                                                Icons.location_on_outlined),
+                                          ),
+                                          title: Text(state
+                                              .fromPrediction[index]
+                                              .description!),
+                                        ),
+                                        Divider(),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
                         )
                       : state.active == 'to'
                           ? ListView.builder(

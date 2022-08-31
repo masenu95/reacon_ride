@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reacon_customer/application/auth/authentication/auth_bloc.dart';
+import 'package:reacon_customer/injection.dart';
 
 import '../../application/track/track_bloc.dart';
 import '../home/home.dart';
@@ -16,6 +17,7 @@ class Welcome extends StatelessWidget {
         } else if (state.authStatus == "unauthenticated") {
           Navigator.pushReplacementNamed(context, '/login');
         } else if (state.authStatus == "authenticated") {
+          context.read<TrackBloc>().add(const TrackEvent.getNearDrivers());
           Navigator.pushReplacementNamed(context, Landing.routeName);
         }
       },

@@ -30,6 +30,9 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
       _tripStreamSubscription;
   late StreamSubscription<DocumentSnapshot<Map<String, dynamic>>>
       _driverStreamSubscription;
+
+  late StreamSubscription<List<DocumentSnapshot<Map<String, dynamic>>>>
+      _driversStreamSubscription;
   @override
   Stream<TrackState> mapEventToState(
     TrackEvent event,
@@ -171,7 +174,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
         );
 
         if (kDebugMode) {
-          print(res);
+          // print(res);
         }
       },
       sendRequest: (e) async* {
@@ -180,6 +183,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
           searchTo: false,
           searchFrom: false,
         );
+        // print(state.drivers[0].token);
         final result = await _facade.createRequest(
           fromLocation: GeoPoint(
             state.fromPlace.coordinates.latitude as double,
@@ -194,6 +198,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
           toName: state.toPlace.featureName!,
           estimatedCost: state.taxPrice.toString(),
           actualCost: state.taxPrice.toString(),
+          drivers: state.drivers,
         );
         RequestModel request = RequestModel(
           fromLocation: const GeoPoint(0, 0),
@@ -214,7 +219,9 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
           (l) => null,
           (r) => request = r,
         );
+        //print(request.id);
         add(TrackEvent.getTrip(request.id));
+
         yield state.copyWith(
           tripData: request,
           requestLoading: false,
@@ -238,9 +245,12 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
             );
       },
       tripReceived: (e) async* {
-        print(e.data);
+        //print(e.data);
         final data = e.data.data()! as Map<String, dynamic>;
         final RequestModel request = RequestModel.fromJson(data);
+        if (request.status == "ACCEPTED") {
+          add(TrackEvent.getDriver(request.driverId));
+        }
         yield state.copyWith(
           tripData: request,
         );
@@ -248,16 +258,66 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
       driverReceived: (e) async* {
         final data = e.data.data()! as Map<String, dynamic>;
         final Driver request = Driver.fromJson(data);
+        print(e.data.data());
         yield state.copyWith(
           driverData: request,
         );
       },
       getDriver: (e) async* {
-        _driverStreamSubscription = _facade.getTrip(id: e.driverId).listen(
+        print(e.driverId);
+        _driverStreamSubscription = _facade.getDriver(id: e.driverId).listen(
               (event) => add(
                 TrackEvent.driverReceived(event),
               ),
             );
+      },
+      getNearDrivers: (e) async* {
+        _driversStreamSubscription = _facade
+            .getDrivers(
+          location: LatLng(
+            state.current.latitude,
+            state.current.longitude,
+          ),
+        )
+            .listen((event) {
+          add(
+            TrackEvent.nearDriversReceived(event),
+          );
+        });
+      },
+      nearDriversReceived: (e) async* {
+        List<Driver> drivers = [];
+        drivers.addAll(e.data.map(
+            (data) => Driver.fromJson(data.data()! as Map<String, dynamic>)));
+        // print(drivers[0].vehicleType,);
+
+        yield state.copyWith(
+          drivers: drivers,
+        );
+      },
+      myLocation: (e) async* {
+        Position position = await Geolocator.getCurrentPosition();
+        bool search = false;
+
+        final address = await Geocoder.google(EnvConstant.googleAPiKey)
+            .findAddressesFromCoordinates(
+          Coordinates(
+            position.latitude,
+            position.longitude,
+          ),
+        );
+        if (address[0].coordinates.latitude != 0 &&
+            state.toPlace.coordinates.latitude != 0) {
+          search = true;
+        }
+
+        yield state.copyWith(
+          fromPlace: address[0],
+          fromPrediction: [],
+          search: search,
+          searchFrom: true,
+          from: address[0].featureName!,
+        );
       },
     );
   }

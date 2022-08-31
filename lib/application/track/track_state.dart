@@ -9,6 +9,7 @@ class TrackState with _$TrackState {
     required String to,
     required List<AutocompletePrediction> fromPrediction,
     required List<AutocompletePrediction> toPrediction,
+    required List<Driver> drivers,
     required bool loading,
     required Address fromPlace,
     required Address toPlace,
@@ -47,7 +48,7 @@ class TrackState with _$TrackState {
         ),
         fromPrediction: [],
         toPrediction: [],
-        active: '',
+        active: 'from',
         fromPlace: Address(coordinates: Coordinates(0, 0)),
         toPlace: Address(coordinates: Coordinates(0, 0)),
         directions: {},
@@ -88,6 +89,8 @@ class TrackState with _$TrackState {
           vehicleNo: '',
           location: const GeoPoint(0, 0),
           token: '',
+          vehicleType: '',
         ),
+        drivers: [],
       );
 }

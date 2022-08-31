@@ -5,6 +5,7 @@ class Driver {
   final String phone;
   final String name;
   final String vehicleColor;
+  final String vehicleType;
   final String vehicleManufacture;
   final String vehicleNo;
   final GeoPoint location;
@@ -13,6 +14,7 @@ class Driver {
   //final bool isOnline;
 
   Driver({
+    required this.vehicleType,
     required this.email,
     required this.phone,
     required this.name,
@@ -32,8 +34,9 @@ class Driver {
       vehicleColor: data['vehicle_color'].toString(),
       vehicleManufacture: data['vehicle_manufacture'].toString(),
       vehicleNo: data['vehicle_no'].toString(),
-      location: data['geopoint'] as GeoPoint,
+      location: data['position']['geopoint'] as GeoPoint,
       token: data['token'].toString(),
+      vehicleType: data['vehicle_type'].toString(),
       //isBooked: data['isBooked'] as bool,
       //isOnline: data['online'] as bool,
     );

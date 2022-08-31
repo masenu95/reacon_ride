@@ -34,6 +34,7 @@ class LoginForm extends StatelessWidget {
               ).show(context);
             },
             (_) {
+              context.read<TrackBloc>().add(const TrackEvent.getNearDrivers());
               Navigator.pushReplacementNamed(context, Landing.routeName);
             },
           ),

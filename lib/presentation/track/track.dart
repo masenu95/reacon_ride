@@ -21,6 +21,7 @@ import 'package:reacon_customer/presentation/core/utils/custom_style.dart';
 import 'package:reacon_customer/presentation/core/utils/dimensions.dart';
 import 'package:reacon_customer/presentation/core/utils/strings.dart';
 import 'package:reacon_customer/presentation/core/widget.dart';
+import 'package:reacon_customer/presentation/track/location_service.dart';
 import 'package:reacon_customer/presentation/track/mapKitAssistant.dart';
 import 'package:reacon_customer/presentation/track/ride.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -45,10 +46,16 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
   late StreamSubscription<Position> positionStream;
   final geo = Geoflutterfire();
   late Position myPosition;
-  BitmapDescriptor? myIcon;
+  BitmapDescriptor? taxIcon;
+  BitmapDescriptor? bodaIcon;
+  BitmapDescriptor? bajajiIcon;
+  BitmapDescriptor? kirikuuIcon;
   bool isAction = true;
   Set<Marker> markerSet = Set<Marker>();
   Set<Circle> circleSet = Set<Circle>();
+  Set<Polyline> _polylines = Set<Polyline>();
+
+  int _polylineIdCounter = 1;
 
   var rotation = 0.0;
 
@@ -77,7 +84,25 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
       const ImageConfiguration(size: Size(4, 4)),
       'images/tax.png',
     ).then((onValue) {
-      myIcon = onValue;
+      taxIcon = onValue;
+    });
+    BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(size: Size(4, 4)),
+      'images/boda.png',
+    ).then((onValue) {
+      bodaIcon = onValue;
+    });
+    BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(size: Size(4, 4)),
+      'images/bajaji.png',
+    ).then((onValue) {
+      bajajiIcon = onValue;
+    });
+    BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(size: Size(4, 4)),
+      'images/kirikuu.png',
+    ).then((onValue) {
+      kirikuuIcon = onValue;
     });
   }
 
@@ -88,7 +113,7 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
         state.request.fold(
           () {},
           (a) {
-            print(a);
+            // print(a);
           },
         );
         if (state.driverData.location.longitude != 0.0) {
@@ -99,10 +124,38 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
           Marker driverMarker = Marker(
             position: mPosition,
             markerId: const MarkerId("driverPosition"),
-            icon: myIcon!,
+            icon: taxIcon!,
             rotation: rotation,
           );
           markerSet.add(driverMarker);
+        }
+
+        if (state.drivers.isNotEmpty) {
+          for (final driver in state.drivers) {
+            LatLng mPosition = LatLng(
+              driver.location.latitude,
+              driver.location.longitude,
+            );
+            var icon = taxIcon!;
+            if (driver.vehicleType == "Dirm XL") {
+              icon = taxIcon!;
+            } else if (driver.vehicleType == "Dirm XXL") {
+              icon = taxIcon!;
+            } else if (driver.vehicleType == "Dirm Boda") {
+              icon = bodaIcon!;
+            } else if (driver.vehicleType == "Dirm Bajaji") {
+              icon = bajajiIcon!;
+            } else if (driver.vehicleType == "Dirm Kirikuu") {
+              icon = kirikuuIcon!;
+            }
+            Marker driverMarker = Marker(
+              position: mPosition,
+              markerId: MarkerId(driver.token),
+              icon: icon,
+              rotation: rotation,
+            );
+            markerSet.add(driverMarker);
+          }
         }
 
         if (state.tripData.status == "ON WAY") {
@@ -130,12 +183,19 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
           BitmapDescriptor.defaultMarkerWithHue(90),
         );
 
-        _getPolyline(
+        polylineGenerate(
+          destination:
+              "${state.toPlace.coordinates.latitude},${state.toPlace.coordinates.longitude}",
+          origin:
+              "${state.fromPlace.coordinates.latitude},${state.fromPlace.coordinates.longitude}",
+        );
+
+        /*  _getPolyline(
           fromLatitude: state.fromPlace.coordinates.latitude!,
           toLatitude: state.toPlace.coordinates.latitude!,
           fromLong: state.fromPlace.coordinates.longitude!,
           toLong: state.toPlace.coordinates.longitude!,
-        );
+        );*/
 
         return Scaffold(
           key: _scaffoldKey,
@@ -165,7 +225,7 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                             scrollGesturesEnabled: true,
                             zoomGesturesEnabled: true,
                             circles: circleSet,
-                            polylines: polyLineSet,
+                            polylines: _polylines,
                             onMapCreated: (GoogleMapController controller) {
                               _googleMapController.complete(controller);
                               newRideGoogleMapController = controller;
@@ -198,9 +258,12 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                           ),
                         );
                       },
-                      initialChildSize: 0.45,
-                      minChildSize: 0.4,
-                      maxChildSize: 0.6,
+                      initialChildSize:
+                          state.tripData.status == "ACCEPTED" ? 0.35 : 0.45,
+                      minChildSize:
+                          state.tripData.status == "ACCEPTED" ? 0.2 : 0.4,
+                      maxChildSize:
+                          state.tripData.status == "ACCEPTED" ? 0.45 : 0.6,
                     ),
                   ],
                 ),
@@ -407,7 +470,7 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
       icon: descriptor,
       position: position,
     );
-    markers[markerId] = marker;
+    markerSet.add(marker);
   }
 
   _addPolyLine(List<LatLng> polylineCoordinates) {
@@ -542,6 +605,36 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
     });
   }
 
+  Future<void> polylineGenerate({
+    required String origin,
+    required String destination,
+  }) async {
+    var directions = await LocationService().getDirections(
+      origin,
+      destination,
+    );
+    _setPolyline(directions['polyline_decoded'] as List<PointLatLng>);
+  }
+
+  void _setPolyline(List<PointLatLng> points) {
+    final String polylineIdVal = 'polyline_$_polylineIdCounter';
+    _polylineIdCounter++;
+    _polylines.clear();
+
+    _polylines.add(
+      Polyline(
+        polylineId: PolylineId(polylineIdVal),
+        width: 5,
+        color: Colors.red,
+        points: points
+            .map(
+              (point) => LatLng(point.latitude, point.longitude),
+            )
+            .toList(),
+      ),
+    );
+  }
+
   void locatePosition() async {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission != PermissionStatus.granted) {
@@ -583,7 +676,7 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
       /*  Marker driverMarker = Marker(
         position: mPosition,
         markerId: const MarkerId("driverPosition"),
-        icon: myIcon!,
+        icon: taxIcon!,
         rotation: rotation as double,
       );*/
 
@@ -651,7 +744,7 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                     setState(() {
                       isAction = !isAction;
                     });
-                    print(isAction.toString());
+                    // print(isAction.toString());
                   },
                 )
               ],
@@ -664,7 +757,7 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
               itemCount: 4,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                print(VehicleList.list().length);
+                //print(VehicleList.list().length);
                 final Vehicle vehicle = VehicleList.list()[index];
                 return GestureDetector(
                   onTap: () {
