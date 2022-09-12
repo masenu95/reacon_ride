@@ -63,6 +63,7 @@ class ApiTrackFacade implements ITrackFacade {
             await _firestore.collection('Users').doc(firebaseUser.uid).get();
 
         if (userSnapshot.data() != null) {
+          print(userSnapshot.data());
           final UserModel user = UserModel.fromJson(
             json: userSnapshot.data() as Map<String, dynamic>,
             id: userSnapshot.id,
@@ -115,6 +116,7 @@ class ApiTrackFacade implements ITrackFacade {
             final _random = Random();
             //print(drivers[0].token);
             var driver = (drivers..shuffle()).first;
+            print(driver);
             var result = await http.post(
               Uri.parse('https://fcm.googleapis.com/fcm/send'),
               headers: <String, String>{
@@ -134,11 +136,12 @@ class ApiTrackFacade implements ITrackFacade {
                     'id': id,
                     'status': 'done'
                   },
-                  "to": driver.token,
+                  "to": drivers[0].token,
                   // "eq2Lg1xdSEuW6DwIuBmeG1:APA91bGOujp20RedyVoRZoVte83MqADjKhU7L5eFIRyWverGQ3i_J33odJN_p9D8kUWy9mVk44-frSAc3M0HWrn5v-mgPx0t8iwp1jsIyxQx3tbOPguMEuBsBHOfDu6AkDbN7L_O-PFj",
                 },
               ),
             );
+            print(result);
             /*   print(result.body);
               } else {
                 continue;

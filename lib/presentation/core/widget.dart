@@ -186,34 +186,28 @@ class Loader extends StatelessWidget {
 }
 
 class FormFieldWidget extends StatelessWidget {
-  const FormFieldWidget({
-    Key? key,
-    required this.label,
-    required this.hint,
-    required this.onChange,
-    required this.validation,
-    required this.color,
-    required this.text,
-  }) : super(key: key);
+  const FormFieldWidget(
+      {Key? key,
+      required this.label,
+      required this.hint,
+      required this.onChange,
+      required this.validation,
+      required this.color,
+      required this.text,
+      required this.controller})
+      : super(key: key);
   final String label;
   final String hint;
   final void Function(String) onChange;
   final String? Function(String?)? validation;
   final Color color;
   final String text;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _controller = TextEditingController();
-    _controller.value = TextEditingValue(
-      text: text,
-      selection: TextSelection(
-        baseOffset: text.length,
-        extentOffset: text.length,
-      ),
-    );
     return TextFormField(
-      controller: _controller,
+      controller: controller,
       style: const TextStyle(
         fontSize: 14.0,
         color: Colors.black,

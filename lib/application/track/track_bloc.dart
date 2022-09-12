@@ -120,6 +120,20 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
 
         yield state.copyWith(
           fromPlace: address[0],
+          tripData: RequestModel(
+            fromLocation: const GeoPoint(0, 0),
+            toLocation: const GeoPoint(0, 0),
+            userId: "",
+            customerName: '',
+            customerPhone: '',
+            status: '',
+            estimatedCost: '',
+            actualCost: '',
+            driverId: '',
+            from: '',
+            to: '',
+            id: "",
+          ),
           fromPrediction: [],
           search: search,
           searchFrom: true,
@@ -141,6 +155,20 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
           toPrediction: [],
           search: search,
           searchTo: true,
+          tripData: RequestModel(
+            fromLocation: const GeoPoint(0, 0),
+            toLocation: const GeoPoint(0, 0),
+            userId: "",
+            customerName: '',
+            customerPhone: '',
+            status: '',
+            estimatedCost: '',
+            actualCost: '',
+            driverId: '',
+            from: '',
+            to: '',
+            id: "",
+          ),
         );
       },
       getDirection: (e) async* {

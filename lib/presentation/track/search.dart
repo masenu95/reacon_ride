@@ -4,9 +4,17 @@ import 'package:reacon_customer/application/track/track_bloc.dart';
 import 'package:reacon_customer/presentation/core/widget.dart';
 import 'package:reacon_customer/presentation/track/track.dart';
 
-class SearchRoute extends StatelessWidget {
+class SearchRoute extends StatefulWidget {
   const SearchRoute({Key? key}) : super(key: key);
   static const routeName = "search-route";
+
+  @override
+  State<SearchRoute> createState() => _SearchRouteState();
+}
+
+class _SearchRouteState extends State<SearchRoute> {
+  final TextEditingController fromController = TextEditingController();
+  final TextEditingController toController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +23,27 @@ class SearchRoute extends StatelessWidget {
         if (state.searchFrom == true && state.searchTo == true) {
           context.read<TrackBloc>().add(const TrackEvent.getDirection());
           Navigator.pushNamed(context, TrackMapDetail.routeName);
+        }
+        if (state.searchFrom == true) {
+          setState(() {
+            fromController.value = TextEditingValue(
+                text: state.fromPlace.featureName!,
+                selection: TextSelection(
+                  baseOffset: state.fromPlace.featureName!.length,
+                  extentOffset: state.fromPlace.featureName!.length,
+                ));
+          });
+        }
+
+        if (state.searchTo == true) {
+          setState(() {
+            toController.value = TextEditingValue(
+                text: state.toPlace.featureName!,
+                selection: TextSelection(
+                  baseOffset: state.toPlace.featureName!.length,
+                  extentOffset: state.toPlace.featureName!.length,
+                ));
+          });
         }
       },
       builder: (context, state) {
@@ -34,6 +63,7 @@ class SearchRoute extends StatelessWidget {
                   hint: 'From',
                   color: Theme.of(context).cardColor,
                   label: '',
+                  controller: fromController,
                 ),
                 FormFieldWidget(
                   onChange: (value) => context
@@ -46,6 +76,7 @@ class SearchRoute extends StatelessWidget {
                   hint: 'Destination',
                   color: Theme.of(context).primaryColor,
                   label: '',
+                  controller: toController,
                 ),
                 Expanded(
                   child: state.active == "from"
