@@ -20,6 +20,8 @@ class _SearchRouteState extends State<SearchRoute> {
   Widget build(BuildContext context) {
     return BlocConsumer<TrackBloc, TrackState>(
       listener: (context, state) {
+        print(state.searchFrom);
+        print(state.searchTo);
         if (state.searchFrom == true && state.searchTo == true) {
           context.read<TrackBloc>().add(const TrackEvent.getDirection());
           Navigator.pushNamed(context, TrackMapDetail.routeName);

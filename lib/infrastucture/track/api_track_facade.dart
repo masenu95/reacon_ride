@@ -55,105 +55,115 @@ class ApiTrackFacade implements ITrackFacade {
     required String actualCost,
     required List<Driver> drivers,
   }) async {
-    print(drivers[0].token);
+    print(
+        '============================${drivers.length}==========================');
     try {
       final User? firebaseUser = FirebaseAuth.instance.currentUser;
-      if (firebaseUser != null) {
-        final userSnapshot =
-            await _firestore.collection('Users').doc(firebaseUser.uid).get();
 
-        if (userSnapshot.data() != null) {
-          print(userSnapshot.data());
-          final UserModel user = UserModel.fromJson(
-            json: userSnapshot.data() as Map<String, dynamic>,
-            id: userSnapshot.id,
-          );
+      if (drivers.isNotEmpty) {
+        final driver = (drivers..shuffle()).first;
 
-          //timestamp
-          final DateTime currentPhoneDate = DateTime.now();
-          final Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate);
+        if (firebaseUser != null) {
+          final userSnapshot =
+              await _firestore.collection('Users').doc(firebaseUser.uid).get();
 
-          //final address =
-          // await getAddressFromLatLng(geoPoint.latitude, geoPoint.longitude);
-          // print(address);
-          final String id =
-              '${user.uid}${DateTime.now().millisecondsSinceEpoch}';
-          final token = await _messaging.getToken();
-          await _firestore.collection('Trips').doc(id).set({
-            'customer': user.name,
-            'phone': user.phone,
-            'uid': user.uid,
-            'token': token,
-            'id': id,
-            "fromLocation": fromLocation,
-            'toLocation': toLocation,
-            'fromName': fromName,
-            'toName': toName,
-            'status': 'REQUESTING',
-            'estimatedFee': estimatedCost,
-            'actualCost': actualCost,
-            'created_at': myTimeStamp.toDate(),
-          });
-
-          final trip = await _firestore.collection('Trips').doc(id).get();
-
-          if (trip.data() != null) {
-            final requestModel =
-                RequestModel.fromJson(trip.data() as Map<String, dynamic>);
-            //final collection = await _firestore.collection('Drivers').get();
-            //final List<Driver> drivers = [];
-            /*for (int i = 0; i < collection.docs.length; i++) {
-              final driver = Driver.fromJson(collection.docs[i].data());
-              final double distanceInMeters = Geolocator.distanceBetween(
-                driver.location.latitude,
-                driver.location.longitude,
-                fromLocation.latitude,
-                fromLocation.longitude,
-              );
-              print(distanceInMeters);
-              if (distanceInMeters < 5000) {
-                print(collection.docs[i].data());*/
-            final _random = Random();
-            //print(drivers[0].token);
-            var driver = (drivers..shuffle()).first;
-            print(driver);
-            var result = await http.post(
-              Uri.parse('https://fcm.googleapis.com/fcm/send'),
-              headers: <String, String>{
-                'Content-Type': 'application/json',
-                'Authorization':
-                    'key=AAAAtkSxkLY:APA91bHOlrex0qaaw97CsSVnpq843r6KN9QslYoPVdRkc8Xl0SLdtkkmXjULa1ucIo-iKOkC7IiqmiTv-6UPE9Vwi6M7-HJ_AvWVMK10bMyEynPCWb_P6e1Gg3BXipabXto3_lyHXkF8',
-              },
-              body: jsonEncode(
-                <String, dynamic>{
-                  'notification': <String, dynamic>{
-                    'body': "Hello New Request Arrive on dirm ",
-                    'title': 'New Request Arrive'
-                  },
-                  'priority': 'high',
-                  'data': <String, dynamic>{
-                    'click_action': 'FLUTTER_NOTIFICATION_CLICK',
-                    'id': id,
-                    'status': 'done'
-                  },
-                  "to": drivers[0].token,
-                  // "eq2Lg1xdSEuW6DwIuBmeG1:APA91bGOujp20RedyVoRZoVte83MqADjKhU7L5eFIRyWverGQ3i_J33odJN_p9D8kUWy9mVk44-frSAc3M0HWrn5v-mgPx0t8iwp1jsIyxQx3tbOPguMEuBsBHOfDu6AkDbN7L_O-PFj",
-                },
-              ),
+          if (userSnapshot.data() != null) {
+            print(userSnapshot.data());
+            final UserModel user = UserModel.fromJson(
+              json: userSnapshot.data() as Map<String, dynamic>,
+              id: userSnapshot.id,
             );
-            print(result);
-            /*   print(result.body);
-              } else {
-                continue;
-              }
-            }*/
-            return right(requestModel);
+
+            //timestamp
+            final DateTime currentPhoneDate = DateTime.now();
+            final Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate);
+
+            //final address =
+            // await getAddressFromLatLng(geoPoint.latitude, geoPoint.longitude);
+            // print(address);
+            final String id =
+                '${user.uid}${DateTime.now().millisecondsSinceEpoch}';
+            final token = await _messaging.getToken();
+            await _firestore.collection('Trips').doc(id).set({
+              'customer': user.name,
+              'phone': user.phone,
+              'driverName': driver.name,
+              'uid': user.uid,
+              'token': token,
+              'id': id,
+              "fromLocation": fromLocation,
+              'toLocation': toLocation,
+              'fromName': fromName,
+              'toName': toName,
+              'status': 'REQUESTING',
+              'estimatedFee': estimatedCost,
+              'actualCost': actualCost,
+              'created_at': myTimeStamp.toDate(),
+            });
+
+            final trip = await _firestore.collection('Trips').doc(id).get();
+
+            if (trip.data() != null) {
+              final requestModel =
+                  RequestModel.fromJson(trip.data() as Map<String, dynamic>);
+              //final collection = await _firestore.collection('Drivers').get();
+              //final List<Driver> drivers = [];
+              /*for (int i = 0; i < collection.docs.length; i++) {
+                final driver = Driver.fromJson(collection.docs[i].data());
+                final double distanceInMeters = Geolocator.distanceBetween(
+                  driver.location.latitude,
+                  driver.location.longitude,
+                  fromLocation.latitude,
+                  fromLocation.longitude,
+                );
+                print(distanceInMeters);
+                if (distanceInMeters < 5000) {
+                  print(collection.docs[i].data());*/
+              // final _random = Random();
+              //print(drivers[0].token);
+
+              var result = await http.post(
+                Uri.parse('https://fcm.googleapis.com/fcm/send'),
+                headers: <String, String>{
+                  'Content-Type': 'application/json',
+                  'Authorization':
+                      'key=AAAAtkSxkLY:APA91bHOlrex0qaaw97CsSVnpq843r6KN9QslYoPVdRkc8Xl0SLdtkkmXjULa1ucIo-iKOkC7IiqmiTv-6UPE9Vwi6M7-HJ_AvWVMK10bMyEynPCWb_P6e1Gg3BXipabXto3_lyHXkF8',
+                },
+                body: jsonEncode(
+                  <String, dynamic>{
+                    'notification': <String, dynamic>{
+                      'body': "Hello New Request Arrive on dirm ",
+                      'title': 'New Request Arrive'
+                    },
+                    'priority': 'high',
+                    'data': <String, dynamic>{
+                      'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+                      'id': id,
+                      'status': 'done'
+                    },
+                    "to": driver.token,
+                    // "eq2Lg1xdSEuW6DwIuBmeG1:APA91bGOujp20RedyVoRZoVte83MqADjKhU7L5eFIRyWverGQ3i_J33odJN_p9D8kUWy9mVk44-frSAc3M0HWrn5v-mgPx0t8iwp1jsIyxQx3tbOPguMEuBsBHOfDu6AkDbN7L_O-PFj",
+                  },
+                ),
+              );
+              print(driver.token);
+              print(driver.name);
+              print(result.body);
+              /*   print(result.body);
+                } else {
+                  continue;
+                }
+              }*/
+              return right(requestModel);
+            } else {
+              return left(const RequestFailure.serverError());
+            }
           } else {
             return left(const RequestFailure.serverError());
           }
-        } else {
-          return left(const RequestFailure.serverError());
         }
+      } else {
+        return left(const RequestFailure.unavailable());
       }
     } on FirebaseAuthException catch (e) {
       print(e);
@@ -198,14 +208,18 @@ class ApiTrackFacade implements ITrackFacade {
     });
 
 // get the collection reference or query
-    final collectionReference = _firestore.collection('Drivers');
+    final query = _firestore.collection('Drivers');
+    final collectionReference = query
+        .where('online', isEqualTo: true)
+        .where('isBooked', isEqualTo: false);
 
-    double radius = 5000;
-    String field = 'position';
+    const double radius = 5;
+    const String field = 'position';
 
     final Stream<List<DocumentSnapshot<Map<String, dynamic>>>> stream = geo
         .collection(collectionRef: collectionReference)
-        .within(center: center, radius: radius, field: field);
+        .within(center: center, radius: radius, field: field, strictMode: true);
+
     print(stream);
 
     yield* stream;

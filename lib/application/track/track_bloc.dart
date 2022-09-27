@@ -1,10 +1,10 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_geocoder/geocoder.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -33,6 +33,9 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
 
   late StreamSubscription<List<DocumentSnapshot<Map<String, dynamic>>>>
       _driversStreamSubscription;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  final _storage = const FlutterSecureStorage();
   @override
   Stream<TrackState> mapEventToState(
     TrackEvent event,
@@ -93,6 +96,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
         yield state.copyWith(to: e.name);
         if (e.name.isNotEmpty) {
           final result = await _googlePlace.queryAutocomplete.get(e.name);
+          print(result);
           if (result != null && result.predictions != null) {
             yield state.copyWith(
               toPrediction: result.predictions!,
@@ -234,7 +238,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
           userId: "",
           customerName: '',
           customerPhone: '',
-          status: '',
+          status: 'CANCELED',
           estimatedCost: '',
           actualCost: '',
           driverId: '',
@@ -242,21 +246,59 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
           to: '',
           id: "",
         );
+        print(result);
 
         result.fold(
-          (l) => null,
-          (r) => request = r,
+          (l) async* {
+            yield state.copyWith(
+              tripData: request,
+              requestLoading: false,
+              request: optionOf(result),
+              searchTo: false,
+              searchFrom: false,
+              active: 'from',
+            );
+          },
+          (r) async* {
+            request = r;
+            add(TrackEvent.getTrip(request.id));
+
+            yield state.copyWith(
+              tripData: request,
+              request: optionOf(result),
+              searchTo: false,
+              searchFrom: false,
+              active: 'from',
+            );
+            Future.delayed(const Duration(seconds: 15), () async* {
+              try {
+                yield state.copyWith(
+                  requestLoading: false,
+                );
+                final collection = await firestore
+                    .collection('Trips')
+                    .where('id', isEqualTo: request.id)
+                    .get();
+                if (collection.docs[0].get('status') == "REQUESTING" ||
+                    collection.docs.isEmpty) {
+                  await firestore
+                      .collection('Trips')
+                      .doc(request.id)
+                      .update({'status': 'TIMEOUT'});
+                }
+              } catch (e) {
+                yield state.copyWith(
+                  requestLoading: false,
+                );
+              }
+
+              yield state.copyWith(
+                requestLoading: false,
+              );
+            });
+          },
         );
         //print(request.id);
-        add(TrackEvent.getTrip(request.id));
-
-        yield state.copyWith(
-          tripData: request,
-          requestLoading: false,
-          request: optionOf(result),
-          searchTo: false,
-          searchFrom: false,
-        );
       },
       serviceChange: (e) async* {
         yield state.copyWith(
@@ -277,10 +319,12 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
         final data = e.data.data()! as Map<String, dynamic>;
         final RequestModel request = RequestModel.fromJson(data);
         if (request.status == "ACCEPTED") {
+          await _storage.write(key: "requestId", value: request.id);
           add(TrackEvent.getDriver(request.driverId));
         }
         yield state.copyWith(
           tripData: request,
+          requestLoading: false,
         );
       },
       driverReceived: (e) async* {
@@ -334,6 +378,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
             position.longitude,
           ),
         );
+        print(address);
         if (address[0].coordinates.latitude != 0 &&
             state.toPlace.coordinates.latitude != 0) {
           search = true;

@@ -90,6 +90,8 @@ class TrackState with _$TrackState {
           location: const GeoPoint(0, 0),
           token: '',
           vehicleType: '',
+          isBooked: false,
+          isOnline: false,
         ),
         drivers: [],
       );

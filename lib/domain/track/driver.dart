@@ -10,8 +10,8 @@ class Driver {
   final String vehicleNo;
   final GeoPoint location;
   final String token;
-  //final bool isBooked;
-  //final bool isOnline;
+  final bool isBooked;
+  final bool isOnline;
 
   Driver({
     required this.vehicleType,
@@ -23,8 +23,8 @@ class Driver {
     required this.vehicleNo,
     required this.location,
     required this.token,
-    //required this.isBooked,
-    //required this.isOnline,
+    required this.isBooked,
+    required this.isOnline,
   });
   factory Driver.fromJson(Map<String, dynamic> data) {
     return Driver(
@@ -37,8 +37,8 @@ class Driver {
       location: data['position']['geopoint'] as GeoPoint,
       token: data['token'].toString(),
       vehicleType: data['vehicle_type'].toString(),
-      //isBooked: data['isBooked'] as bool,
-      //isOnline: data['online'] as bool,
+      isBooked: data['isBooked'] as bool,
+      isOnline: data['online'] as bool,
     );
   }
 }

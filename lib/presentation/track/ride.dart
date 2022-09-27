@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -63,6 +64,17 @@ class _RideState extends State<Ride> {
           () {},
           (a) {
             print(a);
+            a.fold(
+              (failure) {
+                FlushbarHelper.createError(
+                  message: failure.map(
+                    serverError: (_) => 'Driver is unavailable try again',
+                    unavailable: (_) => 'Driver is unavailable try again',
+                  ),
+                ).show(context);
+              },
+              (r) => null,
+            );
           },
         );
         if (state.driverData.location.longitude != 0.0) {

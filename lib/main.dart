@@ -14,5 +14,5 @@ Future<void> main() async {
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
   ));
-  runApp(Phoenix(child: App()));
+  runApp(Phoenix(child: App(),),);
 }

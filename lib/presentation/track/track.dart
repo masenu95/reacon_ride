@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -113,7 +114,18 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
         state.request.fold(
           () {},
           (a) {
-            // print(a);
+            print(state.requestLoading);
+            a.fold(
+              (failure) {
+                FlushbarHelper.createError(
+                  message: failure.map(
+                    serverError: (_) => 'Driver is unavailable try again',
+                    unavailable: (_) => 'Driver is unavailable try again',
+                  ),
+                ).show(context);
+              },
+              (r) => null,
+            );
           },
         );
         if (state.driverData.location.longitude != 0.0) {
@@ -239,6 +251,7 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                     ),
                     DraggableScrollableSheet(
                       builder: (context, scrollController) {
+                        print("----------------------${state.requestLoading}----------------------");
                         return Container(
                           decoration: const BoxDecoration(
                             color: Colors.white,
@@ -249,8 +262,7 @@ class _TrackMapDetailState extends State<TrackMapDetail> {
                           ),
                           child: SingleChildScrollView(
                             controller: scrollController,
-                            child: state.requestLoading ||
-                                    state.tripData.status == "REQUESTING"
+                            child: state.requestLoading || state.tripData.status == "ACCEPTED"
                                 ? RequestBottomSheet()
                                 : state.tripData.status == "ACCEPTED"
                                     ? acceptedRiderWidget(context)
